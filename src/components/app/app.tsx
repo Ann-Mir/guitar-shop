@@ -5,6 +5,7 @@ import Header from '../header/header';
 import CataloguePage from '../pages/catalogue-page/catalogue-page';
 import MainPage from '../pages/main/main-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
+import UnderConstructionPage from '../pages/under-construction-page/under-construction-page';
 
 
 function App(): JSX.Element {
@@ -15,6 +16,7 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path={AppRoute.Root} component={MainPage} />
         <Route exact path={AppRoute.Guitars} component={CataloguePage} />
+        <Route exact path={AppRoute.UnderConstruction} component={UnderConstructionPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />

@@ -2,7 +2,7 @@ import MainLayout from '../../main-layout/main-layout';
 import UnderConstruction from '../../under-constuction/under-construction';
 
 
-function MainPage(): JSX.Element {
+function UnderConstructionPage(): JSX.Element {
 
   return (
     <MainLayout>
@@ -11,4 +11,4 @@ function MainPage(): JSX.Element {
   );
 }
 
-export default MainPage;
+export default UnderConstructionPage;
