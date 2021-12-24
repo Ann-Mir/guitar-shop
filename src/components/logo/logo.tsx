@@ -1,4 +1,6 @@
 import cn from 'classnames';
+import {NavLink} from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 
 type LogoProps = {
@@ -9,7 +11,10 @@ function Logo({ className }: LogoProps): JSX.Element {
   const logoClasses = cn(className, 'logo');
 
   return (
-    <a className={logoClasses}>
+    <NavLink
+      className={logoClasses}
+      to={AppRoute.Root}
+    >
       <img
         className="logo__img"
         width="70"
@@ -17,7 +22,7 @@ function Logo({ className }: LogoProps): JSX.Element {
         src="./img/svg/logo.svg"
         alt="Логотип"
       />
-    </a>
+    </NavLink>
   );
 }
 
