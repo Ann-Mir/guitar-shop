@@ -3,3 +3,7 @@ export enum AppRoute {
   Guitars = '/guitars',
   UnderConstruction = '/under-construction',
 }
+
+export enum APIRoute {
+  Guitars = '/guitars',
+}
