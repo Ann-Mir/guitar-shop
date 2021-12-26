@@ -1,37 +1,49 @@
-function Card(): JSX.Element {
+import { Guitar } from '../../types/guitar';
+
+
+const MAX_STARS = 5;
+
+type CardProps = {
+  guitar: Guitar;
+};
+
+function Card({ guitar }: CardProps): JSX.Element {
+
+  const { previewImg, rating, name, price } = guitar;
+  const fullStars = Math.floor(rating);
+  const emptyStars = MAX_STARS - fullStars;
 
   return (
     <div className="product-card">
       <img
-        src="img/content/guitar-2.jpg"
+        src={previewImg}
         width="75"
         height="190"
-        alt="СURT Z30 Plus Acoustics"
+        alt={name}
       />
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
           <span className="visually-hidden">Рейтинг:</span>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-          <span className="rate__count">9</span>
+          {[...Array(fullStars)].map((i) => (
+            <svg key={i} width="12" height="11" aria-hidden="true">
+              <use xlinkHref="#icon-full-star"></use>
+            </svg>
+          ))}
+          {
+            emptyStars > 0 && emptyStars < MAX_STARS ?
+              [...Array(emptyStars)].map((i) => (
+                <svg key={i} width="12" height="11" aria-hidden="true">
+                  <use xlinkHref="#icon-star"></use>
+                </svg>
+              ))
+              : null
+          }
+          <span className="rate__count">{rating}</span>
           <span className="rate__message"></span>
         </div>
-        <p className="product-card__title">СURT Z30 Plus Acoustics</p>
+        <p className="product-card__title">{name}</p>
         <p className="product-card__price">
-          <span className="visually-hidden">Цена:</span>129 500 ₽
+          <span className="visually-hidden">Цена:</span>{price} ₽
         </p>
       </div>
       <div className="product-card__buttons">
