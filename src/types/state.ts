@@ -7,4 +7,8 @@ export type GuitarsData = {
   isDataLoaded: boolean,
 };
 
+export type SearchResults = {
+  guitars: Guitars,
+};
+
 export type State = RootState;

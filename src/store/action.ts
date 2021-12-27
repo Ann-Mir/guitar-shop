@@ -11,3 +11,12 @@ export const loadGuitars = createAction(
     },
   }),
 );
+
+export const loadSearchResults = createAction(
+  ActionType.LoadSearchResults,
+  (guitars: Guitars) => ({
+    payload: {
+      guitars,
+    },
+  }),
+);

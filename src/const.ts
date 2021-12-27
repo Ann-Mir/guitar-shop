@@ -1,9 +1,15 @@
 export enum AppRoute {
   Root = '/',
   Guitars = '/guitars',
+  Guitar = '/guitars/:id',
   UnderConstruction = '/under-construction',
 }
 
 export enum APIRoute {
   Guitars = '/guitars',
+}
+
+export enum SortOption {
+  Price = 'price',
+  Rating = 'rating',
 }

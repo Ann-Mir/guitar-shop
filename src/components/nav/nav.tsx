@@ -12,6 +12,7 @@ function Nav(): JSX.Element {
             className="link main-nav__link"
             activeClassName="link--current"
             to={AppRoute.Guitars}
+            exact
           >
             Каталог
           </NavLink>
