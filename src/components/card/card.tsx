@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { Guitar } from '../../types/guitar';
 
 
@@ -24,15 +25,15 @@ function Card({ guitar }: CardProps): JSX.Element {
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
           <span className="visually-hidden">Рейтинг:</span>
-          {[...Array(fullStars)].map((i) => (
-            <svg key={i} width="12" height="11" aria-hidden="true">
+          {[...Array(fullStars)].map(() => (
+            <svg key={nanoid()} width="12" height="11" aria-hidden="true">
               <use xlinkHref="#icon-full-star"></use>
             </svg>
           ))}
           {
-            emptyStars > 0 && emptyStars < MAX_STARS ?
-              [...Array(emptyStars)].map((i) => (
-                <svg key={i} width="12" height="11" aria-hidden="true">
+            emptyStars > 0 ?
+              [...Array(emptyStars)].map(() => (
+                <svg key={nanoid()} width="12" height="11" aria-hidden="true">
                   <use xlinkHref="#icon-star"></use>
                 </svg>
               ))

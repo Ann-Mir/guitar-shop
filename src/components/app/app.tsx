@@ -10,15 +10,11 @@ import MainPage from '../pages/main-page/main-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import UnderConstructionPage from '../pages/under-construction-page/under-construction-page';
 
-
 function App(): JSX.Element {
-
   const isDataLoaded = useSelector(getLoadedDataStatus);
 
   if (!isDataLoaded) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
   return (
@@ -27,7 +23,12 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path={AppRoute.Root} component={MainPage} />
         <Route exact path={AppRoute.Guitars} component={CataloguePage} />
-        <Route exact path={AppRoute.UnderConstruction} component={UnderConstructionPage} />
+        <Route
+          exact
+          path={AppRoute.UnderConstruction}
+          component={UnderConstructionPage}
+        />
+        <Route path={AppRoute.Guitar} component={UnderConstructionPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
