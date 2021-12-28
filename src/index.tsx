@@ -16,7 +16,6 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
 
-store.dispatch(fetchGuitarsAction());
 
 ReactDOM.render(
   <React.StrictMode>

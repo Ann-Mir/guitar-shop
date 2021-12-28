@@ -1,12 +1,9 @@
 import { APIRoute } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
+import { TQueryParams } from '../types/query';
 import { loadGuitars, loadSearchResults } from './action';
 
-
-type SearchParams = {
-  'name_like': string;
-};
 
 export const fetchGuitarsAction =
   (): ThunkActionResult =>
@@ -16,10 +13,19 @@ export const fetchGuitarsAction =
     };
 
 export const searchGuitarsWithParams =
-  (queryParams: SearchParams): ThunkActionResult =>
+  (queryParams: TQueryParams): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
       const { data } = await api.get<Guitar[]>(APIRoute.Guitars, {
         params: queryParams,
       });
       dispatch(loadSearchResults(data));
+    };
+
+export const fetchGuitarsWithParamsAction =
+  (queryParams: TQueryParams): ThunkActionResult =>
+    async (dispatch, _getState, api): Promise<void> => {
+      const { data } = await api.get<Guitar[]>(APIRoute.Guitars, {
+        params: queryParams,
+      });
+      dispatch(loadGuitars(data));
     };
