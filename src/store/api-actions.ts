@@ -8,7 +8,7 @@ import { loadGuitars, loadSearchResults } from './action';
 export const fetchGuitarsAction =
   (searchParams: string): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<Guitar[]>(`${APIRoute.Guitars}${searchParams}`);
+      const { data } = await api.get<Guitar[]>(`${APIRoute.Guitars}${searchParams}`);
       dispatch(loadGuitars(data));
     };
 
