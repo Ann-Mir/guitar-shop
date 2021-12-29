@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { GuitarsData } from '../../types/state';
+import { TGuitarsData } from '../../types/state';
 import {loadGuitars} from '../action';
 
-const initialState: GuitarsData = {
+const initialState: TGuitarsData = {
   guitars: [],
   isDataLoaded: false,
 };
