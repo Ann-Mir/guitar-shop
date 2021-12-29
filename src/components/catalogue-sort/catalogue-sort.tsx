@@ -1,4 +1,3 @@
-import { KeyboardEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
 import { MouseEvent, KeyboardEvent } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { OrderOption, SortOption } from '../../const';
@@ -44,7 +43,8 @@ function CatalogueSort(): JSX.Element {
           по цене
         </button>
         <button
-          className={`catalog-sort__type-button ${sortType === SortOption.RATING ? 'catalog-sort__type-button--active' : ''}`}
+          className={`catalog-sort__type-button ${sortType === SortOption.RATING
+            ? 'catalog-sort__type-button--active' : ''}`}
           aria-label="по популярности"
           data-type="rating"
           onClick={onSortTypeClick}
@@ -54,16 +54,18 @@ function CatalogueSort(): JSX.Element {
       </div>
       <div className="catalog-sort__order">
         <button
-          // className="catalog-sort__order-button catalog-sort__order-button--up catalog-sort__order-button--active"
-          className={`catalog-sort__order-button catalog-sort__order-button--up ${orderType === OrderOption.ASC ? 'catalog-sort__order-button--active' : null}`}
+          className={`catalog-sort__order-button catalog-sort__order-button--up
+           ${orderType === OrderOption.ASC
+      ? 'catalog-sort__order-button--active' : null}`}
           aria-label="По возрастанию"
           tabIndex={-1}
           data-order="asc"
           onClick={onOrderTypeClick}
         />
         <button
-          // className="catalog-sort__order-button catalog-sort__order-button--down"
-          className={`catalog-sort__order-button catalog-sort__order-button--down ${orderType === OrderOption.DESC ? 'catalog-sort__order-button--active' : null}`}
+          className={`catalog-sort__order-button catalog-sort__order-button--down
+           ${orderType === OrderOption.DESC
+      ? 'catalog-sort__order-button--active' : null}`}
           aria-label="По убыванию"
           data-order="desc"
           onClick={onOrderTypeClick}

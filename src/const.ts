@@ -10,13 +10,11 @@ export enum APIRoute {
 }
 
 export enum SortOption {
-  DEFAULT = 'default',
   PRICE = 'price',
   RATING = 'rating',
 }
 
 export enum OrderOption {
-  DEFAULT = 'default',
   DESC = 'desc',
   ASC = 'asc',
 }
