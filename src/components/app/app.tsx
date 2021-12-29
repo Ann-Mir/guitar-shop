@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import useQueryParams from '../../hooks/useQueryParams';
+import useQueryParams from '../../hooks/use-query-params';
 import Spinner from '../../spinner/spinner';
-import { fetchGuitarsWithParamsAction } from '../../store/api-actions';
+import { fetchGuitarsAction, fetchGuitarsWithParamsAction } from '../../store/api-actions';
 import { getLoadedDataStatus } from '../../store/guitars-data/selectors';
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -17,12 +17,13 @@ function App(): JSX.Element {
 
   const dispatch = useDispatch();
   const isDataLoaded = useSelector(getLoadedDataStatus);
-
-  const queryParams = useQueryParams();
+  const {search} = useLocation();
+  // const queryParams = useQueryParams();
 
   useEffect(() => {
-    dispatch(fetchGuitarsWithParamsAction(queryParams));
-  }, []);
+    // dispatch(fetchGuitarsWithParamsAction(queryParams));
+    dispatch(fetchGuitarsAction(search));
+  }, [search, dispatch]);
 
   if (!isDataLoaded) {
     return <Spinner />;
