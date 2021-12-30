@@ -12,6 +12,8 @@ import {State} from '../types/state';
 export enum ActionType {
   LoadGuitars = 'data/loadGuitars',
   LoadSearchResults = 'search/loadSearchResults',
+  SetMinPrice = 'filters/minPrice',
+  SetMaxPrice = 'filter/maxPrice',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

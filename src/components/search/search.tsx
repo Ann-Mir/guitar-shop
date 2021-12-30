@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { loadSearchResults } from '../../store/action';
+import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
 import { getSearchResults } from '../../store/search-results/selectors';
 import { Guitars } from '../../types/guitar';

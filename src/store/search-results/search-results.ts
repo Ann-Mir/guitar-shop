@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { TSearchResults } from '../../types/state';
-import { loadSearchResults } from '../action';
+import { loadSearchResults } from '../actions';
 
 const initialState: TSearchResults = {
   guitars: [],

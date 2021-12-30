@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Spinner from '../../spinner/spinner';
-import { fetchGuitarsAction } from '../../store/api-actions';
+import { fetchGuitarsAction, fetchMaxPriceAction, fetchMinPriceAction } from '../../store/api-actions';
 import { getLoadedDataStatus } from '../../store/guitars-data/selectors';
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -17,6 +17,11 @@ function App(): JSX.Element {
   const dispatch = useDispatch();
   const isDataLoaded = useSelector(getLoadedDataStatus);
   const {search} = useLocation();
+
+  useEffect(() => {
+    dispatch(fetchMinPriceAction());
+    dispatch(fetchMaxPriceAction());
+  }, []);
 
   useEffect(() => {
     dispatch(fetchGuitarsAction(search));
