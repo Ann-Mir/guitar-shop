@@ -20,3 +20,21 @@ export const loadSearchResults = createAction(
     },
   }),
 );
+
+export const setMinPrice = createAction(
+  ActionType.SetMinPrice,
+  (price: number) => ({
+    payload: {
+      price,
+    },
+  }),
+);
+
+export const setMaxPrice = createAction(
+  ActionType.SetMaxPrice,
+  (price: number) => ({
+    payload: {
+      price,
+    },
+  }),
+);
