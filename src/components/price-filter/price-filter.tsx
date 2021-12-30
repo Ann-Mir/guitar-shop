@@ -32,7 +32,7 @@ function PriceFilter(): JSX.Element {
     if (value) {
       let min = parseInt(value, 10);
       if (min < minPrice) {
-        min = minPriceValue as number;
+        min = minPrice;
       }
       setMinPriceValue(min);
       query.set('price_gte', String(min));
