@@ -6,13 +6,13 @@ import { searchResults } from './search-results/search-results';
 export enum NameSpace {
   data = 'DATA',
   search = 'SEARCH',
-  filter = 'FILTER',
+  filters = 'FILTER',
 }
 
 export const rootReducer = combineReducers({
   [NameSpace.data]: guitarsData,
   [NameSpace.search]: searchResults,
-  [NameSpace.filter]: filter,
+  [NameSpace.filters]: filter,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

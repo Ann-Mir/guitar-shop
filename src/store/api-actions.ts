@@ -31,10 +31,10 @@ export const fetchGuitarsWithParamsAction =
     };
 
 export const fetchMinPriceAction =
-  (searchParams: string): ThunkActionResult =>
+  (): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
 
-      const queryParams = new URLSearchParams(searchParams);
+      const queryParams = new URLSearchParams();
       queryParams.set('_order', OrderOption.ASC);
       queryParams.set('_sort', SortOption.PRICE);
       queryParams.set('_limit', '1');
@@ -47,9 +47,9 @@ export const fetchMinPriceAction =
     };
 
 export const fetchMaxPriceAction =
-  (searchParams: string): ThunkActionResult =>
+  (): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
-      const queryParams = new URLSearchParams(searchParams);
+      const queryParams = new URLSearchParams();
       queryParams.set('_order', OrderOption.DESC);
       queryParams.set('_sort', SortOption.PRICE);
       queryParams.set('_start', '0');
