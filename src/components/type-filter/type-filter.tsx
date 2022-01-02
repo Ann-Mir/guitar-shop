@@ -1,20 +1,22 @@
+import FilterTypeItem from '../filter-type-item/filter-type-item';
+
+
+export const GUITAR_TYPES = {
+  acoustic: 'Акустические гитары',
+  electric: 'Электрогитары',
+  ukulele: 'Укулеле',
+};
+
 function TypeFilter(): JSX.Element {
 
   return (
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Тип гитар</legend>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="acoustic" name="acoustic" />
-        <label htmlFor="acoustic">Акустические гитары</label>
-      </div>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="electric" name="electric" checked />
-        <label htmlFor="electric">Электрогитары</label>
-      </div>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="ukulele" name="ukulele" checked />
-        <label htmlFor="ukulele">Укулеле</label>
-      </div>
+      {
+        Object.entries(GUITAR_TYPES)
+          .map(([type, name]) => (
+            <FilterTypeItem key={type} type={ type} name={name} />))
+      }
     </fieldset>
   );
 }
