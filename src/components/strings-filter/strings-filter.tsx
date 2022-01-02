@@ -4,7 +4,7 @@ function StringsFilter(): JSX.Element {
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Количество струн</legend>
       <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" checked />
+        <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" />
         <label htmlFor="4-strings">4</label>
       </div>
       <div className="form-checkbox catalog-filter__block-item">
