@@ -12,10 +12,10 @@ function PriceFilter(): JSX.Element {
   const query = useQuery();
   const minPrice = useSelector(getMinPrice);
   const maxPrice = useSelector(getMaxPrice);
-  const minValue = query.get('price_gte') ? Number(query.get('price_gte')) : undefined;
-  const maxValue = query.get('price_lte') ? Number(query.get('price_lte')) : undefined;
-  const [minPriceValue, setMinPriceValue] = useState<number | string | undefined>(minValue);
-  const [maxPriceValue, setMaxPriceValue] = useState<number | string | undefined>(maxValue);
+  const minValue = query.get('price_gte') ? Number(query.get('price_gte')) : '';
+  const maxValue = query.get('price_lte') ? Number(query.get('price_lte')) : '';
+  const [minPriceValue, setMinPriceValue] = useState<number | string>(minValue);
+  const [maxPriceValue, setMaxPriceValue] = useState<number | string>(maxValue);
 
   const onMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;

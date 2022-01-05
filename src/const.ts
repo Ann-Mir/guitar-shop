@@ -19,3 +19,14 @@ export enum OrderOption {
   ASC = 'asc',
 }
 
+export const STRINGS = [4, 6, 7, 12];
+
+export interface GuitarsStrings {
+  [key: string]: number[]
+}
+
+export const STRINGS_BY_TYPE: GuitarsStrings = {
+  acoustic: [6, 7, 12],
+  electric: [6, 6, 7],
+  ukulele: [4],
+};
