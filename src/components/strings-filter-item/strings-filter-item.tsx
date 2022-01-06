@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import useQuery from '../../hooks/use-query';
 
 
@@ -8,25 +8,33 @@ type StringsFilterItemProps = {
   disabled: boolean,
 }
 
-function StringsFilterItem({stringsCount, disabled}: StringsFilterItemProps) : JSX.Element {
+function StringsFilterItem(
+  {
+    stringsCount,
+    disabled,
+  }: StringsFilterItemProps) : JSX.Element {
 
   const query = useQuery();
   const checkedStringCount = query.getAll('stringCount');
   const {pathname} = useLocation();
   const history = useHistory();
-  const [isChecked, setIsChecked] = useState(checkedStringCount.includes(stringsCount.toString()) && !disabled);
+  const [isChecked, setIsChecked] = useState(
+    checkedStringCount.includes(stringsCount.toString()) && !disabled);
 
-  if (disabled && checkedStringCount.includes(stringsCount.toString())) {
-    query.delete('stringCount');
-    const checkedStrings = checkedStringCount.filter((item) => item !== stringsCount.toString());
-    checkedStrings.forEach((option) => query.append('stringCount', option));
 
-    return <Redirect to={{pathname: pathname, search: query.toString()}} />;
-  }
+  useEffect(() => {
+    if (disabled && checkedStringCount.includes(stringsCount.toString())) {
+      query.delete('stringCount');
+      const checkedStrings = checkedStringCount.filter((item) => item !== stringsCount.toString());
+      checkedStrings.forEach((option) => query.append('stringCount', option));
+      history.replace({pathname: pathname, search: query.toString()});
+    }
+    setIsChecked(checkedStringCount.includes(stringsCount.toString()) && !disabled);
+  }, [query]);
 
   const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {checked} = evt.target;
-    setIsChecked((prevState) => !prevState);
+    setIsChecked(checked);
 
     query.delete('stringCount');
 

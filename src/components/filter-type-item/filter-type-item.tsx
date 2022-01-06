@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import useQuery from '../../hooks/use-query';
 
 
@@ -9,25 +9,33 @@ type FilterTypeItemProps = {
   disabled: boolean,
 }
 
-function FilterTypeItem({type, name, disabled}: FilterTypeItemProps): JSX.Element {
+function FilterTypeItem(
+  {
+    type,
+    name,
+    disabled,
+  }: FilterTypeItemProps): JSX.Element {
 
   const history = useHistory();
   const { pathname } = useLocation();
   const query = useQuery();
   const checkedTypes = query.getAll('type');
-  const [isChecked, setIsChecked] = useState<boolean>(checkedTypes.includes(type));
+  const [isChecked, setIsChecked] = useState<boolean>(
+    checkedTypes.includes(type) && !disabled);
 
-  if (disabled && checkedTypes.includes(type)) {
-    query.delete('type');
-    const checkedTypesOptions = checkedTypes.filter((item) => item !== type);
-    checkedTypesOptions.forEach((option) => query.append('type', option));
-
-    return <Redirect to={{pathname: pathname, search: query.toString()}} />;
-  }
+  useEffect(() => {
+    if (disabled && checkedTypes.includes(type)) {
+      query.delete('type');
+      const checkedTypesOptions = checkedTypes.filter((item) => item !== type);
+      checkedTypesOptions.forEach((option) => query.append('type', option));
+      history.replace({pathname: pathname, search: query.toString()});
+    }
+    setIsChecked(checkedTypes.includes(type) && !disabled);
+  }, [query]);
 
   const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {checked, id} = evt.target;
-    setIsChecked((prevState) => !prevState);
+    setIsChecked(checked);
 
     query.delete('type');
 
