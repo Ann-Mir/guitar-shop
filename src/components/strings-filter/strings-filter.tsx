@@ -1,24 +1,43 @@
+import { useEffect } from 'react';
+import { STRINGS } from '../../const';
+import useQuery from '../../hooks/use-query';
+import StringsFilterItem from '../strings-filter-item/strings-filter-item';
+import { STRINGS_BY_TYPE } from '../../const';
+
+
 function StringsFilter(): JSX.Element {
+
+  const query = useQuery();
+  const availableStrings = new Set();
+
+  const setAvailableStrings = () => {
+    const checkedTypes = query.getAll('type');
+    if (checkedTypes.length > 0) {
+      checkedTypes.forEach((type) => {
+        STRINGS_BY_TYPE[type].forEach((guitarString) => availableStrings.add(guitarString));
+      });
+    } else {
+      STRINGS.forEach((guitarString) => availableStrings.add(guitarString));
+    }
+  };
+  setAvailableStrings();
+
+  const isDisabled = (count: number) => !availableStrings.has(count);
+
+  useEffect(() => {
+    setAvailableStrings();
+  }, [query, availableStrings]);
 
   return (
     <fieldset className="catalog-filter__block">
       <legend className="catalog-filter__block-title">Количество струн</legend>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="4-strings" name="4-strings" />
-        <label htmlFor="4-strings">4</label>
-      </div>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="6-strings" name="6-strings" checked />
-        <label htmlFor="6-strings">6</label>
-      </div>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="7-strings" name="7-strings" />
-        <label htmlFor="7-strings">7</label>
-      </div>
-      <div className="form-checkbox catalog-filter__block-item">
-        <input className="visually-hidden" type="checkbox" id="12-strings" name="12-strings" disabled />
-        <label htmlFor="12-strings">12</label>
-      </div>
+      {STRINGS.map((guitarString) => (
+        <StringsFilterItem
+          key={guitarString}
+          stringsCount={guitarString}
+          disabled={isDisabled(guitarString)}
+        />),
+      )}
     </fieldset>
   );
 }
