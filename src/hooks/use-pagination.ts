@@ -2,6 +2,9 @@ import { useMemo } from 'react';
 
 
 function getArrayInRange(startAt: number, finishAt: number): ReadonlyArray<number> {
+  console.log(startAt);
+  console.log(finishAt);
+  console.log(finishAt - startAt + 1);
   return [...Array(finishAt - startAt + 1).keys()].map((i) => i + startAt);
 }
 
@@ -29,7 +32,7 @@ export const usePagination = (
     const leftSiblingIndex = currentPage - 1;
     const rightSiblingIndex = currentPage + 1;
 
-    return getArrayInRange(rightSiblingIndex, leftSiblingIndex);
+    return getArrayInRange(leftSiblingIndex, rightSiblingIndex);
 
   }, [totalPages, pageSize, maxPagesShown, currentPage]);
 
