@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePagination } from '../../hooks/use-pagination';
+import useQuery from '../../hooks/use-query';
 import { setCurrentPage } from '../../store/actions';
 import { getGuitarsCount } from '../../store/guitars-data/selectors';
 import { getCurrentPage, getPageLimit } from '../../store/pagination/selectors';
@@ -10,6 +11,7 @@ const MAX_PAGES_SHOWN = 3;
 function Pagination(): JSX.Element | null {
 
   const dispatch = useDispatch();
+
   const totalCount = useSelector(getGuitarsCount);
   const currentPage = useSelector(getCurrentPage);
   const pageLimit = useSelector(getPageLimit);
