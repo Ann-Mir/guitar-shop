@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux';
+import { CARDS_PER_PAGE } from '../../const';
 import { getGuitars } from '../../store/guitars-data/selectors';
 import { Guitar } from '../../types/guitar';
 import Card from '../card/card';
 
-
-const CARDS_PER_PAGE = 9;
 
 function CardsList(): JSX.Element {
 

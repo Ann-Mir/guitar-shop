@@ -30,3 +30,5 @@ export const STRINGS_BY_TYPE: GuitarsStrings = {
   electric: [6, 6, 7],
   ukulele: [4],
 };
+
+export const CARDS_PER_PAGE = 9;
