@@ -12,6 +12,15 @@ export const loadGuitars = createAction(
   }),
 );
 
+export const setGuitarsCount = createAction(
+  ActionType.SetGuitarsCount,
+  (guitarsCount: number) => ({
+    payload: {
+      guitarsCount,
+    },
+  }),
+);
+
 export const loadSearchResults = createAction(
   ActionType.LoadSearchResults,
   (guitars: Guitars) => ({
@@ -38,3 +47,14 @@ export const setMaxPrice = createAction(
     },
   }),
 );
+
+export const setCurrentPage = createAction(
+  ActionType.SetCurrentPage,
+  (currentPage: number) => ({
+    payload: {
+      currentPage,
+    },
+  }),
+);
+
+export const resetPagination = createAction(ActionType.ResetPagination);

@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import useQuery from '../../hooks/use-query';
+import { setCurrentPage } from '../../store/actions';
 
 
 type StringsFilterItemProps = {
@@ -14,6 +16,7 @@ function StringsFilterItem(
     disabled,
   }: StringsFilterItemProps) : JSX.Element {
 
+  const dispatch = useDispatch();
   const query = useQuery();
   const checkedStringCount = query.getAll('stringCount');
   const {pathname} = useLocation();
@@ -45,6 +48,7 @@ function StringsFilterItem(
       const strings = checkedStringCount.filter((item) => stringsCount.toString() !== item);
       strings.forEach((item) => query.append('stringCount', item));
     }
+    dispatch(setCurrentPage(1));
     history.push({pathname: pathname, search: query.toString()});
   };
 

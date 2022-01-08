@@ -2,14 +2,19 @@ import { APIRoute, OrderOption, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
 import { TQueryParams } from '../types/query';
-import { loadGuitars, loadSearchResults, setMaxPrice, setMinPrice } from './actions';
+import { loadGuitars, loadSearchResults, setGuitarsCount, setMaxPrice, setMinPrice } from './actions';
 
+const TOTAL_COUNT = 'x-total-count';
 
 export const fetchGuitarsAction =
   (searchParams: string): ThunkActionResult =>
     async (dispatch, _getState, api): Promise<void> => {
-      const { data } = await api.get<Guitar[]>(`${APIRoute.Guitars}${searchParams}`);
+      const response = await api.get<Guitar[]>(`${APIRoute.Guitars}?${searchParams}`);
+      const { data } = response;
+      const totalCount = response.headers[TOTAL_COUNT] as string;
+      const guitarsCount = totalCount ? Number(totalCount) : data.length;
       dispatch(loadGuitars(data));
+      dispatch(setGuitarsCount(guitarsCount));
     };
 
 export const searchGuitarsWithParams =
