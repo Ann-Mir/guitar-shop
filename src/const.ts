@@ -2,6 +2,8 @@ export enum AppRoute {
   Root = '/',
   Guitars = '/guitars',
   Guitar = '/guitars/:id',
+  Shops = '/shops',
+  About = '/about',
   UnderConstruction = '/under-construction',
 }
 

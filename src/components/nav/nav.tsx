@@ -12,7 +12,6 @@ function Nav(): JSX.Element {
             className="link main-nav__link"
             activeClassName="link--current"
             to={AppRoute.Guitars}
-            exact
           >
             Каталог
           </NavLink>
@@ -21,7 +20,7 @@ function Nav(): JSX.Element {
           <NavLink
             className="link main-nav__link"
             activeClassName="link--current"
-            to={AppRoute.UnderConstruction}
+            to={AppRoute.Shops}
           >
             Где купить?
           </NavLink>
@@ -30,7 +29,7 @@ function Nav(): JSX.Element {
           <NavLink
             className="link main-nav__link"
             activeClassName="link--current"
-            to={AppRoute.UnderConstruction}
+            to={AppRoute.About}
           >
             О компании
           </NavLink>
