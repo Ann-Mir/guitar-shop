@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { APIRoute, OrderOption, QueryParams, SortOption } from '../const';
+import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
 import { TQueryParams } from '../types/query';
@@ -15,9 +15,15 @@ const TOTAL_COUNT = 'x-total-count';
 
 export const fetchGuitarsAction =
   (searchParams: string): ThunkActionResult =>
-    async (dispatch, _getState, api): Promise<void> => {
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
       try {
-        const response = await api.get<Guitar[]>(`${APIRoute.Guitars}?${searchParams}`);
+        const response = await api
+          .get<Guitar[]>(
+            `${APIRoute.Guitars}?${QueryParams.Embed}=${EmbedOption.Comments}&${searchParams}`);
         const { data } = response;
         const totalCount = response.headers[TOTAL_COUNT] as string;
         const guitarsCount = totalCount ? Number(totalCount) : data.length;
@@ -30,7 +36,11 @@ export const fetchGuitarsAction =
 
 export const searchGuitarsWithParams =
   (queryParams: TQueryParams): ThunkActionResult =>
-    async (dispatch, _getState, api): Promise<void> => {
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
       try {
         const { data } = await api.get<Guitar[]>(APIRoute.Guitars, {
           params: queryParams,
@@ -44,7 +54,11 @@ export const searchGuitarsWithParams =
 
 export const fetchMinPriceAction =
   (): ThunkActionResult =>
-    async (dispatch, _getState, api): Promise<void> => {
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
 
       const queryParams = new URLSearchParams();
       queryParams.set(QueryParams.Order, OrderOption.Asc);
@@ -63,7 +77,11 @@ export const fetchMinPriceAction =
 
 export const fetchMaxPriceAction =
   (): ThunkActionResult =>
-    async (dispatch, _getState, api): Promise<void> => {
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
       const queryParams = new URLSearchParams();
       queryParams.set(QueryParams.Order, OrderOption.Desc);
       queryParams.set(QueryParams.Sort, SortOption.Price);

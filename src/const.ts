@@ -21,7 +21,11 @@ export enum OrderOption {
   Asc = 'asc',
 }
 
-export const STRINGS = [4, 6, 7, 12];
+export enum EmbedOption {
+  Comments = 'comments',
+}
+
+export const STRINGS: ReadonlyArray<number> = [4, 6, 7, 12];
 
 export interface GuitarsStrings {
   [key: string]: number[]
@@ -39,7 +43,6 @@ export enum QueryParams {
   Sort = '_sort',
   Order = '_order',
   Start = '_start',
-  End = '_end',
   Limit = '_limit',
   PriceGte = 'price_gte',
   PriceLte = 'price_lte',
