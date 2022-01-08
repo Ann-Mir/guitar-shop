@@ -4,7 +4,7 @@ import { setMaxPrice, setMinPrice } from '../actions';
 
 const initialState: TFilter = {
   minPrice: 0,
-  maxPrice: 300000,
+  maxPrice: 0,
 };
 
 const filter = createReducer(initialState, (builder) => {

@@ -36,7 +36,7 @@ function StringsFilterItem(
     setIsChecked(checkedStringCount.includes(stringsCount.toString()) && !disabled);
   }, [query]);
 
-  const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {checked} = evt.target;
     setIsChecked(checked);
 
@@ -63,7 +63,7 @@ function StringsFilterItem(
         name={`${stringsCount}-strings`}
         disabled={disabled}
         checked={isChecked}
-        onChange={onChange}
+        onChange={handleInputChange}
       />
       <label htmlFor={`${stringsCount}-strings`}>{stringsCount}</label>
     </div>

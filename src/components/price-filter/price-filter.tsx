@@ -20,17 +20,17 @@ function PriceFilter(): JSX.Element {
   const [minPriceValue, setMinPriceValue] = useState<number | string>(minValue);
   const [maxPriceValue, setMaxPriceValue] = useState<number | string>(maxValue);
 
-  const onMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setMinPriceValue(value);
   };
 
-  const onMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setMaxPriceValue(value);
   };
 
-  const onMinPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
+  const handleMinPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
     const value = evt.target.value.replace(/^0+/, '');
     if (value) {
       let min = parseInt(value, 10);
@@ -47,7 +47,7 @@ function PriceFilter(): JSX.Element {
     history.push({pathname: pathname, search: query.toString()});
   };
 
-  const onMaxPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
+  const handleMaxPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
     const value = evt.target.value.replace(/^0+/, '');
     if (value) {
       let max = parseInt(value, 10);
@@ -81,8 +81,8 @@ function PriceFilter(): JSX.Element {
             min={minPrice}
             max={maxPrice}
             value={minPriceValue}
-            onChange={onMinPriceChange}
-            onBlur={onMinPriceBlur}
+            onChange={handleMinPriceChange}
+            onBlur={handleMinPriceBlur}
           />
         </div>
         <div className="form-input">
@@ -95,8 +95,8 @@ function PriceFilter(): JSX.Element {
             min={minPriceValue}
             max={maxPriceValue}
             value={maxPriceValue}
-            onChange={onMaxPriceChange}
-            onBlur={onMaxPriceBlur}
+            onChange={handleMaxPriceChange}
+            onBlur={handleMaxPriceBlur}
           />
         </div>
       </div>

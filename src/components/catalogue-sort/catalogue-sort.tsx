@@ -12,7 +12,7 @@ function CatalogueSort(): JSX.Element {
   const sortType = query.get(QueryParams.Sort);
   const orderType = query.get(QueryParams.Order);
 
-  const onSortTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
+  const handleSortTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
 
     const type = (evt.target as HTMLButtonElement).getAttribute('data-type');
     if (type) {
@@ -21,7 +21,7 @@ function CatalogueSort(): JSX.Element {
     }
   };
 
-  const onOrderTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
+  const handleOrderTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
     const order = (evt.target as HTMLButtonElement).getAttribute('data-order');
     if (order) {
       query.set(QueryParams.Order, order);
@@ -39,7 +39,7 @@ function CatalogueSort(): JSX.Element {
           aria-label="по цене"
           tabIndex={-1}
           data-type="price"
-          onClick={onSortTypeClick}
+          onClick={handleSortTypeClick}
         >
           по цене
         </button>
@@ -48,7 +48,7 @@ function CatalogueSort(): JSX.Element {
             ? 'catalog-sort__type-button--active' : ''}`}
           aria-label="по популярности"
           data-type="rating"
-          onClick={onSortTypeClick}
+          onClick={handleSortTypeClick}
         >
           по популярности
         </button>
@@ -61,7 +61,7 @@ function CatalogueSort(): JSX.Element {
           aria-label="По возрастанию"
           tabIndex={-1}
           data-order="asc"
-          onClick={onOrderTypeClick}
+          onClick={handleOrderTypeClick}
         />
         <button
           className={`catalog-sort__order-button catalog-sort__order-button--down
@@ -69,7 +69,7 @@ function CatalogueSort(): JSX.Element {
       ? 'catalog-sort__order-button--active' : null}`}
           aria-label="По убыванию"
           data-order="desc"
-          onClick={onOrderTypeClick}
+          onClick={handleOrderTypeClick}
         />
       </div>
     </div>

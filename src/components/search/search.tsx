@@ -32,7 +32,7 @@ function Search(): JSX.Element {
     }
   };
 
-  const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setSearchValue(value);
     setDebouncedSearchParams();
@@ -54,11 +54,11 @@ function Search(): JSX.Element {
     }
   };
 
-  const onMouseEnter = () => {
+  const handleMouseEnter = () => {
     setIsHovered(true);
   };
 
-  const onMouseLeave = () => {
+  const handleMouseLeave = () => {
     setIsHovered(false);
     if (!isFocused) {
       setSearchValue('');
@@ -66,7 +66,7 @@ function Search(): JSX.Element {
     }
   };
 
-  const onItemClick = (id: number) => {
+  const handleItemClick = (id: number) => {
     history.push(`${AppRoute.Guitars}/${id}`);
     dispatch(loadSearchResults([]));
     setSearchValue('');
@@ -88,7 +88,7 @@ function Search(): JSX.Element {
         </button>
         <input
           className="form-search__input"
-          onChange={onInputChange}
+          onChange={handleInputChange}
           value={searchValue}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -105,8 +105,8 @@ function Search(): JSX.Element {
         <ul
           className="form-search__select-list"
           style={{ zIndex: '1' }}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {searchResults.map((guitar) => (
             <li
@@ -114,7 +114,7 @@ function Search(): JSX.Element {
               tabIndex={0}
               style={{ color: '#FFFFFF' }}
               key={guitar.id}
-              onClick={() => onItemClick(guitar.id)}
+              onClick={() => handleItemClick(guitar.id)}
             >
               {guitar.name}
             </li>

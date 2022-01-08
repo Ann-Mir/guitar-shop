@@ -10,7 +10,7 @@ type CardProps = {
 
 function Card({ guitar }: CardProps): JSX.Element {
 
-  const { previewImg, rating, name, price } = guitar;
+  const { previewImg, rating, name, price, comments } = guitar;
   const fullStars = Math.floor(rating);
   const emptyStars = MAX_STARS - fullStars;
 
@@ -39,7 +39,7 @@ function Card({ guitar }: CardProps): JSX.Element {
               ))
               : null
           }
-          <span className="rate__count">{rating}</span>
+          <span className="rate__count">{comments ? comments.length : 0}</span>
           <span className="rate__message"></span>
         </div>
         <p className="product-card__title">{name}</p>
