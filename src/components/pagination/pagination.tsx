@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePagination } from '../../hooks/use-pagination';
-import useQuery from '../../hooks/use-query';
 import { setCurrentPage } from '../../store/actions';
 import { getGuitarsCount } from '../../store/guitars-data/selectors';
 import { getCurrentPage, getPageLimit } from '../../store/pagination/selectors';
