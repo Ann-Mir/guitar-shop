@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { QueryParams } from '../../const';
 import useQuery from '../../hooks/use-query';
-import { setCurrentPage } from '../../store/actions';
+import { resetPagination } from '../../store/actions';
 import { getMaxPrice, getMinPrice } from '../../store/filter/selectors';
 
 
@@ -14,8 +15,8 @@ function PriceFilter(): JSX.Element {
   const query = useQuery();
   const minPrice = useSelector(getMinPrice);
   const maxPrice = useSelector(getMaxPrice);
-  const minValue = query.get('price_gte') ? Number(query.get('price_gte')) : '';
-  const maxValue = query.get('price_lte') ? Number(query.get('price_lte')) : '';
+  const minValue = query.get(QueryParams.PriceGte) ? Number(query.get(QueryParams.PriceGte)) : '';
+  const maxValue = query.get(QueryParams.PriceLte) ? Number(query.get(QueryParams.PriceLte)) : '';
   const [minPriceValue, setMinPriceValue] = useState<number | string>(minValue);
   const [maxPriceValue, setMaxPriceValue] = useState<number | string>(maxValue);
 
@@ -37,12 +38,12 @@ function PriceFilter(): JSX.Element {
         min = minPrice;
       }
       setMinPriceValue(min);
-      query.set('price_gte', String(min));
-      dispatch(setCurrentPage(1));
+      query.set(QueryParams.PriceGte, String(min));
+      dispatch(resetPagination());
       history.push({pathname: pathname, search: query.toString()});
       return;
     }
-    query.delete('price_gte');
+    query.delete(QueryParams.PriceGte);
     history.push({pathname: pathname, search: query.toString()});
   };
 
@@ -57,12 +58,12 @@ function PriceFilter(): JSX.Element {
         max = minPrice;
       }
       setMaxPriceValue(max);
-      query.set('price_lte', String(max));
-      dispatch(setCurrentPage(1));
+      query.set(QueryParams.PriceLte, String(max));
+      dispatch(resetPagination());
       history.push({pathname: pathname, search: query.toString()});
       return;
     }
-    query.delete('price_lte');
+    query.delete(QueryParams.PriceLte);
     history.push({pathname: pathname, search: query.toString()});
   };
 

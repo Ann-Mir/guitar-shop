@@ -1,4 +1,4 @@
-import { STRINGS_BY_TYPE } from '../../const';
+import { QueryParams, STRINGS_BY_TYPE } from '../../const';
 import useQuery from '../../hooks/use-query';
 import FilterTypeItem from '../filter-type-item/filter-type-item';
 
@@ -12,7 +12,7 @@ export const GUITAR_TYPES = {
 function TypeFilter(): JSX.Element {
 
   const query = useQuery();
-  const checkedStrings = query.getAll('stringCount');
+  const checkedStrings = query.getAll(QueryParams.StringCount);
 
   const isDisabled = (type: string) => {
     const intersection = checkedStrings

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
+import { DEFAULT_PAGE } from '../const';
 
+const PAGINATION_INTERVAL = 1;
 
 function getArrayInRange(startAt: number, finishAt: number): ReadonlyArray<number> {
   return [...Array(finishAt - startAt + 1).keys()].map((i) => i + startAt);
@@ -15,19 +17,19 @@ export const usePagination = (
   const paginationRange = useMemo(() => {
 
     if (maxPagesShown > totalPages) {
-      return getArrayInRange(1, totalPages);
+      return getArrayInRange(DEFAULT_PAGE, totalPages);
     }
 
-    if (currentPage === 1) {
+    if (currentPage === DEFAULT_PAGE) {
       return getArrayInRange(currentPage, maxPagesShown);
     }
 
     if (currentPage === totalPages) {
-      return getArrayInRange(currentPage - maxPagesShown + 1, currentPage);
+      return getArrayInRange(currentPage - maxPagesShown + DEFAULT_PAGE, currentPage);
     }
 
-    const leftSiblingIndex = currentPage - 1;
-    const rightSiblingIndex = currentPage + 1;
+    const leftSiblingIndex = currentPage - PAGINATION_INTERVAL;
+    const rightSiblingIndex = currentPage + PAGINATION_INTERVAL;
 
     return getArrayInRange(leftSiblingIndex, rightSiblingIndex);
 

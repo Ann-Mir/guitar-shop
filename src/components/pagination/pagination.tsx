@@ -1,11 +1,13 @@
 import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DEFAULT_PAGE } from '../../const';
 import { usePagination } from '../../hooks/use-pagination';
 import { setCurrentPage } from '../../store/actions';
 import { getGuitarsCount } from '../../store/guitars-data/selectors';
 import { getCurrentPage, getPageLimit } from '../../store/pagination/selectors';
 
 const MAX_PAGES_SHOWN = 3;
+const PAGINATION_INTERVAL = 1;
 
 function Pagination(): JSX.Element | null {
 
@@ -21,12 +23,12 @@ function Pagination(): JSX.Element | null {
 
   const onPrevPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
-    dispatch(setCurrentPage(currentPage - 1));
+    dispatch(setCurrentPage(currentPage - PAGINATION_INTERVAL));
   };
 
   const onNextPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
-    dispatch(setCurrentPage(currentPage + 1));
+    dispatch(setCurrentPage(currentPage + PAGINATION_INTERVAL));
   };
 
   const onPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
@@ -43,7 +45,7 @@ function Pagination(): JSX.Element | null {
     <div className="pagination page-content__pagination">
       <ul className="pagination__list">
         {
-          currentPage !== 1 && (
+          currentPage !== DEFAULT_PAGE && (
             <li className="pagination__page pagination__page--prev" id="prev">
               <a
                 onClick={onPrevPageClick}
@@ -55,7 +57,7 @@ function Pagination(): JSX.Element | null {
             </li>
           )
         }
-        {paginationRange.map((page) => (
+        {paginationRange.map((page: number) => (
           <li
             key={page}
             className={

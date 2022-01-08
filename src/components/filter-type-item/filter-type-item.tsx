@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { QueryParams } from '../../const';
 import useQuery from '../../hooks/use-query';
-import { setCurrentPage } from '../../store/actions';
+import { resetPagination } from '../../store/actions';
 
 
 type FilterTypeItemProps = {
@@ -22,15 +23,15 @@ function FilterTypeItem(
   const history = useHistory();
   const { pathname } = useLocation();
   const query = useQuery();
-  const checkedTypes = query.getAll('type');
+  const checkedTypes = query.getAll(QueryParams.Type);
   const [isChecked, setIsChecked] = useState<boolean>(
     checkedTypes.includes(type) && !disabled);
 
   useEffect(() => {
     if (disabled && checkedTypes.includes(type)) {
-      query.delete('type');
+      query.delete(QueryParams.Type);
       const checkedTypesOptions = checkedTypes.filter((item) => item !== type);
-      checkedTypesOptions.forEach((option) => query.append('type', option));
+      checkedTypesOptions.forEach((option) => query.append(QueryParams.Type, option));
       history.replace({pathname: pathname, search: query.toString()});
     }
     setIsChecked(checkedTypes.includes(type) && !disabled);
@@ -40,17 +41,17 @@ function FilterTypeItem(
     const {checked, id} = evt.target;
     setIsChecked(checked);
 
-    query.delete('type');
+    query.delete(QueryParams.Type);
 
     if (checked) {
       checkedTypes.push(type);
-      checkedTypes.forEach((item) => query.append('type', item));
+      checkedTypes.forEach((item) => query.append(QueryParams.Type, item));
     } else {
       const types = checkedTypes.filter((item) => id !== item);
-      types.forEach((item) => query.append('type', item));
+      types.forEach((item) => query.append(QueryParams.Type, item));
     }
     const search = query.toString();
-    dispatch(setCurrentPage(1));
+    dispatch(resetPagination());
     history.push({pathname: pathname, search: search});
   };
 

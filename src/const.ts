@@ -2,6 +2,8 @@ export enum AppRoute {
   Root = '/',
   Guitars = '/guitars',
   Guitar = '/guitars/:id',
+  Shops = '/shops',
+  About = '/about',
   UnderConstruction = '/under-construction',
 }
 
@@ -10,13 +12,13 @@ export enum APIRoute {
 }
 
 export enum SortOption {
-  PRICE = 'price',
-  RATING = 'rating',
+  Price = 'price',
+  Rating = 'rating',
 }
 
 export enum OrderOption {
-  DESC = 'desc',
-  ASC = 'asc',
+  Desc = 'desc',
+  Asc = 'asc',
 }
 
 export const STRINGS = [4, 6, 7, 12];
@@ -32,3 +34,19 @@ export const STRINGS_BY_TYPE: GuitarsStrings = {
 };
 
 export const CARDS_PER_PAGE = 9;
+
+export enum QueryParams {
+  Sort = '_sort',
+  Order = '_order',
+  Start = '_start',
+  End = '_end',
+  Limit = '_limit',
+  PriceGte = 'price_gte',
+  PriceLte = 'price_lte',
+  NameLike = 'name_like',
+  Embed = '_embed',
+  Type = 'type',
+  StringCount = 'stringCount',
+}
+
+export const DEFAULT_PAGE = 1;

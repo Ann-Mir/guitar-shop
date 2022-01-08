@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { QueryParams } from '../../const';
 import { AppRoute } from '../../const';
 import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
@@ -25,7 +26,7 @@ function Search(): JSX.Element {
 
   const getSearch = () => {
     if (searchParams) {
-      dispatch(searchGuitarsWithParams({ 'name_like': searchParams }));
+      dispatch(searchGuitarsWithParams({[QueryParams.NameLike]: searchParams }));
     } else {
       dispatch(loadSearchResults([]));
     }
