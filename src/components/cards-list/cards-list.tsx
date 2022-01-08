@@ -17,6 +17,13 @@ function CardsList(): JSX.Element {
       style={{position: 'relative', width: '100%', height: '100%'}}
     >
       {
+        isDataLoaded && guitars.length === 0 && (
+          <p style={{fontSize: '18px', fontWeight: 'bold', width: '100%'}}>
+            По вашему запросу ничего не найдено
+          </p>
+        )
+      }
+      {
         isDataLoaded
           ?
           guitars.slice(0, CARDS_PER_PAGE)

@@ -1,17 +1,12 @@
 import {Action} from 'redux';
-import {
-  ThunkAction,
-  ThunkDispatch
-} from 'redux-thunk';
-import {
-  AxiosInstance
-} from 'axios';
+import {ThunkAction} from 'redux-thunk';
+import {AxiosInstance} from 'axios';
 import {State} from '../types/state';
 
 
 export enum ActionType {
   LoadGuitars = 'data/loadGuitars',
-  SetGuitarsCount = 'data/setGuitasCount',
+  SetGuitarsCount = 'data/setGuitarsCount',
   LoadSearchResults = 'search/loadSearchResults',
   SetMinPrice = 'filters/minPrice',
   SetMaxPrice = 'filter/maxPrice',
@@ -20,5 +15,3 @@ export enum ActionType {
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
-
-export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Action>;

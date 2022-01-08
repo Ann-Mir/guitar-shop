@@ -11,4 +11,5 @@ export type TQueryParams = {
   name_like?: string,
   _embed?: string,
   type?: string,
+  _limit?: number,
 }

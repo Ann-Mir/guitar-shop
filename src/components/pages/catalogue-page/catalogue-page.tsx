@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { QueryParams } from '../../../const';
 import useQuery from '../../../hooks/use-query';
 import { fetchGuitarsAction, fetchMaxPriceAction, fetchMinPriceAction } from '../../../store/api-actions';
 import { getPageLimit, getStart } from '../../../store/pagination/selectors';
@@ -29,8 +30,8 @@ function CataloguePage(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    query.set('_start', start.toString());
-    query.set('_limit', limit.toString());
+    query.set(QueryParams.Start, start.toString());
+    query.set(QueryParams.Limit, limit.toString());
     dispatch(fetchGuitarsAction(query.toString()));
     history.replace({pathname: pathname, search: query.toString()});
   }, [query, dispatch, start, limit]);
