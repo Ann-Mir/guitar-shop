@@ -21,17 +21,17 @@ function Pagination(): JSX.Element | null {
 
   const paginationRange = usePagination(totalPages, pageLimit, MAX_PAGES_SHOWN, currentPage);
 
-  const onPrevPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handlePrevPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(setCurrentPage(currentPage - PAGINATION_INTERVAL));
   };
 
-  const onNextPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handleNextPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(setCurrentPage(currentPage + PAGINATION_INTERVAL));
   };
 
-  const onPageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handlePageClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     const { id } = (evt.target as HTMLAnchorElement).dataset;
     dispatch(setCurrentPage(Number(id)));
@@ -48,7 +48,7 @@ function Pagination(): JSX.Element | null {
           currentPage !== DEFAULT_PAGE && (
             <li className="pagination__page pagination__page--prev" id="prev">
               <a
-                onClick={onPrevPageClick}
+                onClick={handlePrevPageClick}
                 className="link pagination__page-link"
                 href="#"
               >
@@ -67,7 +67,7 @@ function Pagination(): JSX.Element | null {
           >
             <a
               data-id={page}
-              onClick={onPageClick}
+              onClick={handlePageClick}
               className="link pagination__page-link"
               href="#"
             >
@@ -79,7 +79,7 @@ function Pagination(): JSX.Element | null {
           currentPage !== totalPages && (
             <li className="pagination__page pagination__page--next" id="next">
               <a
-                onClick={onNextPageClick}
+                onClick={handleNextPageClick}
                 className="link pagination__page-link"
                 href="#"
               >

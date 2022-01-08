@@ -37,7 +37,7 @@ function FilterTypeItem(
     setIsChecked(checkedTypes.includes(type) && !disabled);
   }, [query]);
 
-  const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {checked, id} = evt.target;
     setIsChecked(checked);
 
@@ -62,7 +62,7 @@ function FilterTypeItem(
         type="checkbox"
         id={type}
         name={type}
-        onChange={onChange}
+        onChange={handleInputChange}
         checked={isChecked}
         disabled={disabled}
       />
