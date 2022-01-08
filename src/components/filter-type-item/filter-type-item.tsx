@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import useQuery from '../../hooks/use-query';
+import { setCurrentPage } from '../../store/actions';
 
 
 type FilterTypeItemProps = {
@@ -16,6 +18,7 @@ function FilterTypeItem(
     disabled,
   }: FilterTypeItemProps): JSX.Element {
 
+  const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
   const query = useQuery();
@@ -47,6 +50,7 @@ function FilterTypeItem(
       types.forEach((item) => query.append('type', item));
     }
     const search = query.toString();
+    dispatch(setCurrentPage(1));
     history.push({pathname: pathname, search: search});
   };
 

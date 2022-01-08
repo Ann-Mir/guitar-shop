@@ -1,12 +1,14 @@
 import React, { ChangeEvent, FocusEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import useQuery from '../../hooks/use-query';
+import { setCurrentPage } from '../../store/actions';
 import { getMaxPrice, getMinPrice } from '../../store/filter/selectors';
 
 
 function PriceFilter(): JSX.Element {
 
+  const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
   const query = useQuery();
@@ -36,6 +38,7 @@ function PriceFilter(): JSX.Element {
       }
       setMinPriceValue(min);
       query.set('price_gte', String(min));
+      dispatch(setCurrentPage(1));
       history.push({pathname: pathname, search: query.toString()});
       return;
     }
@@ -55,6 +58,7 @@ function PriceFilter(): JSX.Element {
       }
       setMaxPriceValue(max);
       query.set('price_lte', String(max));
+      dispatch(setCurrentPage(1));
       history.push({pathname: pathname, search: query.toString()});
       return;
     }
