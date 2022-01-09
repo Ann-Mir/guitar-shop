@@ -1,6 +1,49 @@
 import { CARDS_PER_PAGE, DEFAULT_PAGE } from './const';
 import { Guitars } from './types/guitar';
 
+export const mockGuitar =   {
+  id: 1,
+  name: 'Честер Bass',
+  vendorCode: 'SO757575',
+  type: 'electric',
+  description:'Замечательный малобюджетный вариант, созданный для новичков, которые отдают предпочтение мелодичным стилям. Прекрасно звучат блюз и баллады, исполненные на этой гитаре. Акустические свойства весьма высоки, в отличие от ее стоимости.',
+  previewImg: 'img/guitar-1.jpg',
+  stringCount: 7,
+  rating: 4,
+  price: 17500,
+  comments: [
+    {
+      id: '0',
+      userName: 'Максим',
+      advantage: 'Цена=качество.',
+      disadvantage: 'Покрытие.',
+      comment: 'Неплохо, но дорого.',
+      rating: 4,
+      createAt: '2021-09-28T13:00:41.845Z',
+      guitarId: 1,
+    },
+    {
+      id: '1',
+      userName: 'Максим',
+      advantage: 'Цена=качество.',
+      disadvantage: 'Покрытие.',
+      comment: 'Неплохо, но дорого.',
+      rating: 3,
+      createAt: '2021-09-29T13:00:41.845Z',
+      guitarId: 1,
+    },
+    {
+      id: '2',
+      userName: 'Максим',
+      advantage: 'Цена=качество.',
+      disadvantage: 'Покрытие.',
+      comment: 'Неплохо, но дорого.',
+      rating: 5,
+      createAt: '2021-09-30T13:00:41.845Z',
+      guitarId: 1,
+    },
+  ],
+};
 
 export const mockGuitars: Guitars = [
   {

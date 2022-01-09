@@ -1,4 +1,6 @@
 import { nanoid } from 'nanoid';
+import { generatePath, Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Guitar } from '../../types/guitar';
 
 
@@ -48,9 +50,12 @@ function Card({ guitar }: CardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <a className="button button--mini" href="#">
+        <Link
+          to={generatePath(AppRoute.Guitar, { id: 1 })}
+          className="button button--mini"
+        >
           Подробнее
-        </a>
+        </Link>
         <a
           className="button button--red button--mini button--add-to-cart"
           href="#"
