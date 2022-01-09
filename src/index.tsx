@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './components/app/app';
 import { createApi } from './services/api';
+import { fetchMaxPriceAction, fetchMinPriceAction } from './store/api-actions';
 import { rootReducer } from './store/root-reducer';
 import thunk from 'redux-thunk';
 
@@ -18,6 +19,8 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
 
+store.dispatch(fetchMinPriceAction());
+store.dispatch(fetchMaxPriceAction());
 
 ReactDOM.render(
   <React.StrictMode>
