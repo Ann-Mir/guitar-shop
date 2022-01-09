@@ -5,13 +5,14 @@ import { AppRoute } from '../../const';
 function Nav(): JSX.Element {
 
   return (
-    <nav className="main-nav">
+    <nav className="main-nav" data-testid="nav">
       <ul className="main-nav__list">
         <li>
           <NavLink
             className="link main-nav__link"
             activeClassName="link--current"
             to={AppRoute.Guitars}
+            data-testid="catalog-link"
             exact
           >
             Каталог

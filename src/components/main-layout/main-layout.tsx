@@ -8,7 +8,7 @@ type MainLayoutProps = {
 function MainLayout({ children }: MainLayoutProps): JSX.Element {
 
   return (
-    <main className="page-content">
+    <main className="page-content" data-testid="main-layout">
       <div className="container">
         {children}
       </div>
