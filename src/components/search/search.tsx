@@ -73,7 +73,7 @@ function Search(): JSX.Element {
   };
 
   return (
-    <div className="form-search">
+    <div className="form-search" data-testid="form-search">
       <form className="form-search__form">
         <button className="form-search__submit" type="submit">
           <svg
@@ -96,6 +96,7 @@ function Search(): JSX.Element {
           type="text"
           autoComplete="off"
           placeholder="что вы ищите?"
+          data-testid="search-input"
         />
         <label className="visually-hidden" htmlFor="search">
           Поиск
