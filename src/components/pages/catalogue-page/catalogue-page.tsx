@@ -27,15 +27,15 @@ function CataloguePage(): JSX.Element {
   useEffect(() => {
     query.set(QueryParams.Start, start.toString());
     query.set(QueryParams.Limit, limit.toString());
-    dispatch(fetchGuitarsAction(query.toString()));
     history.replace({pathname: pathname, search: query.toString()});
+    dispatch(fetchGuitarsAction(query.toString()));
   }, [query, dispatch, start, limit]);
 
   return (
     <MainLayout>
       <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
       <Breadcrumbs />
-      <div className="catalog">
+      <div className="catalog" data-testid="catalogue-page">
         <CatalogueFilter />
         <CatalogueSort />
         <CardsList />
