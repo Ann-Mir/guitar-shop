@@ -65,6 +65,7 @@ function FilterTypeItem(
         onChange={handleInputChange}
         checked={isChecked}
         disabled={disabled}
+        data-testid="type-checkbox"
       />
       <label htmlFor={type}>{name}</label>
     </div>
