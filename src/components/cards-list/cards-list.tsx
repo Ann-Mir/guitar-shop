@@ -13,6 +13,7 @@ function CardsList(): JSX.Element {
 
   return (
     <div
+      data-testid="catalog"
       className="cards catalog__cards"
       style={{position: 'relative', width: '100%', height: '100%'}}
     >

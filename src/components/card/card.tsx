@@ -17,7 +17,7 @@ function Card({ guitar }: CardProps): JSX.Element {
   const emptyStars = MAX_STARS - fullStars;
 
   return (
-    <div className="product-card">
+    <div className="product-card" data-testid="product-card">
       <img
         src={previewImg}
         width="75"
