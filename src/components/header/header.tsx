@@ -7,7 +7,7 @@ import Search from '../search/search';
 function Header(): JSX.Element {
 
   return (
-    <header className="header" id="header">
+    <header className="header" id="header" data-testid="header">
       <div className="container header__wrapper">
         <Logo className={'header__logo'} />
         <Nav />

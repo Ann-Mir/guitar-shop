@@ -8,7 +8,7 @@ import Socials from '../socials/socials';
 function Footer(): JSX.Element {
 
   return (
-    <footer className="footer">
+    <footer className="footer" data-testid="footer">
       <div className="footer__container container">
         <Logo className={'footer__logo'} />
         <Socials />
