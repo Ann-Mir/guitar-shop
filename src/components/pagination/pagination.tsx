@@ -42,7 +42,7 @@ function Pagination(): JSX.Element | null {
   }
 
   return (
-    <div className="pagination page-content__pagination">
+    <div className="pagination page-content__pagination" data-testid="pagination">
       <ul className="pagination__list">
         {
           currentPage !== DEFAULT_PAGE && (
@@ -51,6 +51,7 @@ function Pagination(): JSX.Element | null {
                 onClick={handlePrevPageClick}
                 className="link pagination__page-link"
                 href="#"
+                data-testid="back-button"
               >
                 Назад
               </a>
@@ -60,6 +61,7 @@ function Pagination(): JSX.Element | null {
         {paginationRange.map((page: number) => (
           <li
             key={page}
+            data-testid={page.toString()}
             className={
               `pagination__page
                ${page === currentPage ? 'pagination__page--active' : ''}`
@@ -82,6 +84,7 @@ function Pagination(): JSX.Element | null {
                 onClick={handleNextPageClick}
                 className="link pagination__page-link"
                 href="#"
+                data-testid="next-button"
               >
                 Далее
               </a>

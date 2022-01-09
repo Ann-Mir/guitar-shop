@@ -151,7 +151,7 @@ export const mockState = {
   DATA: {
     guitars: mockGuitars,
     isDataLoaded: true,
-    guitarsCount: 0,
+    guitarsCount: 27,
   },
   SEARCH: {
     guitars: [],
