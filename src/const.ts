@@ -5,6 +5,7 @@ export enum AppRoute {
   Shops = '/shops',
   About = '/about',
   UnderConstruction = '/under-construction',
+  Cart = '/cart',
 }
 
 export enum APIRoute {

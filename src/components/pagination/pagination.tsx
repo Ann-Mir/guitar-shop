@@ -50,7 +50,7 @@ function Pagination(): JSX.Element | null {
               <a
                 onClick={handlePrevPageClick}
                 className="link pagination__page-link"
-                href="#"
+                href="/"
                 data-testid="back-button"
               >
                 Назад
@@ -71,7 +71,7 @@ function Pagination(): JSX.Element | null {
               data-id={page}
               onClick={handlePageClick}
               className="link pagination__page-link"
-              href="#"
+              href="/"
             >
               {page}
             </a>
@@ -83,7 +83,7 @@ function Pagination(): JSX.Element | null {
               <a
                 onClick={handleNextPageClick}
                 className="link pagination__page-link"
-                href="#"
+                href="/"
                 data-testid="next-button"
               >
                 Далее

@@ -29,7 +29,7 @@ function CataloguePage(): JSX.Element {
     query.set(QueryParams.Limit, limit.toString());
     history.replace({pathname: pathname, search: query.toString()});
     dispatch(fetchGuitarsAction(query.toString()));
-  }, [query, dispatch, start, limit]);
+  }, [query, dispatch, start, limit, history, pathname]);
 
   return (
     <MainLayout>

@@ -23,14 +23,6 @@ function Search(): JSX.Element {
 
   const searchResults: Guitars = useSelector(getSearchResults);
 
-  const getSearch = () => {
-    if (searchParams) {
-      dispatch(searchGuitarsWithParams(searchParams));
-    } else {
-      dispatch(loadSearchResults([]));
-    }
-  };
-
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setSearchValue(value);
@@ -38,8 +30,12 @@ function Search(): JSX.Element {
   };
 
   useEffect(() => {
-    getSearch();
-  }, [dispatch, searchParams]);
+    if (searchParams) {
+      dispatch(searchGuitarsWithParams(searchParams));
+    } else {
+      dispatch(loadSearchResults([]));
+    }
+  }, [searchParams, dispatch]);
 
   const onFocus = () => {
     setIsFocused(true);

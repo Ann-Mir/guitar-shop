@@ -56,12 +56,12 @@ function Card({ guitar }: CardProps): JSX.Element {
         >
           Подробнее
         </Link>
-        <a
+        <Link
           className="button button--red button--mini button--add-to-cart"
-          href="#"
+          to={AppRoute.UnderConstruction}
         >
           Купить
-        </a>
+        </Link>
       </div>
     </div>
   );
