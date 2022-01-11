@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import thunk from 'redux-thunk';
 import MainPage from './main-page';
-import { mockState } from '../../../test-utils';
+import { mockState } from '../../../utils/test-utils';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore([thunk]);

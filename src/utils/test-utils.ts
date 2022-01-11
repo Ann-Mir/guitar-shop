@@ -1,5 +1,5 @@
-import { CARDS_PER_PAGE, DEFAULT_PAGE } from './const';
-import { Guitars } from './types/guitar';
+import { CARDS_PER_PAGE, DEFAULT_PAGE } from '../const';
+import { Guitars } from '../types/guitar';
 
 export const mockGuitar =   {
   id: 1,

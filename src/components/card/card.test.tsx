@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import { mockGuitar } from '../../test-utils';
+import { mockGuitar } from '../../utils/test-utils';
 import Card from './card';
 
 const history = createMemoryHistory();

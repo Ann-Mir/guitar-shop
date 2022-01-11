@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import { CARDS_PER_PAGE } from '../../const';
 import { ActionType } from '../../types/action';
 import Pagination from './pagination';
-import { mockState } from '../../test-utils';
+import { mockState } from '../../utils/test-utils';
 import * as Redux from 'react-redux';
 
 const history = createMemoryHistory();

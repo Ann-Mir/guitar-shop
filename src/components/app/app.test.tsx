@@ -5,7 +5,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { AppRoute } from '../../const';
 import thunk from 'redux-thunk';
-import { mockState } from '../../test-utils';
+import { mockState } from '../../utils/test-utils';
 import App from './app';
 
 
