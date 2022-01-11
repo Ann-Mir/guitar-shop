@@ -6,11 +6,12 @@ import CataloguePage from '../pages/catalogue-page/catalogue-page';
 import MainPage from '../pages/main-page/main-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import UnderConstructionPage from '../pages/under-construction-page/under-construction-page';
+import './app.css';
 
 function App(): JSX.Element {
 
   return (
-    <>
+    <div className="wrapper">
       <Header />
       <Switch>
         <Route exact path={AppRoute.Root} component={MainPage} />
@@ -24,7 +25,7 @@ function App(): JSX.Element {
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
-import { TQueryParams } from '../types/query';
 import { loadGuitars, loadSearchResults, setGuitarsCount, setMaxPrice, setMinPrice } from './actions';
 
 
@@ -35,16 +34,15 @@ export const fetchGuitarsAction =
     };
 
 export const searchGuitarsWithParams =
-  (queryParams: TQueryParams): ThunkActionResult =>
+  (searchParams: string): ThunkActionResult =>
     async (
       dispatch,
       _getState,
       api,
     ): Promise<void> => {
       try {
-        const { data } = await api.get<Guitar[]>(APIRoute.Guitars, {
-          params: queryParams,
-        });
+        const { data } = await api
+          .get<Guitar[]>(`${APIRoute.Guitars}?${QueryParams.NameLike}=${searchParams}`);
         dispatch(loadSearchResults(data));
       } catch {
         toast.warn(ErrorMessage.FetchGuitars);

@@ -6,7 +6,7 @@ import TypeFilter from '../type-filter/type-filter';
 function CatalogueFilter(): JSX.Element {
 
   return (
-    <form className="catalog-filter">
+    <form className="catalog-filter" data-testid="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
       <PriceFilter />
       <TypeFilter />

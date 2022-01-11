@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { QueryParams } from '../../../const';
 import useQuery from '../../../hooks/use-query';
-import { fetchGuitarsAction, fetchMaxPriceAction, fetchMinPriceAction } from '../../../store/api-actions';
+import { fetchGuitarsAction } from '../../../store/api-actions';
 import { getPageLimit, getStart } from '../../../store/pagination/selectors';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import CardsList from '../../cards-list/cards-list';
@@ -25,22 +25,17 @@ function CataloguePage(): JSX.Element {
   const {pathname} = useLocation();
 
   useEffect(() => {
-    dispatch(fetchMinPriceAction());
-    dispatch(fetchMaxPriceAction());
-  }, []);
-
-  useEffect(() => {
     query.set(QueryParams.Start, start.toString());
     query.set(QueryParams.Limit, limit.toString());
-    dispatch(fetchGuitarsAction(query.toString()));
     history.replace({pathname: pathname, search: query.toString()});
-  }, [query, dispatch, start, limit]);
+    dispatch(fetchGuitarsAction(query.toString()));
+  }, [query, dispatch, start, limit, history, pathname]);
 
   return (
     <MainLayout>
       <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
       <Breadcrumbs />
-      <div className="catalog">
+      <div className="catalog" data-testid="catalogue-page">
         <CatalogueFilter />
         <CatalogueSort />
         <CardsList />

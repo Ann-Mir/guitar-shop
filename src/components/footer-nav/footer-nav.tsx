@@ -1,7 +1,7 @@
 function FooterNav(): JSX.Element {
 
   return (
-    <section className="footer__nav-section footer__nav-section--links">
+    <section className="footer__nav-section footer__nav-section--links" data-testid="footer-nav">
       <h2 className="footer__nav-title">Информация</h2>
       <ul className="footer__nav-list">
         <li className="footer__nav-list-item">

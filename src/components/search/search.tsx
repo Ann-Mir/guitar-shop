@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { QueryParams } from '../../const';
 import { AppRoute } from '../../const';
 import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
@@ -24,14 +23,6 @@ function Search(): JSX.Element {
 
   const searchResults: Guitars = useSelector(getSearchResults);
 
-  const getSearch = () => {
-    if (searchParams) {
-      dispatch(searchGuitarsWithParams({[QueryParams.NameLike]: searchParams }));
-    } else {
-      dispatch(loadSearchResults([]));
-    }
-  };
-
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setSearchValue(value);
@@ -39,8 +30,12 @@ function Search(): JSX.Element {
   };
 
   useEffect(() => {
-    getSearch();
-  }, [dispatch, searchParams]);
+    if (searchParams) {
+      dispatch(searchGuitarsWithParams(searchParams));
+    } else {
+      dispatch(loadSearchResults([]));
+    }
+  }, [searchParams, dispatch]);
 
   const onFocus = () => {
     setIsFocused(true);
@@ -73,7 +68,7 @@ function Search(): JSX.Element {
   };
 
   return (
-    <div className="form-search">
+    <div className="form-search" data-testid="form-search">
       <form className="form-search__form">
         <button className="form-search__submit" type="submit">
           <svg
@@ -96,6 +91,7 @@ function Search(): JSX.Element {
           type="text"
           autoComplete="off"
           placeholder="что вы ищите?"
+          data-testid="search-input"
         />
         <label className="visually-hidden" htmlFor="search">
           Поиск

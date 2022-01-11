@@ -68,7 +68,7 @@ function PriceFilter(): JSX.Element {
   };
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset className="catalog-filter__block" data-testid="price-filter">
       <legend className="catalog-filter__block-title">Цена, ₽</legend>
       <div className="catalog-filter__price-range">
         <div className="form-input">
@@ -83,6 +83,7 @@ function PriceFilter(): JSX.Element {
             value={minPriceValue}
             onChange={handleMinPriceChange}
             onBlur={handleMinPriceBlur}
+            data-testid="min-price-input"
           />
         </div>
         <div className="form-input">
@@ -97,6 +98,7 @@ function PriceFilter(): JSX.Element {
             value={maxPriceValue}
             onChange={handleMaxPriceChange}
             onBlur={handleMaxPriceBlur}
+            data-testid="max-price-input"
           />
         </div>
       </div>

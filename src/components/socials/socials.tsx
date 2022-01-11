@@ -1,7 +1,7 @@
 function Socials(): JSX.Element {
 
   return (
-    <div className="socials footer__socials">
+    <div className="socials footer__socials" data-testid="socials">
       <ul className="socials__list">
         <li className="socials-item">
           <a

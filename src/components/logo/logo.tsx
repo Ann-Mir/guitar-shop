@@ -14,6 +14,7 @@ function Logo({ className }: LogoProps): JSX.Element {
     <NavLink
       className={logoClasses}
       to={AppRoute.Root}
+      data-testid="logo"
     >
       <img
         className="logo__img"

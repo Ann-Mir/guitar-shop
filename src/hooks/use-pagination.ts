@@ -33,7 +33,7 @@ export const usePagination = (
 
     return getArrayInRange(leftSiblingIndex, rightSiblingIndex);
 
-  }, [totalPages, pageSize, maxPagesShown, currentPage]);
+  }, [totalPages, maxPagesShown, currentPage]);
 
   return paginationRange;
 };
