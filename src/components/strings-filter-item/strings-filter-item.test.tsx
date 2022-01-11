@@ -7,7 +7,6 @@ import {createMemoryHistory} from 'history';
 import thunk from 'redux-thunk';
 import StringsFilterItem from './strings-filter-item';
 import { mockState } from '../../utils/test-utils';
-import * as Redux from 'react-redux';
 
 const history = createMemoryHistory();
 

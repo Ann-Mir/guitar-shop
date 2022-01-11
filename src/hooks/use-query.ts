@@ -8,3 +8,5 @@ function useQuery() {
 }
 
 export default useQuery;
+
+// from https://v5.reactrouter.com/web/example/query-parameters
