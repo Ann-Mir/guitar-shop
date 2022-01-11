@@ -26,6 +26,8 @@ export enum EmbedOption {
 }
 
 export const STRINGS: ReadonlyArray<number> = [4, 6, 7, 12];
+export const FILTER_GUITAR_TYPES: ReadonlyArray<string> = [
+  'acoustic', 'electric', 'ukulele'];
 
 export interface GuitarsStrings {
   [key: string]: number[]

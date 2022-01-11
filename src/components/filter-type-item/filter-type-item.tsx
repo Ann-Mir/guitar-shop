@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { QueryParams } from '../../const';
+import { FILTER_GUITAR_TYPES, QueryParams, STRINGS, STRINGS_BY_TYPE } from '../../const';
 import useQuery from '../../hooks/use-query';
 import { resetPagination } from '../../store/actions';
+import { getAvailableStringsByTypes } from '../../utils/filter-utils';
 
 
 type FilterTypeItemProps = {
@@ -24,35 +24,33 @@ function FilterTypeItem(
   const { pathname } = useLocation();
   const query = useQuery();
   const checkedTypes = query.getAll(QueryParams.Type);
-  const [isChecked, setIsChecked] = useState<boolean>(
-    checkedTypes.includes(type) && !disabled);
+  const checkedStrings = query.getAll(QueryParams.StringCount);
 
-  useEffect(() => {
-    if (disabled && checkedTypes.includes(type)) {
-      query.delete(QueryParams.Type);
-      const checkedTypesOptions = checkedTypes.filter((item) => item !== type);
-      checkedTypesOptions.forEach((option) => query.append(QueryParams.Type, option));
-      history.replace({pathname: pathname, search: query.toString()});
-    }
-    setIsChecked(checkedTypes.includes(type) && !disabled);
-  }, [query]);
+  const isChecked = checkedTypes.includes(type);
 
-  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const {checked, id} = evt.target;
-    setIsChecked(checked);
-
-    query.delete(QueryParams.Type);
-
-    if (checked) {
-      checkedTypes.push(type);
-      checkedTypes.forEach((item) => query.append(QueryParams.Type, item));
+  const handleInputChange = () => {
+    const checkedGuitarTypes = checkedTypes.filter(
+      (item) => FILTER_GUITAR_TYPES.includes(item));
+    const currentTypeIndex = checkedTypes.findIndex(
+      (item) => item === type);
+    if (currentTypeIndex === -1) {
+      checkedGuitarTypes.push(type);
     } else {
-      const types = checkedTypes.filter((item) => id !== item);
-      types.forEach((item) => query.append(QueryParams.Type, item));
+      checkedGuitarTypes.splice(currentTypeIndex, 1);
     }
-    const search = query.toString();
+
+    const availableStrings = getAvailableStringsByTypes(checkedGuitarTypes);
+    if (availableStrings.length === 0) {
+      STRINGS.forEach((item) => availableStrings.push(item));
+    }
+    const checkedStringOptions = checkedStrings
+      .filter((item) => availableStrings.includes(Number(item)));
+    query.delete(QueryParams.Type);
+    query.delete(QueryParams.StringCount);
+    checkedGuitarTypes.forEach((item) => query.append(QueryParams.Type, item));
+    checkedStringOptions.forEach((item) => query.append(QueryParams.StringCount, item));
     dispatch(resetPagination());
-    history.push({pathname: pathname, search: search});
+    history.push({pathname: pathname, search: query.toString()});
   };
 
   return (
