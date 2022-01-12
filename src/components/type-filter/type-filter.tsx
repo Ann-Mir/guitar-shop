@@ -3,7 +3,11 @@ import useQuery from '../../hooks/use-query';
 import FilterTypeItem from '../filter-type-item/filter-type-item';
 
 
-export const GUITAR_TYPES = {
+export interface GuitarTypes {
+  [key: string]: string,
+}
+
+export const GUITAR_TYPES: GuitarTypes = {
   acoustic: 'Акустические гитары',
   electric: 'Электрогитары',
   ukulele: 'Укулеле',

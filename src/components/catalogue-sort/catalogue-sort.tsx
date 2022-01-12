@@ -18,7 +18,9 @@ function CatalogueSort(): JSX.Element {
   const orderType = query.get(QueryParams.Order);
 
   const handleSortTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
-
+    if (!orderType) {
+      query.set(QueryParams.Order, OrderOption.Asc);
+    }
     const type = (evt.target as HTMLButtonElement).getAttribute('data-type');
     if (type) {
       query.set(QueryParams.Sort, type);
@@ -28,6 +30,9 @@ function CatalogueSort(): JSX.Element {
 
   const handleOrderTypeClick = (evt: KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>) => {
     const order = (evt.target as HTMLButtonElement).getAttribute('data-order');
+    if (!sortType) {
+      query.set(QueryParams.Sort, SortOption.Price);
+    }
     if (order) {
       query.set(QueryParams.Order, order);
       history.push({pathname: pathname, search: query.toString()});
