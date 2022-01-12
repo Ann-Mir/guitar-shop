@@ -1797,9 +1797,9 @@ button,
 }
 
 .catalog-sort__order-button--up {
-  border-width: 0 7px 12px;
-  border-top-color: transparent;
-  border-bottom-color: #585757;
+  border-width: 12px 7px 0px;
+  border-top-color: #585757;
+  transform: rotate(180deg)
 }
 
 .catalog-sort__order-button--up::before {

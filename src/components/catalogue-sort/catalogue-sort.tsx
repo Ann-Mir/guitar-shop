@@ -69,7 +69,7 @@ function CatalogueSort(): JSX.Element {
         <button
           className={`catalog-sort__order-button catalog-sort__order-button--up
            ${orderType === OrderOption.Asc
-      ? ActiveClassName.Order : null}`}
+      ? ActiveClassName.Order : ''}`}
           aria-label="По возрастанию"
           tabIndex={-1}
           data-order="asc"
@@ -79,7 +79,7 @@ function CatalogueSort(): JSX.Element {
         <button
           className={`catalog-sort__order-button catalog-sort__order-button--down
            ${orderType === OrderOption.Desc
-      ? ActiveClassName.Order : null}`}
+      ? ActiveClassName.Order : ''}`}
           aria-label="По убыванию"
           data-order="desc"
           onClick={handleOrderTypeClick}
