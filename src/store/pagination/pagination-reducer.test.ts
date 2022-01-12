@@ -30,7 +30,7 @@ describe('Reducer: paginationReducer', () => {
       });
   });
 
-  it('should update reset initial state by resetPagination', () => {
+  it('should reset initial state by resetPagination', () => {
 
     expect(paginationReducer(state, resetPagination()))
       .toEqual({
