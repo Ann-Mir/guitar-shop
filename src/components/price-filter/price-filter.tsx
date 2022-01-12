@@ -32,6 +32,9 @@ function PriceFilter(): JSX.Element {
 
   const handleMinPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
     const value = evt.target.value.replace(/^0+/, '');
+    if (!value) {
+      setMinPriceValue(minPrice);
+    }
     if (value) {
       let min = parseInt(value, 10);
       if (min < minPrice) {
@@ -49,6 +52,9 @@ function PriceFilter(): JSX.Element {
 
   const handleMaxPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
     const value = evt.target.value.replace(/^0+/, '');
+    if (!value) {
+      setMaxPriceValue(minPrice);
+    }
     if (value) {
       let max = parseInt(value, 10);
       if (max > maxPrice) {
