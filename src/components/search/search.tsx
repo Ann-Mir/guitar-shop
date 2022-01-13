@@ -37,11 +37,11 @@ function Search(): JSX.Element {
     }
   }, [searchParams, dispatch]);
 
-  const onFocus = () => {
+  const handleInputFocus = () => {
     setIsFocused(true);
   };
 
-  const onBlur = () => {
+  const handleInputBlur = () => {
     setIsFocused(false);
     if (!isHovered) {
       setSearchValue('');
@@ -85,8 +85,8 @@ function Search(): JSX.Element {
           className="form-search__input"
           onChange={handleInputChange}
           value={searchValue}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           id="search"
           type="text"
           autoComplete="off"
