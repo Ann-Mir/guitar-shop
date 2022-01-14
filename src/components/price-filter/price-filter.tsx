@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { QueryParams } from '../../const';
@@ -6,6 +6,10 @@ import useQuery from '../../hooks/use-query';
 import { resetPagination } from '../../store/actions';
 import { getMaxPrice, getMinPrice } from '../../store/filter/selectors';
 
+
+const MIN_PRICE_LENGTH = 1;
+const ZERO_PRICE = '0';
+const EMPTY_PRICE = '';
 
 function PriceFilter(): JSX.Element {
 
@@ -17,30 +21,40 @@ function PriceFilter(): JSX.Element {
   const maxPrice = useSelector(getMaxPrice);
   const minValue = query.get(QueryParams.PriceGte) ? Number(query.get(QueryParams.PriceGte)) : '';
   const maxValue = query.get(QueryParams.PriceLte) ? Number(query.get(QueryParams.PriceLte)) : '';
-  const [minPriceValue, setMinPriceValue] = useState<number | string>(minValue);
-  const [maxPriceValue, setMaxPriceValue] = useState<number | string>(maxValue);
+  const [minPriceValue, setMinPriceValue] = useState<string>(minValue.toString());
+  const [maxPriceValue, setMaxPriceValue] = useState<string>(maxValue.toString());
 
   const handleMinPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
+    if (value.length > MIN_PRICE_LENGTH) {
+      value.replace(/^0+/, '');
+    }
     setMinPriceValue(value);
   };
 
   const handleMaxPriceChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
+    if (value.length > MIN_PRICE_LENGTH) {
+      value.replace(/^0+/, '');
+    }
     setMaxPriceValue(value);
   };
 
-  const handleMinPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
-    const value = evt.target.value.replace(/^0+/, '');
-    if (!value) {
-      setMinPriceValue(minPrice);
+  const handleMinPriceBlur = () => {
+    if (minPriceValue !== ZERO_PRICE && minPriceValue === EMPTY_PRICE) {
+      if (query.has(QueryParams.PriceGte)) {
+        dispatch(resetPagination());
+        query.delete(QueryParams.PriceGte);
+        history.push({pathname: pathname, search: query.toString()});
+      }
+      return;
     }
-    if (value) {
-      let min = parseInt(value, 10);
+    if (minPriceValue || Number(minPriceValue) === 0) {
+      let min = parseInt(minPriceValue, 10);
       if (min < minPrice) {
         min = minPrice;
       }
-      setMinPriceValue(min);
+      setMinPriceValue(min.toString());
       query.set(QueryParams.PriceGte, String(min));
       dispatch(resetPagination());
       history.push({pathname: pathname, search: query.toString()});
@@ -50,20 +64,24 @@ function PriceFilter(): JSX.Element {
     history.push({pathname: pathname, search: query.toString()});
   };
 
-  const handleMaxPriceBlur = (evt: FocusEvent<HTMLInputElement>) => {
-    const value = evt.target.value.replace(/^0+/, '');
-    if (!value) {
-      setMaxPriceValue(minPrice);
+  const handleMaxPriceBlur = () => {
+    if (maxPriceValue !== ZERO_PRICE && maxPriceValue === EMPTY_PRICE) {
+      if (query.has(QueryParams.PriceLte)) {
+        query.delete(QueryParams.PriceLte);
+        dispatch(resetPagination());
+        history.push({pathname: pathname, search: query.toString()});
+      }
+      return;
     }
-    if (value) {
-      let max = parseInt(value, 10);
+    if (maxPriceValue || Number(maxPriceValue) === 0) {
+      let max = parseInt(maxPriceValue, 10);
       if (max > maxPrice) {
         max = maxPrice;
       }
       if (max < minPrice) {
         max = minPrice;
       }
-      setMaxPriceValue(max);
+      setMaxPriceValue(max.toString());
       query.set(QueryParams.PriceLte, String(max));
       dispatch(resetPagination());
       history.push({pathname: pathname, search: query.toString()});
