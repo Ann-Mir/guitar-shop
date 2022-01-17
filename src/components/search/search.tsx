@@ -2,13 +2,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import useDebounce from '../../hooks/use-debounce';
 import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
 import { getSearchResults } from '../../store/search-results/selectors';
 import { Guitars } from '../../types/guitar';
-import debounce from 'lodash.debounce';
 
-const RENDER_DELAY = 600;
 
 function Search(): JSX.Element {
   const dispatch = useDispatch();
@@ -17,25 +16,21 @@ function Search(): JSX.Element {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const [searchParams, setSearchParams] = useState<string>('');
-
-  const setDebouncedSearchParams = debounce(() => setSearchParams(searchValue), RENDER_DELAY);
-
+  const debouncedSearchParams = useDebounce(searchValue);
   const searchResults: Guitars = useSelector(getSearchResults);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setSearchValue(value);
-    setDebouncedSearchParams();
   };
 
   useEffect(() => {
-    if (searchParams) {
-      dispatch(searchGuitarsWithParams(searchParams));
+    if (debouncedSearchParams) {
+      dispatch(searchGuitarsWithParams(debouncedSearchParams));
     } else {
       dispatch(loadSearchResults([]));
     }
-  }, [searchParams, dispatch]);
+  }, [debouncedSearchParams, dispatch]);
 
   const handleInputFocus = () => {
     setIsFocused(true);

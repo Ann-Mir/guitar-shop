@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
-import { loadGuitars, loadSearchResults, setGuitarsCount, setMaxPrice, setMinPrice } from './actions';
+import { loadGuitars, loadSearchResults, setGuitarsCount, setIsDataLoaded, setMaxPrice, setMinPrice } from './actions';
 
 
 const enum ErrorMessage {
@@ -19,6 +19,7 @@ export const fetchGuitarsAction =
       _getState,
       api,
     ): Promise<void> => {
+      dispatch(setIsDataLoaded(false));
       try {
         const response = await api
           .get<Guitar[]>(
@@ -30,6 +31,7 @@ export const fetchGuitarsAction =
         dispatch(setGuitarsCount(guitarsCount));
       } catch {
         toast.error(ErrorMessage.FetchGuitars);
+        dispatch(setIsDataLoaded(true));
       }
     };
 

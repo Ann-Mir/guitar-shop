@@ -10,11 +10,11 @@ const initialState: TFilter = {
 const filter = createReducer(initialState, (builder) => {
   builder
     .addCase(setMinPrice, (state, action) => {
-      const {price} = action.payload;
+      const { price } = action.payload;
       state.minPrice = price;
     })
     .addCase(setMaxPrice, (state, action) => {
-      const {price} = action.payload;
+      const { price } = action.payload;
       state.maxPrice = price;
     });
 });

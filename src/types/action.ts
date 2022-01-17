@@ -12,6 +12,7 @@ export enum ActionType {
   SetMaxPrice = 'filter/maxPrice',
   SetCurrentPage = 'pagination/setCurrentPage',
   ResetPagination = 'pagination/resetPagination',
+  SetIsDataLoaded = 'data/setIsDataLoaded',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
