@@ -56,3 +56,5 @@ export enum QueryParams {
 }
 
 export const DEFAULT_PAGE = 1;
+
+export const ENTER_KEY_CODE = 'Enter';

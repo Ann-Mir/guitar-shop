@@ -3,7 +3,7 @@ import { CARDS_PER_PAGE } from '../../const';
 import { getGuitars, getLoadedDataStatus } from '../../store/guitars-data/selectors';
 import { Guitar } from '../../types/guitar';
 import Card from '../card/card';
-import Spinner from '../spinner/spinner';
+import PlaceholderLoading from 'react-placeholder-loading';
 
 
 function CardsList(): JSX.Element {
@@ -25,11 +25,24 @@ function CardsList(): JSX.Element {
         )
       }
       {
-        isDataLoaded
-          ?
+        isDataLoaded && (
           guitars.slice(0, CARDS_PER_PAGE)
             .map((guitar: Guitar) => <Card key={guitar.id} guitar={guitar} />)
-          : <Spinner />
+        )
+      }
+      {
+        !isDataLoaded && (
+          [...Array(CARDS_PER_PAGE)].map(
+            (index) => (
+              <PlaceholderLoading
+                key={index}
+                shape="rect"
+                width={220}
+                height={310}
+                colorStart="#f6f8fa"
+                colorEnd="#b6b8b9"
+              />))
+        )
       }
     </div>
   );

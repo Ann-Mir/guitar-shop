@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { QueryParams } from '../../const';
+import { ENTER_KEY_CODE, QueryParams } from '../../const';
 import useQuery from '../../hooks/use-query';
 import { resetPagination } from '../../store/actions';
 import { getMaxPrice, getMinPrice } from '../../store/filter/selectors';
@@ -91,6 +91,18 @@ function PriceFilter(): JSX.Element {
     history.push({pathname: pathname, search: query.toString()});
   };
 
+  const handleMinPriceKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === ENTER_KEY_CODE) {
+      handleMinPriceBlur();
+    }
+  };
+
+  const handleMaxPriceKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === ENTER_KEY_CODE) {
+      handleMaxPriceBlur();
+    }
+  };
+
   return (
     <fieldset className="catalog-filter__block" data-testid="price-filter">
       <legend className="catalog-filter__block-title">Цена, ₽</legend>
@@ -108,6 +120,7 @@ function PriceFilter(): JSX.Element {
             onChange={handleMinPriceChange}
             onBlur={handleMinPriceBlur}
             data-testid="min-price-input"
+            onKeyPress={handleMinPriceKeyPress}
           />
         </div>
         <div className="form-input">
@@ -123,6 +136,7 @@ function PriceFilter(): JSX.Element {
             onChange={handleMaxPriceChange}
             onBlur={handleMaxPriceBlur}
             data-testid="max-price-input"
+            onKeyPress={handleMaxPriceKeyPress}
           />
         </div>
       </div>

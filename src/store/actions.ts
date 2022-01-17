@@ -48,6 +48,15 @@ export const setMaxPrice = createAction(
   }),
 );
 
+export const setIsDataLoaded = createAction(
+  ActionType.SetIsDataLoaded,
+  (isDataLoaded: boolean) => ({
+    payload: {
+      isDataLoaded: isDataLoaded,
+    },
+  }),
+);
+
 export const setCurrentPage = createAction(
   ActionType.SetCurrentPage,
   (currentPage: number) => ({

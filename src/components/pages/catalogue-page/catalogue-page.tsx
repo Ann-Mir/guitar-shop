@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { QueryParams } from '../../../const';
 import useQuery from '../../../hooks/use-query';
 import { fetchGuitarsAction } from '../../../store/api-actions';
+import { getLoadedDataStatus } from '../../../store/guitars-data/selectors';
 import { getPageLimit, getStart } from '../../../store/pagination/selectors';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import CardsList from '../../cards-list/cards-list';
@@ -19,6 +20,7 @@ function CataloguePage(): JSX.Element {
   const query = useQuery();
   const limit = useSelector(getPageLimit);
   const start = useSelector(getStart);
+  const isDataLoaded = useSelector(getLoadedDataStatus);
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ function CataloguePage(): JSX.Element {
         <CatalogueFilter />
         <CatalogueSort />
         <CardsList />
-        <Pagination />
+        {isDataLoaded && <Pagination />}
       </div>
     </MainLayout>
   );

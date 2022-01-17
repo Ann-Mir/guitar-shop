@@ -9,7 +9,7 @@ import { mockGuitars } from '../utils/test-utils';
 import {
   loadGuitars,
   loadSearchResults,
-  setGuitarsCount,
+  setGuitarsCount, setIsDataLoaded,
   setMaxPrice,
   setMinPrice
 } from './actions';
@@ -46,6 +46,7 @@ describe('Async actions', () => {
       await store.dispatch(fetchGuitarsAction(fakeParams));
 
       expect(store.getActions()).toEqual([
+        setIsDataLoaded(false),
         loadGuitars(mockGuitars),
         setGuitarsCount(mockGuitars.length),
       ]);
