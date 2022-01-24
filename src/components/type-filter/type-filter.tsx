@@ -1,11 +1,7 @@
 import { QueryParams, STRINGS_BY_TYPE } from '../../const';
 import useQuery from '../../hooks/use-query';
+import { GuitarTypes } from '../../types/guitar';
 import FilterTypeItem from '../filter-type-item/filter-type-item';
-
-
-export interface GuitarTypes {
-  [key: string]: string,
-}
 
 export const GUITAR_TYPES: GuitarTypes = {
   acoustic: 'Акустические гитары',

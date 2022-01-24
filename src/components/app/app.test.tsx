@@ -11,6 +11,7 @@ import App from './app';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore([thunk]);
+const TEST_ID = 1;
 
 const store = mockStore(mockState);
 
@@ -38,11 +39,11 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
   });
 
-  it('should render "UnderConstructionPage" when user navigate to "/guitars/:id"', () => {
-    history.push('/guitars/1');
+  it('should render "GuitarPage" when user navigate to "/guitars/:id"', () => {
+    history.push(`/guitars/${TEST_ID}`);
     render(fakeApp);
 
-    expect(screen.getByText(/Cтраница в разработке./i)).toBeInTheDocument();
+    expect(screen.getByText(/Честер Bass/i)).toBeInTheDocument();
   });
 
   it('should render "NotFoundPage" when user navigate to non-existent route', () => {

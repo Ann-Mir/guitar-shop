@@ -1,6 +1,5 @@
 import { Comments } from './comment';
 
-
 export type Guitar = {
   id: number;
   name: string;
@@ -15,3 +14,7 @@ export type Guitar = {
 };
 
 export type Guitars = Guitar[];
+
+export interface GuitarTypes {
+  [key: string]: string;
+}

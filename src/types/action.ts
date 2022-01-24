@@ -13,6 +13,8 @@ export enum ActionType {
   SetCurrentPage = 'pagination/setCurrentPage',
   ResetPagination = 'pagination/resetPagination',
   SetIsDataLoaded = 'data/setIsDataLoaded',
+  LoadGuitar = 'guitar/loadGuitar',
+  SetIsGuitarLoaded = 'guitar/setIsGuitarLoaded',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

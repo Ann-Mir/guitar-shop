@@ -7,7 +7,7 @@ export const mockGuitar =   {
   vendorCode: 'SO757575',
   type: 'electric',
   description:'Замечательный малобюджетный вариант, созданный для новичков, которые отдают предпочтение мелодичным стилям. Прекрасно звучат блюз и баллады, исполненные на этой гитаре. Акустические свойства весьма высоки, в отличие от ее стоимости.',
-  previewImg: 'img/guitar-1.jpg',
+  previewImg: 'img/guitar-data-1.jpg',
   stringCount: 7,
   rating: 4,
   price: 17500,
@@ -42,6 +42,16 @@ export const mockGuitar =   {
       createAt: '2021-09-30T13:00:41.845Z',
       guitarId: 1,
     },
+    {
+      id: '3',
+      userName: 'Максим',
+      advantage: 'Цена=качество.',
+      disadvantage: 'Покрытие.',
+      comment: 'Неплохо, но дорого.',
+      rating: 5,
+      createAt: '2021-09-30T13:00:41.845Z',
+      guitarId: 1,
+    },
   ],
 };
 
@@ -52,7 +62,7 @@ export const mockGuitars: Guitars = [
     vendorCode: 'SO757575',
     type: 'electric',
     description:'Замечательный малобюджетный вариант, созданный для новичков, которые отдают предпочтение мелодичным стилям. Прекрасно звучат блюз и баллады, исполненные на этой гитаре. Акустические свойства весьма высоки, в отличие от ее стоимости.',
-    previewImg: 'img/guitar-1.jpg',
+    previewImg: 'img/guitar-data-1.jpg',
     stringCount: 7,
     rating: 4,
     price: 17500,
@@ -95,7 +105,7 @@ export const mockGuitars: Guitars = [
     vendorCode: 'TK129049',
     type: 'electric',
     description: 'Эргономичность гитары и качество сборки являются, пожалуй, её главными преимуществами. Идеальное расположение в руках музыканта дополняется прочностью конструкции из клёна.',
-    previewImg: 'img/guitar-8.jpg',
+    previewImg: 'img/guitar-data-8.jpg',
     stringCount: 7,
     rating: 3.5,
     price: 29500,
@@ -118,7 +128,7 @@ export const mockGuitars: Guitars = [
     vendorCode: 'RO111111',
     type: 'ukulele',
     description: 'Укулеле класса премиум от компании CURT, собравшая в себе все самые необходимые качесва: лёгкость корпуса, прочность струн и компактный размер.',
-    previewImg: 'img/guitar-6.jpg',
+    previewImg: 'img/guitar-data-6.jpg',
     stringCount: 4,
     rating: 4,
     price: 6800,
@@ -165,4 +175,20 @@ export const mockState = {
     limit: CARDS_PER_PAGE,
     start: 0,
   },
+  GUITAR: {
+    guitar: mockGuitar,
+    isGuitarLoaded: true,
+  },
+};
+
+
+export const fakeComment = {
+  id: '0',
+  userName: 'Максим',
+  advantage: 'Цена=качество.',
+  disadvantage: 'Покрытие.',
+  comment: 'Неплохо, но дорого.',
+  rating: 4,
+  createAt: '2021-09-28T13:00:41.845Z',
+  guitarId: 1,
 };

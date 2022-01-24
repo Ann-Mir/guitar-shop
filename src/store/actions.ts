@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
-import {Guitars} from '../types/guitar';
+import { Guitar, Guitars } from '../types/guitar';
 
 
 export const loadGuitars = createAction(
@@ -67,3 +67,21 @@ export const setCurrentPage = createAction(
 );
 
 export const resetPagination = createAction(ActionType.ResetPagination);
+
+export const loadGuitar = createAction(
+  ActionType.LoadGuitar,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);
+
+export const setIsGuitarLoaded = createAction(
+  ActionType.SetIsGuitarLoaded,
+  (isGuitarLoaded: boolean) => ({
+    payload: {
+      isGuitarLoaded,
+    },
+  }),
+);

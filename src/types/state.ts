@@ -1,4 +1,4 @@
-import {Guitars} from './guitar';
+import { Guitar, Guitars } from './guitar';
 import {RootState} from '../store/root-reducer';
 
 
@@ -21,6 +21,11 @@ export type TPagination = {
   currentPage: number,
   start: number,
   limit: number,
+};
+
+export type TGuitarData = {
+  guitar: Guitar | null,
+  isGuitarLoaded: boolean,
 };
 
 export type State = RootState;

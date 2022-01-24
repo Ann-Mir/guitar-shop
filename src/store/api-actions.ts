@@ -2,7 +2,16 @@ import { toast } from 'react-toastify';
 import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Guitar } from '../types/guitar';
-import { loadGuitars, loadSearchResults, setGuitarsCount, setIsDataLoaded, setMaxPrice, setMinPrice } from './actions';
+import {
+  loadGuitar,
+  loadGuitars,
+  loadSearchResults,
+  setGuitarsCount,
+  setIsDataLoaded,
+  setIsGuitarLoaded,
+  setMaxPrice,
+  setMinPrice,
+} from './actions';
 
 
 const enum ErrorMessage {
@@ -94,5 +103,26 @@ export const fetchMaxPriceAction =
         dispatch(setMaxPrice(data[0].price));
       } catch {
         toast.warn(ErrorMessage.FetchPrice);
+      }
+    };
+
+
+export const fetchGuitarAction =
+  (id: string): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      dispatch(setIsGuitarLoaded(false));
+      try {
+        const response = await api
+          .get<Guitar>(
+            `${APIRoute.Guitars}/${id}?${QueryParams.Embed}=${EmbedOption.Comments}`);
+        const { data } = response;
+        dispatch(loadGuitar(data));
+      } catch {
+        toast.error(ErrorMessage.FetchGuitars);
+        dispatch(setIsGuitarLoaded(true));
       }
     };

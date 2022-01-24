@@ -3,6 +3,7 @@ import { AppRoute } from '../../const';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import CataloguePage from '../pages/catalogue-page/catalogue-page';
+import GuitarPage from '../pages/guitar-page/guitar-page';
 import MainPage from '../pages/main-page/main-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import UnderConstructionPage from '../pages/under-construction-page/under-construction-page';
@@ -21,7 +22,7 @@ function App(): JSX.Element {
           path={AppRoute.UnderConstruction}
           component={UnderConstructionPage}
         />
-        <Route path={AppRoute.Guitar} component={UnderConstructionPage} />
+        <Route path={AppRoute.Guitar} component={GuitarPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />
