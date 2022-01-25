@@ -1,11 +1,82 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { postComment } from '../../store/api-actions';
+import { CommentPost } from '../../types/comment';
 import Modal from '../modal/modal';
 
 
 type ReviewFormProps = {
+  id: number;
+  name: string;
   onClose: () => void;
 }
 
-function ReviewForm({ onClose }: ReviewFormProps): JSX.Element {
+function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
+
+  const dispatch = useDispatch();
+
+  const [userName, setUserName] = useState<string>('');
+  const [isUserNameValid, setIsUserNameValid] = useState(true);
+
+  const [advantage, setAdvantage] = useState<string>('');
+
+  const [disadvantage, setDisadvantage] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
+
+  const [rating, setRating] = useState<number | null>(null);
+  const [isRatingValid, setIsRatingValid] = useState(true);
+
+  const handleRatingClick = (evt: ChangeEvent<HTMLInputElement>) => {
+    setIsRatingValid(true);
+    setRating(Number(evt.target.value));
+  };
+
+  const handleUserNameChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setIsUserNameValid(true);
+    setUserName(evt.target.value);
+  };
+
+  const handleAdvantageChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setAdvantage(evt.target.value);
+  };
+
+  const handleDisadvantageChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setDisadvantage(evt.target.value);
+  };
+
+  const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(evt.target.value);
+  };
+
+  const checkIfFormValid = () => {
+    if (!userName) {
+      setIsUserNameValid(false);
+    }
+    if(!rating) {
+      setIsRatingValid(false);
+    }
+
+    return userName && rating && advantage && disadvantage && comment;
+  };
+
+  const handleFormSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+
+    const isValid = checkIfFormValid();
+
+    if (isValid) {
+      const commentPost: CommentPost = {
+        guitarId: id,
+        userName: userName,
+        advantage: advantage,
+        disadvantage: disadvantage,
+        comment: comment,
+        rating: 3,
+      };
+      dispatch(postComment(commentPost));
+    }
+  };
+
   return (
     <Modal onClose={onClose}>
       <div className="modal is-active modal--review modal-for-ui-kit">
@@ -16,9 +87,9 @@ function ReviewForm({ onClose }: ReviewFormProps): JSX.Element {
               Оставить отзыв
             </h2>
             <h3 className="modal__product-name title title--medium-20 title--uppercase">
-              СURT Z30 Plus
+              {name}
             </h3>
-            <form className="form-review">
+            <form className="form-review" onSubmit={handleFormSubmit}>
               <div className="form-review__wrapper">
                 <div className="form-review__name-wrapper">
                   <label
@@ -32,16 +103,22 @@ function ReviewForm({ onClose }: ReviewFormProps): JSX.Element {
                     id="user-name"
                     type="text"
                     autoComplete="off"
+                    value={userName}
+                    onChange={handleUserNameChange}
                   />
-                  <span className="form-review__warning">
-                    Заполните поле
-                  </span>
+                  {
+                    !isUserNameValid && (
+                      <span className="form-review__warning">
+                        Заполните поле
+                      </span>
+                    )
+                  }
                 </div>
                 <div>
                   <span className="form-review__label form-review__label--required">
                     Ваша Оценка
                   </span>
-                  <div className="rate rate--reverse">
+                  <div className="rate rate--reverse" onChange={handleRatingClick}>
                     <input className="visually-hidden" type="radio" id="star-5" name="rate" value="5" />
                     <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
                     <input className="visually-hidden" type="radio" id="star-4" name="rate" value="4" />
@@ -53,28 +130,51 @@ function ReviewForm({ onClose }: ReviewFormProps): JSX.Element {
                     <input className="visually-hidden" type="radio" id="star-1" name="rate" value="1" />
                     <label className='rate__label' htmlFor='star-1' title='Ужасно'/>
                     <span className="rate__count" />
-                    <span className="rate__message">
-                      Поставьте оценку
-                    </span>
+                    {
+                      !isRatingValid && (
+                        <span className="rate__message">
+                          Поставьте оценку
+                        </span>
+                      )
+                    }
                   </div>
                 </div>
               </div>
-              <label className="form-review__label" htmlFor="user-name">
+              <label className="form-review__label" htmlFor="pros">
                 Достоинства
               </label>
-              <input className="form-review__input" id="pros" type="text" autoComplete="off" />
-              <label className="form-review__label" htmlFor="user-name">
+              <input
+                className="form-review__input"
+                id="pros"
+                type="text"
+                autoComplete="off"
+                value={advantage}
+                onChange={handleAdvantageChange}
+                required
+              />
+              <label className="form-review__label" htmlFor="disadv">
                 Недостатки
               </label>
-              <input className="form-review__input" id="user-name" type="text" autoComplete="off" />
-              <label className="form-review__label" htmlFor="user-name">
+              <input
+                className="form-review__input"
+                id="disadv"
+                type="text"
+                autoComplete="off"
+                value={disadvantage}
+                onChange={handleDisadvantageChange}
+                required
+              />
+              <label className="form-review__label" htmlFor="comment">
                 Комментарий
               </label>
               <textarea
                 className='form-review__input form-review__input--textarea'
-                id='user-name'
+                id='comment'
                 rows={10}
                 autoComplete='off'
+                value={comment}
+                onChange={handleCommentChange}
+                required
               />
               <button
                 className="button button--medium-20 form-review__button"

@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
+import { CommentPost } from '../types/comment';
 import { Guitar } from '../types/guitar';
 import {
   loadGuitar,
@@ -17,6 +18,7 @@ import {
 const enum ErrorMessage {
   FetchGuitars = 'Не удалось загрузить данные из каталога',
   FetchPrice = 'Не удалось загрузить данные о ценах',
+  PostComment = 'Не удалось отправить комментарий',
 }
 
 const TOTAL_COUNT = 'x-total-count';
@@ -124,5 +126,22 @@ export const fetchGuitarAction =
       } catch {
         toast.error(ErrorMessage.FetchGuitars);
         dispatch(setIsGuitarLoaded(true));
+      }
+    };
+
+export const postComment =
+  (commentPost: CommentPost): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+
+      try {
+        const response = await api
+          .post<CommentPost>(`${APIRoute.Comments}`, commentPost);
+        const { data } = response;
+      } catch {
+        toast.error(ErrorMessage.PostComment);
       }
     };

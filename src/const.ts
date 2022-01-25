@@ -10,6 +10,7 @@ export enum AppRoute {
 
 export enum APIRoute {
   Guitars = '/guitars',
+  Comments = '/comments',
 }
 
 export enum SortOption {

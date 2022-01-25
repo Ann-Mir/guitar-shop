@@ -13,6 +13,7 @@ const COMMENTS_STEP = 3;
 function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
 
   const comments = guitar.comments?.slice().reverse();
+  const { name, id } = guitar;
   const [commentsShown, setCommentsShown] = useState(COMMENTS_STEP);
 
 
@@ -38,7 +39,7 @@ function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
   return (
     <section className="reviews">
       {
-        isReviewFormVisible && <ReviewForm onClose={handleReviewFormClose} />
+        isReviewFormVisible && <ReviewForm id={id} name={name} onClose={handleReviewFormClose} />
       }
       {
         isReviewSuccessModalVisible && <ReviewSuccessModal onClose={handleReviewFormClose} />
