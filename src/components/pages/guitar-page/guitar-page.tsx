@@ -28,7 +28,7 @@ function GuitarPage(): JSX.Element {
     <MainLayout>
       {isGuitarLoaded && guitar ? (
         <>
-          <h1 className="page-content__title title title--bigger">Товар</h1>
+          <h1 className="page-content__title title title--bigger">{guitar.name}</h1>
           <Breadcrumbs />
           <ProductContainer guitar={guitar} />
           <ReviewsWrapper guitar={guitar}/>

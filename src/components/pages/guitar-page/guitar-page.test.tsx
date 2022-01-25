@@ -23,6 +23,8 @@ describe('Component: GuitarPage', () => {
   it('should render correctly', () => {
     history.push('/guitars/1');
     render(fakeApp);
-    expect(screen.getByText('Товар')).toBeInTheDocument();
+    expect(screen.getByText('Характеристики')).toBeInTheDocument();
+    expect(screen.getByText('Описание')).toBeInTheDocument();
+    expect(screen.getByText('Добавить в корзину')).toBeInTheDocument();
   });
 });

@@ -1,12 +1,16 @@
-import ModalOverlay from '../modal-overlay/modal-overlay';
+import Modal from '../modal/modal';
 
 
-function ReviewSuccessModal(): JSX.Element {
+type ReviewSuccessModalProps = {
+  onClose: () => void;
+}
+
+function ReviewSuccessModal({ onClose }: ReviewSuccessModalProps): JSX.Element {
   return (
-    <ModalOverlay onClose={() => {}}>
+    <Modal onClose={onClose}>
       <div className="modal is-active modal--success modal-for-ui-kit">
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal></div>
+          <div className="modal__overlay" data-close-modal onClick={onClose}></div>
           <div className="modal__content">
             <svg className="modal__icon" width="26" height="20" aria-hidden="true">
               <use xlinkHref="#icon-success"></use>
@@ -28,7 +32,7 @@ function ReviewSuccessModal(): JSX.Element {
           </div>
         </div>
       </div>
-    </ModalOverlay>
+    </Modal>
   );
 }
 

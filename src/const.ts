@@ -42,6 +42,8 @@ export const STRINGS_BY_TYPE: GuitarsStrings = {
 
 export const CARDS_PER_PAGE = 9;
 
+export const ESCAPE_KEY_CODE = 'Escape';
+
 export enum QueryParams {
   Sort = '_sort',
   Order = '_order',

@@ -10,7 +10,7 @@ import {
   setIsDataLoaded,
   setIsGuitarLoaded,
   setMaxPrice,
-  setMinPrice,
+  setMinPrice
 } from './actions';
 
 
