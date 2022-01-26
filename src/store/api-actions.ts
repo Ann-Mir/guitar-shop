@@ -1,23 +1,27 @@
 import { toast } from 'react-toastify';
-import { APIRoute, EmbedOption, OrderOption, QueryParams, SortOption } from '../const';
+import { APIRoute, EmbedOption, OrderOption, PostingStatus, QueryParams, SortOption } from '../const';
 import { ThunkActionResult } from '../types/action';
-import { CommentPost } from '../types/comment';
+import { CommentPost, Comments, Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
 import {
+  loadComments,
   loadGuitar,
   loadGuitars,
   loadSearchResults,
+  setAreCommentsLoaded,
   setGuitarsCount,
   setIsDataLoaded,
   setIsGuitarLoaded,
   setMaxPrice,
-  setMinPrice
+  setMinPrice,
+  setPostingStatus
 } from './actions';
 
 
-const enum ErrorMessage {
+export const enum ErrorMessage {
   FetchGuitars = 'Не удалось загрузить данные из каталога',
   FetchPrice = 'Не удалось загрузить данные о ценах',
+  FetchComments = 'Не удалось загрузить комментарии',
   PostComment = 'Не удалось отправить комментарий',
 }
 
@@ -120,7 +124,7 @@ export const fetchGuitarAction =
       try {
         const response = await api
           .get<Guitar>(
-            `${APIRoute.Guitars}/${id}?${QueryParams.Embed}=${EmbedOption.Comments}`);
+            `${APIRoute.Guitars}/${id}`);
         const { data } = response;
         dispatch(loadGuitar(data));
       } catch {
@@ -129,19 +133,47 @@ export const fetchGuitarAction =
       }
     };
 
-export const postComment =
+export const fetchCommentsAction =
+  (id: string): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      dispatch(setAreCommentsLoaded(false));
+      try {
+        const response = await api
+          .get<Comments>(
+            `${APIRoute.Guitars}/${id}${APIRoute.Comments}`);
+        const { data } = response;
+        dispatch(loadComments(data));
+      } catch {
+        toast.error(ErrorMessage.FetchComments);
+        dispatch(setAreCommentsLoaded(true));
+      }
+    };
+
+
+export const postCommentAction =
   (commentPost: CommentPost): ThunkActionResult =>
     async (
       dispatch,
       _getState,
       api,
     ): Promise<void> => {
-
+      dispatch(setAreCommentsLoaded(false));
       try {
         const response = await api
-          .post<CommentPost>(`${APIRoute.Comments}`, commentPost);
+          .post<Comment>(`${APIRoute.Comments}`, commentPost);
+
         const { data } = response;
+
+        const comments = _getState().GUITAR.comments;
+        dispatch(loadComments([data, ...comments]));
+        dispatch(setPostingStatus(PostingStatus.Success));
       } catch {
         toast.error(ErrorMessage.PostComment);
+        dispatch(setAreCommentsLoaded(true));
+        dispatch(setPostingStatus(PostingStatus.Error));
       }
     };

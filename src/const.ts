@@ -61,3 +61,10 @@ export enum QueryParams {
 export const DEFAULT_PAGE = 1;
 
 export const ENTER_KEY_CODE = 'Enter';
+
+export enum PostingStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Success = 'success',
+  Error = 'error',
+}

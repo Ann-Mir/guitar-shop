@@ -15,6 +15,9 @@ export enum ActionType {
   SetIsDataLoaded = 'data/setIsDataLoaded',
   LoadGuitar = 'guitar/loadGuitar',
   SetIsGuitarLoaded = 'guitar/setIsGuitarLoaded',
+  LoadComments = 'guitar/loadComments',
+  SetAreCommentsLoaded = 'guitar/setAreCommentsLoaded',
+  SetPostingStatus = 'guitar/setPostingStatus',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

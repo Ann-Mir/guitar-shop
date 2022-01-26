@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchGuitarAction } from '../../../store/api-actions';
+import { fetchCommentsAction, fetchGuitarAction } from '../../../store/api-actions';
 import { getGuitar, getIsGuitarLoaded } from '../../../store/guitar-data/selectors';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import MainLayout from '../../main-layout/main-layout';
@@ -22,6 +22,7 @@ function GuitarPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchGuitarAction(id));
+    dispatch(fetchCommentsAction(id));
   }, []);
 
   return (

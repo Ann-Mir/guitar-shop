@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { PostingStatus } from '../../const';
+import { setPostingStatus } from '../../store/actions';
+import { getAreCommentsLoaded, getComments } from '../../store/guitar-data/selectors';
 import { Guitar } from '../../types/guitar';
 import ReviewForm from '../review-form/review-form';
-import ReviewSuccessModal from '../review-success-modal/review-success-modal';
 import Review from '../review/review';
 
 type ReviewsWrapperProps = {
@@ -12,16 +15,17 @@ const COMMENTS_STEP = 3;
 
 function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
 
-  const comments = guitar.comments?.slice().reverse();
+  const dispatch = useDispatch();
+  const comments = useSelector(getComments);
+  const areCommentsLoaded = useSelector(getAreCommentsLoaded);
   const { name, id } = guitar;
   const [commentsShown, setCommentsShown] = useState(COMMENTS_STEP);
 
-
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
-  const [isReviewSuccessModalVisible, setIsReviewSuccessModalVisible] = useState(false);
 
   const handleReviewFormClose = () => {
     setIsReviewFormVisible(false);
+    dispatch(setPostingStatus(PostingStatus.Unknown));
   };
 
   const handleShowMoreCommentsClick = () => {
@@ -41,9 +45,6 @@ function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
       {
         isReviewFormVisible && <ReviewForm id={id} name={name} onClose={handleReviewFormClose} />
       }
-      {
-        isReviewSuccessModalVisible && <ReviewSuccessModal onClose={handleReviewFormClose} />
-      }
       <h3 className="reviews__title title title--bigger">
         Отзывы
       </h3>
@@ -55,11 +56,16 @@ function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
         Оставить отзыв
       </a>
       {
-        comments && comments.slice(0, commentsShown).map(
+        !areCommentsLoaded && (
+          <p>Комментарии загружаются...</p>
+        )
+      }
+      {
+        areCommentsLoaded && comments && comments.slice(0, commentsShown).map(
           (review) => <Review key={review.id} review={review} />)
       }
       {
-        (comments && (comments.length > commentsShown)) && (
+        (areCommentsLoaded && comments && (comments.length > commentsShown)) && (
           <button
             className="button button--medium reviews__more-button"
             onClick={handleShowMoreCommentsClick}

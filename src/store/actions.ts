@@ -1,5 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
+import { PostingStatus } from '../const';
 import {ActionType} from '../types/action';
+import { Comments } from '../types/comment';
 import { Guitar, Guitars } from '../types/guitar';
 
 
@@ -82,6 +84,33 @@ export const setIsGuitarLoaded = createAction(
   (isGuitarLoaded: boolean) => ({
     payload: {
       isGuitarLoaded,
+    },
+  }),
+);
+
+export const loadComments = createAction(
+  ActionType.LoadComments,
+  (comments: Comments) => ({
+    payload: {
+      comments,
+    },
+  }),
+);
+
+export const setAreCommentsLoaded = createAction(
+  ActionType.SetAreCommentsLoaded,
+  (areCommentsLoaded: boolean) => ({
+    payload: {
+      areCommentsLoaded,
+    },
+  }),
+);
+
+export const setPostingStatus = createAction(
+  ActionType.SetPostingStatus,
+  (postingStatus: PostingStatus) => ({
+    payload: {
+      postingStatus,
     },
   }),
 );

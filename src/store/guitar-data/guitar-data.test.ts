@@ -1,3 +1,4 @@
+import { PostingStatus } from '../../const';
 import { mockGuitar } from '../../utils/test-utils';
 import { loadGuitar, setIsGuitarLoaded } from '../actions';
 import { guitarData } from './guitar-data';
@@ -7,6 +8,9 @@ describe('Reducer: guitarData', () => {
   const state = {
     guitar: null,
     isGuitarLoaded: false,
+    comments: [],
+    areCommentsLoaded: false,
+    postingStatus: PostingStatus.Unknown,
   };
 
   it('should return initial state without additional parameters', () => {
