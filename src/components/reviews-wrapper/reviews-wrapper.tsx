@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostingStatus } from '../../const';
 import { setPostingStatus } from '../../store/actions';
-import { getAreCommentsLoaded, getComments } from '../../store/guitar-data/selectors';
+import { getAreCommentsLoaded, getComments, getSortedComments } from '../../store/guitar-data/selectors';
 import { Guitar } from '../../types/guitar';
 import ReviewForm from '../review-form/review-form';
 import Review from '../review/review';
@@ -16,7 +16,7 @@ const COMMENTS_STEP = 3;
 function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
 
   const dispatch = useDispatch();
-  const comments = useSelector(getComments);
+  const comments = useSelector(getSortedComments);
   const areCommentsLoaded = useSelector(getAreCommentsLoaded);
   const { name, id } = guitar;
   const [commentsShown, setCommentsShown] = useState(COMMENTS_STEP);
