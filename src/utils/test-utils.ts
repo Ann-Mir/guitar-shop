@@ -236,3 +236,47 @@ export const fakeComment = {
   createAt: '2021-09-28T13:00:41.845Z',
   guitarId: 1,
 };
+
+
+export const fakeComments = [
+  {
+    id: '0',
+    userName: 'Максим',
+    advantage: 'Цена=качество.',
+    disadvantage: 'Покрытие.',
+    comment: 'Неплохо, но дорого.',
+    rating: 4,
+    createAt: '2021-09-28T13:00:41.845Z',
+    guitarId: 1,
+  },
+  {
+    id: '1',
+    userName: 'Максим',
+    advantage: 'Цена=качество.',
+    disadvantage: 'Покрытие.',
+    comment: 'Неплохо, но дорого.',
+    rating: 3,
+    createAt: '2021-09-29T13:00:41.845Z',
+    guitarId: 1,
+  },
+  {
+    id: '2',
+    userName: 'Максим',
+    advantage: 'Цена=качество.',
+    disadvantage: 'Покрытие.',
+    comment: 'Неплохо, но дорого.',
+    rating: 5,
+    createAt: '2021-09-30T13:00:41.845Z',
+    guitarId: 1,
+  },
+  {
+    id: '3',
+    userName: 'Максим',
+    advantage: 'Цена=качество.',
+    disadvantage: 'Покрытие.',
+    comment: 'Неплохо, но дорого.',
+    rating: 5,
+    createAt: '2021-09-30T13:00:41.845Z',
+    guitarId: 1,
+  },
+];

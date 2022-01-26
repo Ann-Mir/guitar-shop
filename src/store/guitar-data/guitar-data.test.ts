@@ -1,6 +1,6 @@
 import { PostingStatus } from '../../const';
-import { mockGuitar } from '../../utils/test-utils';
-import { loadGuitar, setIsGuitarLoaded } from '../actions';
+import { fakeComments, mockGuitar } from '../../utils/test-utils';
+import { loadComments, loadGuitar, setAreCommentsLoaded, setIsGuitarLoaded, setPostingStatus } from '../actions';
 import { guitarData } from './guitar-data';
 
 
@@ -35,6 +35,34 @@ describe('Reducer: guitarData', () => {
       .toEqual({
         ...state,
         isGuitarLoaded: true,
+      });
+  });
+
+  it('should update comments by loadComments', () => {
+
+    expect(guitarData(state, loadComments(fakeComments)))
+      .toEqual({
+        ...state,
+        comments: fakeComments,
+        areCommentsLoaded: true,
+      });
+  });
+
+  it('should update postingStatus by setPostingStatus', () => {
+
+    expect(guitarData(state, setPostingStatus(PostingStatus.Success)))
+      .toEqual({
+        ...state,
+        postingStatus: PostingStatus.Success,
+      });
+  });
+
+  it('should update areCommentsLoaded by setAreCommentsLoaded', () => {
+
+    expect(guitarData(state, setAreCommentsLoaded(true)))
+      .toEqual({
+        ...state,
+        areCommentsLoaded: true,
       });
   });
 });
