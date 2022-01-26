@@ -1,16 +1,26 @@
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import * as Redux from 'react-redux';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import { mockGuitar } from '../../utils/test-utils';
+import thunk from 'redux-thunk';
+import { mockGuitar, mockState } from '../../utils/test-utils';
 import ReviewsWrapper from './reviews-wrapper';
 
+
+const mockStore = configureMockStore([thunk]);
+
+const store = mockStore(mockState);
 const history = createMemoryHistory();
 
 const fakeApp = (
-  <Router history={history}>
-    <ReviewsWrapper guitar={mockGuitar}/>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <ReviewsWrapper guitar={mockGuitar}/>
+    </Router>
+  </Provider>
 );
 
 describe('Component: ReviewsWrapper', () => {
@@ -20,6 +30,10 @@ describe('Component: ReviewsWrapper', () => {
   });
 
   it('should handle user events correctly', () => {
+
+    const dispatch = jest.fn();
+    const useDispatch = jest.spyOn(Redux, 'useDispatch');
+    useDispatch.mockReturnValue(dispatch);
 
     render(fakeApp);
 
@@ -38,5 +52,6 @@ describe('Component: ReviewsWrapper', () => {
 
     userEvent.click(upButton);
     expect(fakeUpButtonHandler).toBeCalled();
+    expect(dispatch).toBeCalledTimes(0);
   });
 });

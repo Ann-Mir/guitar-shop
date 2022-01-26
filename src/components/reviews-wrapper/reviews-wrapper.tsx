@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostingStatus } from '../../const';
 import { setPostingStatus } from '../../store/actions';
-import { getAreCommentsLoaded, getComments, getSortedComments } from '../../store/guitar-data/selectors';
+import { getAreCommentsLoaded, getSortedComments } from '../../store/guitar-data/selectors';
 import { Guitar } from '../../types/guitar';
 import ReviewForm from '../review-form/review-form';
 import Review from '../review/review';

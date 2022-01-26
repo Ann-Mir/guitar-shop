@@ -43,7 +43,7 @@ describe('Application Routing', () => {
     history.push(`/guitars/${TEST_ID}`);
     render(fakeApp);
 
-    expect(screen.getByText(/Честер Bass/i)).toBeInTheDocument();
+    expect(screen.getByText(/Перейти в корзину/i)).toBeInTheDocument();
   });
 
   it('should render "NotFoundPage" when user navigate to non-existent route', () => {
