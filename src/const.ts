@@ -10,6 +10,7 @@ export enum AppRoute {
 
 export enum APIRoute {
   Guitars = '/guitars',
+  Comments = '/comments',
 }
 
 export enum SortOption {
@@ -42,6 +43,8 @@ export const STRINGS_BY_TYPE: GuitarsStrings = {
 
 export const CARDS_PER_PAGE = 9;
 
+export const ESCAPE_KEY_CODE = 'Escape';
+
 export enum QueryParams {
   Sort = '_sort',
   Order = '_order',
@@ -58,3 +61,10 @@ export enum QueryParams {
 export const DEFAULT_PAGE = 1;
 
 export const ENTER_KEY_CODE = 'Enter';
+
+export enum PostingStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Success = 'success',
+  Error = 'error',
+}

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 import { CARDS_PER_PAGE } from '../../const';
 import { getGuitars, getLoadedDataStatus } from '../../store/guitars-data/selectors';
@@ -33,9 +34,9 @@ function CardsList(): JSX.Element {
       {
         !isDataLoaded && (
           [...Array(CARDS_PER_PAGE)].map(
-            (index) => (
+            () => (
               <PlaceholderLoading
-                key={index}
+                key={nanoid()}
                 shape="rect"
                 width={220}
                 height={310}
