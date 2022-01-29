@@ -1,8 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, ENTER_KEY_CODE } from '../../const';
 import useDebounce from '../../hooks/use-debounce';
+import useOnClickOutside from '../../hooks/use-outside-click';
 import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
 import { getSearchResults } from '../../store/search-results/selectors';
@@ -15,6 +16,7 @@ function Search(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const searchRef = useRef(null);
 
   const debouncedSearchParams = useDebounce(searchValue);
   const searchResults: Guitars = useSelector(getSearchResults);
@@ -36,7 +38,7 @@ function Search(): JSX.Element {
     setIsFocused(true);
   };
 
-  const handleInputBlur = () => {
+  const handleOutsideClick = () => {
     setIsFocused(false);
     if (!isHovered) {
       setSearchValue('');
@@ -62,8 +64,19 @@ function Search(): JSX.Element {
     setSearchValue('');
   };
 
+  const handleSearchResultKeyPress = (
+    evt: KeyboardEvent<HTMLElement>,
+    id: number,
+  ) => {
+    if (evt.key === ENTER_KEY_CODE) {
+      handleItemClick(id);
+    }
+  };
+
+  useOnClickOutside(searchRef, handleOutsideClick);
+
   return (
-    <div className="form-search" data-testid="form-search">
+    <div className="form-search" data-testid="form-search" ref={searchRef}>
       <form className="form-search__form">
         <button className="form-search__submit" type="submit">
           <svg
@@ -81,7 +94,6 @@ function Search(): JSX.Element {
           onChange={handleInputChange}
           value={searchValue}
           onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
           id="search"
           type="text"
           autoComplete="off"
@@ -106,6 +118,7 @@ function Search(): JSX.Element {
               style={{ color: '#FFFFFF' }}
               key={guitar.id}
               onClick={() => handleItemClick(guitar.id)}
+              onKeyPress={(evt) => handleSearchResultKeyPress(evt, guitar.id)}
             >
               {guitar.name}
             </li>
