@@ -10,22 +10,31 @@ type ModalTypeProps = {
   onClose: () => void;
 };
 
-const modalRoot = document.getElementById('modal-root')!;
 
 function Modal({ children, onClose }: ModalTypeProps): JSX.Element {
 
-  const handleEscKeydown = (evt: KeyboardEvent) => {
-    if (evt.key === ESCAPE_KEY_CODE){
-      onClose();
-    }
-  };
+  let modalRoot = document.getElementById('modal-root');
+
+  if (!modalRoot) {
+    modalRoot = document.createElement('div');
+    modalRoot.setAttribute('id', 'modal-root');
+    document.body.appendChild(modalRoot);
+  }
 
   useEffect(() => {
+
+    const handleEscKeydown = (evt: KeyboardEvent) => {
+      if (evt.key === ESCAPE_KEY_CODE){
+        onClose();
+      }
+    };
+
     window.addEventListener('keydown', handleEscKeydown);
+
     return function () {
       window.removeEventListener('keydown', handleEscKeydown);
     };
-  });
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     <FocusLock>

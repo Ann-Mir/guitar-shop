@@ -68,3 +68,13 @@ export enum PostingStatus {
   Success = 'success',
   Error = 'error',
 }
+
+export enum PageTitles {
+  Main = 'Главная',
+  Catalogue = 'Каталог',
+}
+
+export const BREADCRUMBS_LINKS = {
+  main: {title: PageTitles.Main, route: AppRoute.Root},
+  catalogue: {title: PageTitles.Catalogue, route: AppRoute.Guitars},
+};
