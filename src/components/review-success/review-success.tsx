@@ -4,7 +4,7 @@ type ReviewSuccessModalProps = {
 
 function ReviewSuccess({ onClose }: ReviewSuccessModalProps): JSX.Element {
   return (
-    <div className="modal is-active modal--success modal-for-ui-kit">
+    <div className="modal is-active modal--success modal-for-ui-kit" data-testid="success-modal">
       <div className="modal__wrapper">
         <div className="modal__overlay" data-close-modal onClick={onClose}></div>
         <div className="modal__content">
@@ -25,6 +25,7 @@ function ReviewSuccess({ onClose }: ReviewSuccessModalProps): JSX.Element {
             type="button"
             aria-label="Закрыть"
             onClick={onClose}
+            data-testid="success-close-button"
           >
             <span className="button-cross__icon"></span>
             <span className="modal__close-btn-interactive-area"></span>

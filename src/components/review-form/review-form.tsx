@@ -118,6 +118,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                         id="user-name"
                         type="text"
                         autoComplete="off"
+                        data-testid="input-username"
                         value={userName}
                         onChange={handleUserNameChange}
                       />
@@ -138,7 +139,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                         <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
                         <input className="visually-hidden" type="radio" id="star-4" name="rate" value="4" />
                         <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                        <input className="visually-hidden" type="radio" id="star-3" name="rate" value="3" />
+                        <input className="visually-hidden" type="radio" id="star-3" name="rate" value="3" data-testid="comment-rating-input"/>
                         <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
                         <input className="visually-hidden" type="radio" id="star-2" name="rate" value="2" />
                         <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
@@ -159,6 +160,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                     Достоинства
                   </label>
                   <input
+                    data-testid="input-pros"
                     className="form-review__input"
                     id="pros"
                     type="text"
@@ -175,6 +177,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                     id="disadv"
                     type="text"
                     autoComplete="off"
+                    data-testid="input-disadv"
                     value={disadvantage}
                     onChange={handleDisadvantageChange}
                     required
@@ -186,7 +189,8 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                     className='form-review__input form-review__input--textarea'
                     id='comment'
                     rows={10}
-                    autoComplete='off'
+                    autoComplete="off"
+                    data-testid="input-comment"
                     value={comment}
                     onChange={handleCommentChange}
                     required
@@ -195,6 +199,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                     className="button button--medium-20 form-review__button"
                     type="submit"
                     disabled={postingStatus === PostingStatus.Posting}
+                    data-testid="send-review-button"
                   >
                     Отправить отзыв
                   </button>
@@ -204,6 +209,7 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
                   type="button"
                   aria-label="Закрыть"
                   onClick={onClose}
+                  data-testid="close-comment-modal-button"
                 >
                   <span
                     className='button-cross__icon'
