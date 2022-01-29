@@ -85,6 +85,8 @@ function ReviewForm({ id, name, onClose }: ReviewFormProps): JSX.Element {
         rating: Number(rating),
       };
       dispatch(postCommentAction(commentPost));
+    } else {
+      dispatch(setPostingStatus(PostingStatus.Unknown));
     }
   };
 
