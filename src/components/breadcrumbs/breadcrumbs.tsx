@@ -1,18 +1,22 @@
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { Breadcrumb } from '../../types/nav';
 
-function Breadcrumbs(): JSX.Element {
+
+type BreadcrumbsProps = {
+  breadcrumbs: Breadcrumb[];
+}
+
+function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps): JSX.Element {
 
   return (
     <ul className="breadcrumbs page-content__breadcrumbs">
-      <li className="breadcrumbs__item">
-        <NavLink className="link" to={AppRoute.Root}>Главная</NavLink>
-      </li>
-      <li className="breadcrumbs__item">
-        <NavLink to={AppRoute.Guitars} className="link">
-          Каталог
-        </NavLink>
-      </li>
+      {
+        breadcrumbs.map(({ title, route }) => (
+          <li className="breadcrumbs__item" key={title}>
+            <NavLink className="link" to={route}>{title}</NavLink>
+          </li>
+        ))
+      }
     </ul>
   );
 }

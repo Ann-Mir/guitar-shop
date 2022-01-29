@@ -42,7 +42,6 @@ function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
       </a>
       <div
         className={`tabs__content ${isCharacteristicsActive ? '' : 'hidden'}`}
-        id="characteristics"
       >
         <table className="tabs__table">
           <tbody>
@@ -63,7 +62,6 @@ function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
       </div>
       <div
         className={`tabs__content ${isCharacteristicsActive ? 'hidden' : ''}`}
-        id="description"
       >
         <p className="tabs__product-description">
           {description}
