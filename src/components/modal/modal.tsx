@@ -10,7 +10,7 @@ type ModalTypeProps = {
   onClose: () => void;
 };
 
-const modalRoot = document.getElementById('modal-root')!;
+const modalRoot = document.getElementById('modal-root') as Element;
 
 function Modal({ children, onClose }: ModalTypeProps): JSX.Element {
 

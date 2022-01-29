@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostingStatus } from '../../const';
 import { setPostingStatus } from '../../store/actions';
@@ -36,7 +36,8 @@ function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
     setCommentsShown(COMMENTS_STEP);
   };
 
-  const handleReviewButtonClick = () => {
+  const handleReviewButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
     setIsReviewFormVisible(true);
   };
 
@@ -50,7 +51,7 @@ function ReviewsWrapper({ guitar }: ReviewsWrapperProps): JSX.Element {
       </h3>
       <a
         className="button button--red-border button--big reviews__sumbit-button"
-        href="#"
+        href="/"
         onClick={handleReviewButtonClick}
       >
         Оставить отзыв

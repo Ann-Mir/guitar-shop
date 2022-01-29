@@ -1,3 +1,4 @@
+import { AppRoute } from '../../const';
 import { Guitar } from '../../types/guitar';
 import GuitarDetails from '../guitar-details/guitar-details';
 import Rating from '../rating/rating';
@@ -36,7 +37,7 @@ function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
         </p>
         <a
           className="button button--red button--big product-container__button"
-          href="#"
+          href={AppRoute.Cart}
         >
           Добавить в корзину
         </a>
