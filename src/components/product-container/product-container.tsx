@@ -1,6 +1,7 @@
 import { AppRoute } from '../../const';
 import { Comments } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
+import { formatPrice } from '../../utils/common';
 import GuitarDetails from '../guitar-details/guitar-details';
 import Rating from '../rating/rating';
 
@@ -35,7 +36,7 @@ function ProductContainer({ guitar, comments }: ProductContainerProps): JSX.Elem
           Цена:
         </p>
         <p className="product-container__price-info product-container__price-info--value">
-          {price} ₽
+          {formatPrice(price)} ₽
         </p>
         <a
           className="button button--red button--big product-container__button"
