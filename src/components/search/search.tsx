@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, ENTER_KEY_CODE } from '../../const';
 import useDebounce from '../../hooks/use-debounce';
-import useOnClickOutside from '../../hooks/use-outside-click';
+import useOnClickOutside from '../../hooks/use-on-click-outside';
 import { loadSearchResults } from '../../store/actions';
 import { searchGuitarsWithParams } from '../../store/api-actions';
 import { getSearchResults } from '../../store/search-results/selectors';
