@@ -1,6 +1,7 @@
 import { generatePath, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Guitar } from '../../types/guitar';
+import { formatPrice } from '../../utils/common';
 import Rating from '../rating/rating';
 
 
@@ -28,7 +29,7 @@ function Card({ guitar }: CardProps): JSX.Element {
         />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price">
-          <span className="visually-hidden">Цена:</span>{price} ₽
+          <span className="visually-hidden">Цена:</span>{formatPrice(price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">

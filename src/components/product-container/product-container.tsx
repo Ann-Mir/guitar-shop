@@ -1,14 +1,17 @@
 import { AppRoute } from '../../const';
+import { Comments } from '../../types/comment';
 import { Guitar } from '../../types/guitar';
+import { formatPrice } from '../../utils/common';
 import GuitarDetails from '../guitar-details/guitar-details';
 import Rating from '../rating/rating';
 
 
 type ProductContainerProps = {
   guitar: Guitar,
+  comments: Comments,
 }
 
-function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
+function ProductContainer({ guitar, comments }: ProductContainerProps): JSX.Element {
 
   const { previewImg, rating, name, price } = guitar;
 
@@ -25,7 +28,7 @@ function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
         <h2 className="product-container__title title title--big title--uppercase">
           {name}
         </h2>
-        <Rating rating={rating} className={'product-container__rating'} />
+        <Rating rating={rating} comments={comments} className={'product-container__rating'} />
         <GuitarDetails guitar={guitar} />
       </div>
       <div className="product-container__price-wrapper">
@@ -33,7 +36,7 @@ function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
           Цена:
         </p>
         <p className="product-container__price-info product-container__price-info--value">
-          {price} ₽
+          {formatPrice(price)} ₽
         </p>
         <a
           className="button button--red button--big product-container__button"

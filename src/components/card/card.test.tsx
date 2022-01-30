@@ -19,7 +19,7 @@ describe('Component: Card', () => {
       .getByText(/Честер Bass/i))
       .toBeInTheDocument();
     expect(screen
-      .getByText(/17500/i))
+      .getByText(/17 500/i))
       .toBeInTheDocument();
     expect(screen.getByText(/рейтинг:/i)).toBeInTheDocument();
     expect(screen.getByText(/цена:/i)).toBeInTheDocument();

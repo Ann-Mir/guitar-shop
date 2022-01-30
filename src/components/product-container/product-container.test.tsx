@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import { mockGuitar } from '../../utils/test-utils';
+import { fakeComments, mockGuitar } from '../../utils/test-utils';
 import * as Redux from 'react-redux';
 import ProductContainer from './product-container';
 
@@ -10,7 +10,7 @@ const history = createMemoryHistory();
 
 const fakeApp = (
   <Router history={history}>
-    <ProductContainer guitar={mockGuitar}/>
+    <ProductContainer guitar={mockGuitar} comments={fakeComments}/>
   </Router>
 );
 
