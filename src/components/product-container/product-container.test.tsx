@@ -1,17 +1,24 @@
+import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import { fakeComments, mockGuitar } from '../../utils/test-utils';
+import thunk from 'redux-thunk';
+import { mockGuitar, mockState } from '../../utils/test-utils';
 import * as Redux from 'react-redux';
 import ProductContainer from './product-container';
 
 const history = createMemoryHistory();
+const mockStore = configureMockStore([thunk]);
+const store = mockStore(mockState);
 
 const fakeApp = (
-  <Router history={history}>
-    <ProductContainer guitar={mockGuitar} comments={fakeComments}/>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <ProductContainer guitar={mockGuitar} />
+    </Router>
+  </Provider>
 );
 
 describe('Component: ProductContainer', () => {

@@ -39,10 +39,12 @@ function Search(): JSX.Element {
   };
 
   const handleOutsideClick = () => {
-    setIsFocused(false);
-    if (!isHovered) {
-      setSearchValue('');
-      dispatch(loadSearchResults([]));
+    if (isFocused) {
+      setIsFocused(false);
+      if (!isHovered) {
+        setSearchValue('');
+        dispatch(loadSearchResults([]));
+      }
     }
   };
 
