@@ -1,5 +1,6 @@
+import { useSelector } from 'react-redux';
 import { AppRoute } from '../../const';
-import { Comments } from '../../types/comment';
+import { getAreCommentsLoaded, getComments } from '../../store/guitar-data/selectors';
 import { Guitar } from '../../types/guitar';
 import { formatPrice } from '../../utils/common';
 import GuitarDetails from '../guitar-details/guitar-details';
@@ -8,12 +9,13 @@ import Rating from '../rating/rating';
 
 type ProductContainerProps = {
   guitar: Guitar,
-  comments: Comments,
 }
 
-function ProductContainer({ guitar, comments }: ProductContainerProps): JSX.Element {
+function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
 
   const { previewImg, rating, name, price } = guitar;
+  const comments = useSelector(getComments);
+  const areCommentsLoaded = useSelector(getAreCommentsLoaded);
 
   return (
     <div className="product-container">
@@ -28,7 +30,14 @@ function ProductContainer({ guitar, comments }: ProductContainerProps): JSX.Elem
         <h2 className="product-container__title title title--big title--uppercase">
           {name}
         </h2>
-        <Rating rating={rating} comments={comments} className={'product-container__rating'} />
+        {
+          areCommentsLoaded && (
+            <Rating
+              rating={rating}
+              comments={comments}
+              className={'product-container__rating'}
+            />)
+        }
         <GuitarDetails guitar={guitar} />
       </div>
       <div className="product-container__price-wrapper">
