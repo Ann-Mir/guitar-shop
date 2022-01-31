@@ -1,4 +1,11 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  MouseEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, ENTER_KEY_CODE } from '../../const';
@@ -60,18 +67,21 @@ function Search(): JSX.Element {
     }
   };
 
-  const handleItemClick = (id: number) => {
+  const redirectToSearchResult = (id: number) => {
     history.push(`${AppRoute.Guitars}/${id}`);
     dispatch(loadSearchResults([]));
     setSearchValue('');
   };
 
-  const handleSearchResultKeyPress = (
-    evt: KeyboardEvent<HTMLElement>,
-    id: number,
-  ) => {
+  const handleItemClick = (evt: MouseEvent<HTMLLIElement>) => {
+    const id = (evt.target as HTMLLIElement).dataset.id;
+    redirectToSearchResult(Number(id));
+  };
+
+  const handleSearchResultKeyPress = (evt: KeyboardEvent<HTMLLIElement>) => {
     if (evt.key === ENTER_KEY_CODE) {
-      handleItemClick(id);
+      const id = (evt.target as HTMLLIElement).dataset.id;
+      redirectToSearchResult(Number(id));
     }
   };
 
@@ -117,10 +127,11 @@ function Search(): JSX.Element {
             <li
               className="form-search__select-item"
               tabIndex={0}
+              data-id={guitar.id}
               style={{ color: '#FFFFFF' }}
               key={guitar.id}
-              onClick={() => handleItemClick(guitar.id)}
-              onKeyPress={(evt) => handleSearchResultKeyPress(evt, guitar.id)}
+              onClick={handleItemClick}
+              onKeyPress={handleSearchResultKeyPress}
             >
               {guitar.name}
             </li>
