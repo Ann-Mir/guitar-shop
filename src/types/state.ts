@@ -33,4 +33,9 @@ export type TGuitarData = {
   postingStatus: PostingStatus,
 };
 
+export type TCart = {
+  cartGuitars: Guitar[],
+  coupon: string,
+}
+
 export type State = RootState;

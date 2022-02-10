@@ -114,3 +114,31 @@ export const setPostingStatus = createAction(
     },
   }),
 );
+
+export const addToCart = createAction(
+  ActionType.AddToCart,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);
+
+export const updateCartGuitarQuantity = createAction(
+  ActionType.UpdateCartGuitarQuantity,
+  (guitar: Guitar, quantity: number) => ({
+    payload: {
+      guitar,
+      quantity,
+    },
+  }),
+);
+
+export const removeItemFromCart = createAction(
+  ActionType.RemoveItemFromCart,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);

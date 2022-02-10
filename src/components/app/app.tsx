@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import CartPage from '../pages/cart-page/cart-page';
 import CataloguePage from '../pages/catalogue-page/catalogue-page';
 import GuitarPage from '../pages/guitar-page/guitar-page';
 import MainPage from '../pages/main-page/main-page';
@@ -23,6 +24,7 @@ function App(): JSX.Element {
           component={UnderConstructionPage}
         />
         <Route path={AppRoute.Guitar} component={GuitarPage} />
+        <Route exact path={AppRoute.Cart} component={CartPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer />

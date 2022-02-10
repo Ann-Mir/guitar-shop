@@ -157,6 +157,66 @@ export const mockGuitars: Guitars = [
   },
 ];
 
+export const mockCartGuitars = [
+  {
+    id: 2,
+    name: 'CURT Z300',
+    vendorCode: 'TK129049',
+    type: 'electric',
+    description: 'Эргономичность гитары и качество сборки являются, пожалуй, её главными преимуществами. Идеальное расположение в руках музыканта дополняется прочностью конструкции из клёна.',
+    previewImg: 'img/guitar-data-8.jpg',
+    stringCount: 7,
+    rating: 3.5,
+    price: 29500,
+    quantity: 3,
+    comments: [
+      {
+        id: '9237bc4b',
+        userName: 'Паша',
+        advantage: 'Хорошый звук.',
+        disadvantage: 'Не рекомендую!',
+        comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
+        rating: 4,
+        createAt: '2022-01-07T13:00:41.846Z',
+        guitarId: 2,
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Roman LX',
+    vendorCode: 'RO111111',
+    type: 'ukulele',
+    description: 'Укулеле класса премиум от компании CURT, собравшая в себе все самые необходимые качесва: лёгкость корпуса, прочность струн и компактный размер.',
+    previewImg: 'img/guitar-data-6.jpg',
+    stringCount: 4,
+    rating: 4,
+    price: 6800,
+    quantity: 2,
+    comments: [
+      {
+        id: '24c1-44e4-9b69',
+        userName: 'Максим',
+        advantage: 'Цена=качество.',
+        disadvantage: 'Покрытие.',
+        comment: 'Неплохо, но дорого.',
+        rating: 4,
+        createAt: '2021-09-28T13:00:41.845Z',
+        guitarId: 1,
+      },
+      {
+        id: 'e6802eecc984',
+        userName: 'Максим',
+        advantage: 'Цена=качество.',
+        disadvantage: 'Покрытие.',
+        comment: 'Неплохо, но дорого.',
+        rating: 3,
+        createAt: '2021-09-29T13:00:41.845Z',
+        guitarId: 1,
+      },
+    ],
+  }];
+
 export const mockState = {
   DATA: {
     guitars: mockGuitars,
@@ -223,8 +283,11 @@ export const mockState = {
       },
     ],
   },
+  CART: {
+    cartGuitars: mockCartGuitars,
+    coupon: '',
+  },
 };
-
 
 export const fakeComment = {
   id: '0',

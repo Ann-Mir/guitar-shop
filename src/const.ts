@@ -1,3 +1,5 @@
+import { Guitar, GuitarTypes } from './types/guitar';
+
 export enum AppRoute {
   Root = '/',
   Guitars = '/guitars',
@@ -72,9 +74,19 @@ export enum PostingStatus {
 export enum PageTitles {
   Main = 'Главная',
   Catalogue = 'Каталог',
+  Cart = 'Корзина',
 }
 
 export const BREADCRUMBS_LINKS = {
   main: {title: PageTitles.Main, route: AppRoute.Root},
   catalogue: {title: PageTitles.Catalogue, route: AppRoute.Guitars},
+  cart: {title: PageTitles.Cart, route: AppRoute.Cart},
 };
+
+export const GUITAR_TYPES: GuitarTypes = {
+  electric: 'Электрогитара',
+  acoustic: 'Акустическая гитара',
+  ukulele: 'Укулеле',
+};
+
+export const NOT_FOUND_INDEX = -1;
