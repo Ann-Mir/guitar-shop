@@ -1,8 +1,13 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { getQuantityInCart } from '../../store/cart/selectors';
 
+const MIN_QUANTITY = 0;
 
 function CartLink(): JSX.Element {
+
+  const quantity = useSelector(getQuantityInCart);
 
   return (
     <Link className="header__cart-link" to={AppRoute.Cart} data-testid="cart-link" aria-label="Корзина">
@@ -10,7 +15,11 @@ function CartLink(): JSX.Element {
         <use xlinkHref="#icon-basket"></use>
       </svg>
       <span className="visually-hidden">Перейти в корзину</span>
-      <span className="header__cart-count">0</span>
+      {
+        quantity > MIN_QUANTITY && (
+          <span className="header__cart-count">{quantity}</span>
+        )
+      }
     </Link>
   );
 }
