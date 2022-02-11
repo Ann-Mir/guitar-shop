@@ -9,6 +9,7 @@ import ModalCartDelete from '../modal-cart-delete/modal-cart-delete';
 
 const MAX_QUANTITY = 99;
 const MIN_QUANTITY = 0;
+const QUANTITY_STEP = 1;
 
 type CartItemProps = {
   guitar: Guitar;
@@ -31,13 +32,17 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     let value = Number(evt.target.value);
-    if (value < MIN_QUANTITY) {
-      value = MIN_QUANTITY;
+    if (value === MIN_QUANTITY) {
+      setIsRemoveModalOpen(true);
+    } else {
+      if (value < (MIN_QUANTITY)) {
+        value = Math.abs(value);
+      }
+      if (value > MAX_QUANTITY) {
+        value = MAX_QUANTITY;
+      }
+      dispatch(updateCartGuitarQuantity(guitar, value));
     }
-    if (value > MAX_QUANTITY) {
-      value = MAX_QUANTITY;
-    }
-    dispatch(updateCartGuitarQuantity(guitar, value));
   };
 
   const handleRemoveButtonClick = () => {
@@ -46,6 +51,21 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
 
   const handleModalCartDeleteCloseClick = () => {
     setIsRemoveModalOpen(false);
+  };
+
+  const handleMinusButtonClick = () => {
+    if (quantity === (MIN_QUANTITY + QUANTITY_STEP)) {
+      setIsRemoveModalOpen(true);
+    } else {
+      dispatch(updateCartGuitarQuantity(guitar, (Number(quantity) - QUANTITY_STEP)));
+    }
+  };
+
+  const handlePlusButtonClick = () => {
+    if (quantity === MAX_QUANTITY) {
+      return;
+    }
+    dispatch(updateCartGuitarQuantity(guitar, (Number(quantity) + QUANTITY_STEP)));
   };
 
   return (
@@ -81,6 +101,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           className="quantity__button"
           aria-label="Уменьшить количество"
           data-testid="minus-button"
+          onClick={handleMinusButtonClick}
         >
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-minus"></use>
@@ -95,12 +116,14 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           min="0"
           max="99"
           onChange={handleInputChange}
-          value={quantity}
+          value={Number(quantity).toString().replace(/^0+/, '')}
         />
         <button
           className="quantity__button"
           aria-label="Увеличить количество"
           data-testid="plus-button"
+          onClick={handlePlusButtonClick}
+          disabled={quantity === MAX_QUANTITY}
         >
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-plus"></use>
