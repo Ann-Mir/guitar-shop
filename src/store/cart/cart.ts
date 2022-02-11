@@ -3,7 +3,7 @@ import { NOT_FOUND_INDEX } from '../../const';
 import { TCart } from '../../types/state';
 import {
   addToCart, removeItemFromCart,
-  updateCartGuitarQuantity,
+  updateCartGuitarQuantity
 } from '../actions';
 
 

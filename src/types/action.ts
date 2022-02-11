@@ -1,7 +1,6 @@
 import {Action} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
-import { removeItemFromCart } from '../store/actions';
 import {State} from '../types/state';
 
 

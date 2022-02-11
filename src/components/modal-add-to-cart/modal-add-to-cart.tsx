@@ -41,7 +41,7 @@ function ModalAddToCart({ onClose, guitar, onSuccess }: AddToCartModalProps): JS
             <div className="modal__info">
               <img
                 className="modal__img"
-                src={previewImg}
+                src={`/${previewImg}`}
                 width="67"
                 height="137"
                 alt={name}

@@ -1,4 +1,4 @@
-import { Guitar, GuitarTypes } from './types/guitar';
+import { GuitarTypes } from './types/guitar';
 
 export enum AppRoute {
   Root = '/',

@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Modal from '../modal/modal';
 
@@ -11,8 +11,17 @@ function ModalSuccessAdd({ onClose }: ModalSuccessAddProps): JSX.Element {
 
   const history = useHistory();
 
+  const { pathname } = useLocation();
+
   const handleCartClick = () => {
     history.push(AppRoute.Cart);
+    onClose();
+  };
+
+  const handleShoppingClick = () => {
+    if (pathname !== AppRoute.Guitars) {
+      history.push(AppRoute.Guitars);
+    }
     onClose();
   };
 
@@ -39,7 +48,7 @@ function ModalSuccessAdd({ onClose }: ModalSuccessAddProps): JSX.Element {
               <button
                 className="button button--black-border button--small modal__button modal__button--right"
                 data-testid="modal-success-add-close"
-                onClick={onClose}
+                onClick={handleShoppingClick}
               >
                 Продолжить покупки
               </button>

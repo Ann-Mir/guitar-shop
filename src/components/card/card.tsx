@@ -1,11 +1,11 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { generatePath, Link } from 'react-router-dom';
 import { AppRoute, NOT_FOUND_INDEX } from '../../const';
 import { getGuitarsInCart } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import { formatPrice } from '../../utils/common';
-import ModalAddToCart from '../modal-add-to-cart/modal-add-to-cart';
+import AddToCartButton from '../add-to-cart-button/add-to-cart-button';
 import ModalSuccessAdd from '../modal-success-add/modal-success-add';
 import Rating from '../rating/rating';
 
@@ -20,35 +20,20 @@ function Card({ guitar }: CardProps): JSX.Element {
   const guitarsInCart = useSelector(getGuitarsInCart);
   const index = guitarsInCart.findIndex((item) => item.id === id);
 
-  const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState<boolean>(false);
   const [isAddedToCartModalOpen, setIsAddedToCartModalOpen] = useState<boolean>(false);
-
-  const handleAddToCardClick = (evt: MouseEvent<HTMLAnchorElement>) => {
-    evt.preventDefault();
-    setIsAddToCartModalOpen(true);
-  };
-
-  const handleAddToCartModalClose = () => {
-    setIsAddToCartModalOpen(false);
-  };
 
   const handleModalSuccessAddClose = () => {
     setIsAddedToCartModalOpen(false);
+  };
+
+  const handleAddingToCartSuccess = () => {
+    setIsAddedToCartModalOpen(true);
   };
 
   return (
     <div className="product-card" data-testid="product-card">
       {
         isAddedToCartModalOpen && <ModalSuccessAdd onClose={handleModalSuccessAddClose} />
-      }
-      {
-        isAddToCartModalOpen && (
-          <ModalAddToCart
-            onClose={handleAddToCartModalClose}
-            guitar={guitar}
-            onSuccess={setIsAddedToCartModalOpen}
-          />
-        )
       }
       <img
         src={previewImg}
@@ -83,13 +68,13 @@ function Card({ guitar }: CardProps): JSX.Element {
               В Корзине
             </Link>
           ) : (
-            <Link
-              className="button button--red button--mini button--add-to-cart"
-              to="/"
-              onClick={handleAddToCardClick}
+            <AddToCartButton
+              className={'button--mini button--add-to-cart'}
+              guitar={guitar}
+              onSuccess={handleAddingToCartSuccess}
             >
               Купить
-            </Link>
+            </AddToCartButton>
           )
         }
       </div>
