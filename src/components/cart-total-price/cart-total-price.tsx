@@ -1,10 +1,17 @@
+import { useSelector } from 'react-redux';
+import { getTotalCartPrice } from '../../store/cart/selectors';
+import { formatPrice } from '../../utils/common';
+
+
 function CartTotalPrice(): JSX.Element {
+
+  const totalPrice = useSelector(getTotalCartPrice);
 
   return (
     <div className="cart__total-info">
       <p className="cart__total-item">
         <span className="cart__total-value-name">Всего:</span>
-        <span className="cart__total-value">52 000 ₽</span>
+        <span className="cart__total-value">{formatPrice(totalPrice)} ₽</span>
       </p>
       <p className="cart__total-item">
         <span className="cart__total-value-name">Скидка:</span>

@@ -3,25 +3,27 @@ import {
   APIRoute,
   EmbedOption,
   OrderOption,
-  PostingStatus,
+  PostingStatus, PromoCodeStatus,
   QueryParams,
   SortOption
 } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { CommentPost, Comments, Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { TCouponPost } from '../types/order';
 import {
   loadComments,
   loadGuitar,
   loadGuitars,
   loadSearchResults,
-  setAreCommentsLoaded,
+  setAreCommentsLoaded, setDiscount,
   setGuitarsCount,
   setIsDataLoaded,
   setIsGuitarLoaded,
   setMaxPrice,
   setMinPrice,
-  setPostingStatus
+  setPostingStatus,
+  setPromoCodeStatus
 } from './actions';
 
 
@@ -30,6 +32,7 @@ export const enum ErrorMessage {
   FetchPrice = 'Не удалось загрузить данные о ценах',
   FetchComments = 'Не удалось загрузить комментарии',
   PostComment = 'Не удалось отправить комментарий',
+  CouponPost = 'Не удалось применить промокод',
 }
 
 const TOTAL_COUNT = 'x-total-count';
@@ -182,5 +185,26 @@ export const postCommentAction =
         toast.error(ErrorMessage.PostComment);
         dispatch(setAreCommentsLoaded(true));
         dispatch(setPostingStatus(PostingStatus.Error));
+      }
+    };
+
+
+export const postPromoCodeAction =
+  (promoCode: TCouponPost): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      dispatch(setPromoCodeStatus(PromoCodeStatus.Posting));
+      try {
+        const response = await api.post<TCouponPost>(`${APIRoute.Coupons}`, promoCode);
+
+        const { data } = response;
+        dispatch(setDiscount(Number(data)));
+        dispatch(setPromoCodeStatus(PromoCodeStatus.Success));
+      } catch {
+        toast.error(ErrorMessage.CouponPost);
+        dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
       }
     };

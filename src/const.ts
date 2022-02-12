@@ -13,6 +13,7 @@ export enum AppRoute {
 export enum APIRoute {
   Guitars = '/guitars',
   Comments = '/comments',
+  Coupons = '/coupons',
 }
 
 export enum SortOption {
@@ -90,3 +91,16 @@ export const GUITAR_TYPES: GuitarTypes = {
 };
 
 export const NOT_FOUND_INDEX = -1;
+
+export enum PromoCode {
+  Light = 'light-333',
+  Medium = 'medium-444',
+  High = 'height-555',
+}
+
+export enum PromoCodeStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Success = 'success',
+  Error = 'error',
+}

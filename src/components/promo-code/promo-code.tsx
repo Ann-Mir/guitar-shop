@@ -1,21 +1,78 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { PromoCode as PromoCodeEnum, PromoCodeStatus } from '../../const';
+import { setPromoCodeStatus } from '../../store/actions';
+import { postPromoCodeAction } from '../../store/api-actions';
+import { getCoupon, getPromoCodeStatus } from '../../store/cart/selectors';
+
+const PROMO_CODES: Array<string> = Array.from(Object.values(PromoCodeEnum));
+
 function PromoCode(): JSX.Element {
+
+  const dispatch = useDispatch();
+  const coupon = useSelector(getCoupon);
+  const promoCodeStatus = useSelector(getPromoCodeStatus);
+  const [promo, setPromo] = useState<PromoCodeEnum | string>(coupon);
+
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (promoCodeStatus !== PromoCodeStatus.Unknown) {
+      dispatch(setPromoCodeStatus(PromoCodeStatus.Unknown));
+    }
+    const value = evt.target.value.replace(/\s/g, '');
+    setPromo(value);
+  };
+
+  const handleFormSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+    if (PROMO_CODES.includes(promo)) {
+      dispatch(postPromoCodeAction({coupon: promo}));
+    } else {
+      dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
+    }
+  };
+
   return (
     <div className="cart__coupon coupon">
       <h2 className="title title--little coupon__title">Промокод на скидку</h2>
       <p className="coupon__info">
         Введите свой промокод, если он у вас есть.
       </p>
-      <form className="coupon__form" id="coupon-form" method="post" action="/">
+      <form
+        className="coupon__form"
+        id="coupon-form"
+        method="post"
+        action="/"
+        onSubmit={handleFormSubmit}
+      >
         <div className="form-input coupon__input">
           <label className="visually-hidden">
             Промокод
           </label>
-          <input type="text" placeholder="Введите промокод" id="coupon" name="coupon" />
-          <p className="form-input__message form-input__message--success">
-            Промокод принят
-          </p>
+          <input
+            type="text"
+            placeholder="Введите промокод"
+            id="coupon"
+            name="coupon"
+            value={promo}
+            onChange={handleInputChange}
+          />
+          {
+            promoCodeStatus === PromoCodeStatus.Success && (
+              <p className="form-input__message form-input__message--success">
+                Промокод принят
+              </p>
+            )
+          }
+          {
+            promoCodeStatus === PromoCodeStatus.Error && (
+              <p className="form-input__message form-input__message--error">неверный промокод</p>
+            )
+          }
         </div>
-        <button className="button button--big coupon__button">
+        <button
+          className="button button--big coupon__button"
+          disabled={promoCodeStatus === PromoCodeStatus.Posting}
+        >
           Применить
         </button>
       </form>
