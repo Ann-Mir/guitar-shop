@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PromoCode as PromoCodeEnum, PromoCodeStatus } from '../../const';
-import { setPromoCodeStatus } from '../../store/actions';
+import { DEFAULT_DISCOUNT, PromoCode as PromoCodeEnum, PromoCodeStatus } from '../../const';
+import { setCoupon, setDiscount, setPromoCodeStatus } from '../../store/actions';
 import { postPromoCodeAction } from '../../store/api-actions';
 import { getCoupon, getPromoCodeStatus } from '../../store/cart/selectors';
 
@@ -28,6 +28,8 @@ function PromoCode(): JSX.Element {
       dispatch(postPromoCodeAction({coupon: promo as PromoCodeEnum}));
     } else {
       dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
+      dispatch(setDiscount(DEFAULT_DISCOUNT));
+      dispatch(setCoupon(''));
     }
   };
 

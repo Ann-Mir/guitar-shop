@@ -23,7 +23,7 @@ import {
   setMaxPrice,
   setMinPrice,
   setPostingStatus,
-  setPromoCodeStatus,
+  setPromoCodeStatus
 } from './actions';
 
 

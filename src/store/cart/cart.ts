@@ -1,16 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { NOT_FOUND_INDEX, PromoCodeStatus } from '../../const';
+import { DEFAULT_DISCOUNT, NOT_FOUND_INDEX, PromoCodeStatus } from '../../const';
 import { TCart } from '../../types/state';
 import {
   addToCart,
-  removeItemFromCart, setCoupon, setDiscount, setPromoCodeStatus,
-  updateCartGuitarQuantity,
+  removeItemFromCart,
+  setCoupon,
+  setDiscount,
+  setPromoCodeStatus,
+  updateCartGuitarQuantity
 } from '../actions';
 
 const initialState: TCart = {
   cartGuitars: [],
   coupon: '',
-  discount: 0,
+  discount: DEFAULT_DISCOUNT,
   promoCodeStatus: PromoCodeStatus.Unknown,
 };
 

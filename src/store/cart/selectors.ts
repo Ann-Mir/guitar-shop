@@ -4,6 +4,7 @@ import {NameSpace} from '../root-reducer';
 import { State } from '../../types/state';
 import {createSelector} from 'reselect';
 
+const MAX_PERCENT = 100;
 
 export const getGuitarsInCart = (state: State): Guitars => state[NameSpace.cartGuitars].cartGuitars;
 export const getQuantityInCart = createSelector(
@@ -18,3 +19,17 @@ export const getTotalCartPrice = createSelector(
 
 export const getCoupon = (state: State): PromoCode | '' => state[NameSpace.cartGuitars].coupon;
 export const getPromoCodeStatus = (state: State): PromoCodeStatus => state[NameSpace.cartGuitars].promoCodeStatus;
+export const getDiscount = (state: State): number => state[NameSpace.cartGuitars].discount;
+
+export const getDiscountAmount = createSelector(
+  getTotalCartPrice,
+  getDiscount,
+  (totalCartPrice, discount) =>
+    totalCartPrice * (discount / MAX_PERCENT));
+
+export const getPriceWithDiscount = createSelector(
+
+  getTotalCartPrice,
+  getDiscountAmount,
+  (totalCartPrice, discount) =>
+    totalCartPrice - discount);

@@ -163,7 +163,7 @@ export const setDiscount = createAction(
 
 export const setCoupon = createAction(
   ActionType.SetCoupon,
-  (coupon: PromoCode) => ({
+  (coupon: PromoCode | '') => ({
     payload: {
       coupon,
     },

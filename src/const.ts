@@ -104,3 +104,5 @@ export enum PromoCodeStatus {
   Success = 'success',
   Error = 'error',
 }
+
+export const DEFAULT_DISCOUNT = 0;
