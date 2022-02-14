@@ -10,7 +10,7 @@ import {
 import { ThunkActionResult } from '../types/action';
 import { CommentPost, Comments, Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
-import { TCouponPost } from '../types/order';
+import { TCouponPost, TOrderPost } from '../types/order';
 import {
   loadComments,
   loadGuitar,
@@ -33,6 +33,7 @@ export const enum ErrorMessage {
   FetchComments = 'Не удалось загрузить комментарии',
   PostComment = 'Не удалось отправить комментарий',
   CouponPost = 'Не удалось применить промокод',
+  OrderPost = 'Не удалось разместить заказ',
 }
 
 const TOTAL_COUNT = 'x-total-count';
@@ -207,5 +208,22 @@ export const postPromoCodeAction =
       } catch {
         toast.error(ErrorMessage.CouponPost);
         dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
+      }
+    };
+
+export const postOrder =
+  (order: TOrderPost): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      try {
+        const response = await api.post<TOrderPost>(`${APIRoute.Orders}`, order);
+        if (response.status === 201) {
+          toast.info('Заказ размещен!');
+        }
+      } catch {
+        toast.error(ErrorMessage.OrderPost);
       }
     };

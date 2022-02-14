@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DEFAULT_DISCOUNT } from '../../const';
+import { postOrder } from '../../store/api-actions';
 import {
-  getDiscountAmount,
+  getCoupon,
+  getDiscountAmount, getGuitarsInCart,
   getPriceWithDiscount,
   getTotalCartPrice
 } from '../../store/cart/selectors';
@@ -13,6 +15,29 @@ function CartTotalPrice(): JSX.Element {
   const totalPrice = useSelector(getTotalCartPrice);
   const priceWithDiscount = useSelector(getPriceWithDiscount);
   const discount = useSelector(getDiscountAmount);
+  const coupon = useSelector(getCoupon);
+  const guitarsInCart = useSelector(getGuitarsInCart);
+
+  const dispatch = useDispatch();
+
+  const handlePostOrderClick = () => {
+    const guitarIds: Array<number> = [];
+
+    guitarsInCart.forEach(({ quantity, id }) => {
+      for (let i = 0; i < Number(quantity); i++) {
+        guitarIds.push(id);
+      }
+    });
+
+    const promoCode = discount > DEFAULT_DISCOUNT ? coupon : null;
+
+    const order = {
+      guitarsIds: guitarIds,
+      coupon: promoCode,
+    };
+
+    dispatch(postOrder(order));
+  };
 
   return (
     <div className="cart__total-info">
@@ -38,7 +63,10 @@ function CartTotalPrice(): JSX.Element {
           {formatPrice(priceWithDiscount)} ₽
         </span>
       </p>
-      <button className="button button--red button--big cart__order-button">
+      <button
+        className="button button--red button--big cart__order-button"
+        onClick={handlePostOrderClick}
+      >
         Оформить заказ
       </button>
     </div>
