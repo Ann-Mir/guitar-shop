@@ -3,8 +3,8 @@ import { NOT_FOUND_INDEX, PromoCodeStatus } from '../../const';
 import { TCart } from '../../types/state';
 import {
   addToCart,
-  removeItemFromCart, setDiscount, setPromoCodeStatus,
-  updateCartGuitarQuantity
+  removeItemFromCart, setCoupon, setDiscount, setPromoCodeStatus,
+  updateCartGuitarQuantity,
 } from '../actions';
 
 const initialState: TCart = {
@@ -50,6 +50,10 @@ const cart = createReducer(initialState, (builder) => {
     .addCase(setDiscount, (state, action) => {
       const { discount } = action.payload;
       state.discount = discount;
+    })
+    .addCase(setCoupon, (state, action) => {
+      const { coupon } = action.payload;
+      state.coupon = coupon;
     });
 });
 

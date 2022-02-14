@@ -25,7 +25,7 @@ function PromoCode(): JSX.Element {
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     if (PROMO_CODES.includes(promo)) {
-      dispatch(postPromoCodeAction({coupon: promo}));
+      dispatch(postPromoCodeAction({coupon: promo as PromoCodeEnum}));
     } else {
       dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
     }

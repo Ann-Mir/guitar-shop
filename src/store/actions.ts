@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { PostingStatus, PromoCodeStatus } from '../const';
+import { PostingStatus, PromoCode, PromoCodeStatus } from '../const';
 import {ActionType} from '../types/action';
 import { Comments } from '../types/comment';
 import { Guitar, Guitars } from '../types/guitar';
@@ -157,6 +157,15 @@ export const setDiscount = createAction(
   (discount: number) => ({
     payload: {
       discount,
+    },
+  }),
+);
+
+export const setCoupon = createAction(
+  ActionType.SetCoupon,
+  (coupon: PromoCode) => ({
+    payload: {
+      coupon,
     },
   }),
 );

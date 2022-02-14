@@ -16,14 +16,14 @@ import {
   loadGuitar,
   loadGuitars,
   loadSearchResults,
-  setAreCommentsLoaded, setDiscount,
+  setAreCommentsLoaded, setCoupon, setDiscount,
   setGuitarsCount,
   setIsDataLoaded,
   setIsGuitarLoaded,
   setMaxPrice,
   setMinPrice,
   setPostingStatus,
-  setPromoCodeStatus
+  setPromoCodeStatus,
 } from './actions';
 
 
@@ -201,6 +201,7 @@ export const postPromoCodeAction =
         const response = await api.post<TCouponPost>(`${APIRoute.Coupons}`, promoCode);
 
         const { data } = response;
+        dispatch(setCoupon(promoCode.coupon));
         dispatch(setDiscount(Number(data)));
         dispatch(setPromoCodeStatus(PromoCodeStatus.Success));
       } catch {

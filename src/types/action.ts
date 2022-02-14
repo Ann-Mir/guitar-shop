@@ -23,6 +23,7 @@ export enum ActionType {
   RemoveItemFromCart = '/cart/removeItemFromCart',
   SetPromoCodeStatus = 'promo/setPromoCodeStatus',
   SetDiscount = 'promo/setDiscount',
+  SetCoupon = 'promo/setCoupon',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
