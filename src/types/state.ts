@@ -1,4 +1,4 @@
-import { PostingStatus } from '../const';
+import { PostingStatus, PromoCode, PromoCodeStatus } from '../const';
 import { Comments } from './comment';
 import { Guitar, Guitars } from './guitar';
 import {RootState} from '../store/root-reducer';
@@ -32,5 +32,12 @@ export type TGuitarData = {
   comments: Comments,
   postingStatus: PostingStatus,
 };
+
+export type TCart = {
+  cartGuitars: Guitar[],
+  coupon: PromoCode | '',
+  promoCodeStatus: PromoCodeStatus,
+  discount: number,
+}
 
 export type State = RootState;

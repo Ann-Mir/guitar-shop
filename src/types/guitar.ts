@@ -11,6 +11,7 @@ export type Guitar = {
   rating: number;
   price: number;
   comments?: Comments;
+  quantity?: number;
 };
 
 export type Guitars = Guitar[];
@@ -18,3 +19,4 @@ export type Guitars = Guitar[];
 export interface GuitarTypes {
   [key: string]: string;
 }
+

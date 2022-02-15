@@ -1,27 +1,29 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import {createMemoryHistory} from 'history';
 import thunk from 'redux-thunk';
 import { mockState } from '../../utils/test-utils';
-import CartLink from './cart-link';
+import Cart from './cart';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore([thunk]);
 const store = mockStore(mockState);
 
-describe('Component: CartLink', () => {
+const fakeApp = (
+  <Provider store={store}>
+    <Router history={history}>
+      <Cart />
+    </Router>
+  </Provider>
+);
 
+describe('Component: Cart', () => {
   it('should render correctly', () => {
-    render(
-      <Provider store={store}>
-        <Router history={history} >
-          <CartLink />
-        </Router>
-      </Provider>,
-    );
 
-    expect(screen.getByTestId('cart-link')).toBeInTheDocument();
+    render(fakeApp);
+
+    expect(screen.getByTestId('cart')).toBeInTheDocument();
   });
 });

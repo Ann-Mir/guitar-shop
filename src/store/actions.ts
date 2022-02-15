@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { PostingStatus } from '../const';
+import { PostingStatus, PromoCode, PromoCodeStatus } from '../const';
 import {ActionType} from '../types/action';
 import { Comments } from '../types/comment';
 import { Guitar, Guitars } from '../types/guitar';
@@ -111,6 +111,61 @@ export const setPostingStatus = createAction(
   (postingStatus: PostingStatus) => ({
     payload: {
       postingStatus,
+    },
+  }),
+);
+
+export const addToCart = createAction(
+  ActionType.AddToCart,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);
+
+export const updateCartGuitarQuantity = createAction(
+  ActionType.UpdateCartGuitarQuantity,
+  (guitar: Guitar, quantity: number) => ({
+    payload: {
+      guitar,
+      quantity,
+    },
+  }),
+);
+
+export const removeItemFromCart = createAction(
+  ActionType.RemoveItemFromCart,
+  (guitar: Guitar) => ({
+    payload: {
+      guitar,
+    },
+  }),
+);
+
+export const setPromoCodeStatus = createAction(
+  ActionType.SetPromoCodeStatus,
+  (status: PromoCodeStatus) => ({
+    payload: {
+      status,
+    },
+  }),
+);
+
+export const setDiscount = createAction(
+  ActionType.SetDiscount,
+  (discount: number) => ({
+    payload: {
+      discount,
+    },
+  }),
+);
+
+export const setCoupon = createAction(
+  ActionType.SetCoupon,
+  (coupon: PromoCode | '') => ({
+    payload: {
+      coupon,
     },
   }),
 );

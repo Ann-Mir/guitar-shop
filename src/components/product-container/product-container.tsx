@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AppRoute } from '../../const';
 import { getAreCommentsLoaded, getComments } from '../../store/guitar-data/selectors';
 import { Guitar } from '../../types/guitar';
 import { formatPrice } from '../../utils/common';
+import AddToCartButton from '../add-to-cart-button/add-to-cart-button';
 import GuitarDetails from '../guitar-details/guitar-details';
+import ModalSuccessAdd from '../modal-success-add/modal-success-add';
 import Rating from '../rating/rating';
 
 
@@ -17,8 +19,21 @@ function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
   const comments = useSelector(getComments);
   const areCommentsLoaded = useSelector(getAreCommentsLoaded);
 
+  const [isAddedToCartModalOpen, setIsAddedToCartModalOpen] = useState(false);
+
+  const handleModalSuccessAddClose = () => {
+    setIsAddedToCartModalOpen(false);
+  };
+
+  const handleAddingToCartSuccess = () => {
+    setIsAddedToCartModalOpen(true);
+  };
+
   return (
     <div className="product-container">
+      {
+        isAddedToCartModalOpen && <ModalSuccessAdd onClose={handleModalSuccessAddClose} />
+      }
       <img
         className="product-container__img"
         src={`/${previewImg}`}
@@ -47,12 +62,13 @@ function ProductContainer({ guitar }: ProductContainerProps): JSX.Element {
         <p className="product-container__price-info product-container__price-info--value">
           {formatPrice(price)} ₽
         </p>
-        <a
-          className="button button--red button--big product-container__button"
-          href={AppRoute.Cart}
+        <AddToCartButton
+          className={'button--big product-container__button'}
+          guitar={guitar}
+          onSuccess={handleAddingToCartSuccess}
         >
           Добавить в корзину
-        </a>
+        </AddToCartButton>
       </div>
     </div>
   );

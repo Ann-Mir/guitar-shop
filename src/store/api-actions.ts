@@ -3,25 +3,27 @@ import {
   APIRoute,
   EmbedOption,
   OrderOption,
-  PostingStatus,
+  PostingStatus, PromoCodeStatus,
   QueryParams,
   SortOption
 } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { CommentPost, Comments, Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { TCouponPost, TOrderPost } from '../types/order';
 import {
   loadComments,
   loadGuitar,
   loadGuitars,
   loadSearchResults,
-  setAreCommentsLoaded,
+  setAreCommentsLoaded, setCoupon, setDiscount,
   setGuitarsCount,
   setIsDataLoaded,
   setIsGuitarLoaded,
   setMaxPrice,
   setMinPrice,
-  setPostingStatus
+  setPostingStatus,
+  setPromoCodeStatus
 } from './actions';
 
 
@@ -30,9 +32,17 @@ export const enum ErrorMessage {
   FetchPrice = 'Не удалось загрузить данные о ценах',
   FetchComments = 'Не удалось загрузить комментарии',
   PostComment = 'Не удалось отправить комментарий',
+  CouponPost = 'Не удалось применить промокод',
+  OrderPost = 'Не удалось разместить заказ',
+}
+
+export const enum SuccessMessage {
+  OrderSuccess = 'Заказ размещен!',
 }
 
 const TOTAL_COUNT = 'x-total-count';
+
+const RESPONSE_SUCCESS = [200, 201];
 
 export const fetchGuitarsAction =
   (searchParams: string): ThunkActionResult =>
@@ -182,5 +192,44 @@ export const postCommentAction =
         toast.error(ErrorMessage.PostComment);
         dispatch(setAreCommentsLoaded(true));
         dispatch(setPostingStatus(PostingStatus.Error));
+      }
+    };
+
+
+export const postPromoCodeAction =
+  (promoCode: TCouponPost): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      dispatch(setPromoCodeStatus(PromoCodeStatus.Posting));
+      try {
+        const response = await api.post<TCouponPost>(`${APIRoute.Coupons}`, promoCode);
+
+        const { data } = response;
+        dispatch(setCoupon(promoCode.coupon));
+        dispatch(setDiscount(Number(data)));
+        dispatch(setPromoCodeStatus(PromoCodeStatus.Success));
+      } catch {
+        toast.error(ErrorMessage.CouponPost);
+        dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
+      }
+    };
+
+export const postOrder =
+  (order: TOrderPost): ThunkActionResult =>
+    async (
+      dispatch,
+      _getState,
+      api,
+    ): Promise<void> => {
+      try {
+        const response = await api.post<TOrderPost>(`${APIRoute.Orders}`, order);
+        if (RESPONSE_SUCCESS.includes(response.status)) {
+          toast.info(SuccessMessage.OrderSuccess);
+        }
+      } catch {
+        toast.error(ErrorMessage.OrderPost);
       }
     };

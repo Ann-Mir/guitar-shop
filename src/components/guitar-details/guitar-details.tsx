@@ -1,19 +1,13 @@
 import { useState } from 'react';
-import { Guitar, GuitarTypes } from '../../types/guitar';
+import { GUITAR_TYPES } from '../../const';
+import { Guitar } from '../../types/guitar';
 
 
-type GuitarDetailsProps = {
-  guitar: Guitar,
-}
-
-const GUITAR_TYPES: GuitarTypes = {
-  electric: 'Электрогитара',
-  acoustic: 'Акустическая гитара',
-  ukulele: 'Укулеле',
+export type GuitarDetailsProps = {
+  guitar: Guitar;
 };
 
 function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
-
   const { vendorCode, type, stringCount, description } = guitar;
 
   const [isCharacteristicsActive, setIsCharacteristicsActive] = useState(true);
@@ -25,7 +19,9 @@ function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
   return (
     <div className="tabs">
       <a
-        className={`button ${isCharacteristicsActive ? '' : 'button--black-border'} button--medium tabs__button`}
+        className={`button ${
+          isCharacteristicsActive ? '' : 'button--black-border'
+        } button--medium tabs__button`}
         href="#characteristics"
         onClick={handleTabClick}
         data-testid="characteristics-link"
@@ -33,7 +29,9 @@ function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
         Характеристики
       </a>
       <a
-        className={`button ${isCharacteristicsActive ? 'button--black-border': ''} button--medium tabs__button`}
+        className={`button ${
+          isCharacteristicsActive ? 'button--black-border' : ''
+        } button--medium tabs__button`}
         href="#description"
         onClick={handleTabClick}
         data-testid="description-link"
@@ -63,9 +61,7 @@ function GuitarDetails({ guitar }: GuitarDetailsProps): JSX.Element {
       <div
         className={`tabs__content ${isCharacteristicsActive ? 'hidden' : ''}`}
       >
-        <p className="tabs__product-description">
-          {description}
-        </p>
+        <p className="tabs__product-description">{description}</p>
       </div>
     </div>
   );

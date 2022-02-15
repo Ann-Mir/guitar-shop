@@ -1,3 +1,5 @@
+import { GuitarTypes } from './types/guitar';
+
 export enum AppRoute {
   Root = '/',
   Guitars = '/guitars',
@@ -11,6 +13,8 @@ export enum AppRoute {
 export enum APIRoute {
   Guitars = '/guitars',
   Comments = '/comments',
+  Coupons = '/coupons',
+  Orders = '/orders',
 }
 
 export enum SortOption {
@@ -72,9 +76,37 @@ export enum PostingStatus {
 export enum PageTitles {
   Main = 'Главная',
   Catalogue = 'Каталог',
+  Cart = 'Корзина',
 }
 
 export const BREADCRUMBS_LINKS = {
   main: {title: PageTitles.Main, route: AppRoute.Root},
   catalogue: {title: PageTitles.Catalogue, route: AppRoute.Guitars},
+  cart: {title: PageTitles.Cart, route: AppRoute.Cart},
 };
+
+export const GUITAR_TYPES: GuitarTypes = {
+  electric: 'Электрогитара',
+  acoustic: 'Акустическая гитара',
+  ukulele: 'Укулеле',
+};
+
+export const NOT_FOUND_INDEX = -1;
+
+export enum PromoCode {
+  Light = 'light-333',
+  Medium = 'medium-444',
+  High = 'height-555',
+  Default = '',
+}
+
+export enum PromoCodeStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Success = 'success',
+  Error = 'error',
+}
+
+export const DEFAULT_DISCOUNT = 0;
+
+export const DEFAULT_COUPON = '';

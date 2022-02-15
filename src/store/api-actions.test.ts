@@ -2,21 +2,23 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { PromoCode, PromoCodeStatus } from '../const';
 
 import { createApi } from '../services/api';
 import { State } from '../types/state';
 import { mockGuitars } from '../utils/test-utils';
 import {
   loadGuitars,
-  loadSearchResults,
+  loadSearchResults, setCoupon, setDiscount,
   setGuitarsCount, setIsDataLoaded,
   setMaxPrice,
-  setMinPrice
+  setMinPrice,
+  setPromoCodeStatus
 } from './actions';
 import {
   fetchGuitarsAction,
   fetchMaxPriceAction,
-  fetchMinPriceAction,
+  fetchMinPriceAction, postPromoCodeAction,
   searchGuitarsWithParams
 } from './api-actions';
 
@@ -98,6 +100,27 @@ describe('Async actions', () => {
 
       expect(store.getActions()).toEqual([
         loadSearchResults(mockGuitars),
+      ]);
+    });
+
+  it('should dispatch setPromoCodeStatus, setCoupon, setDiscount, setPromoCodeStatus when POST /coupons',
+    async () => {
+      const store = mockStore();
+      const fakeCoupon = {coupon: PromoCode.Medium};
+      const fakeDiscount = 25;
+      mockAPI
+        .onPost('/coupons', fakeCoupon)
+        .reply(200, fakeDiscount);
+
+      expect(store.getActions()).toEqual([]);
+
+      await store.dispatch(postPromoCodeAction(fakeCoupon));
+
+      expect(store.getActions()).toEqual([
+        setPromoCodeStatus(PromoCodeStatus.Posting),
+        setCoupon(PromoCode.Medium),
+        setDiscount(fakeDiscount),
+        setPromoCodeStatus(PromoCodeStatus.Success),
       ]);
     });
 });
