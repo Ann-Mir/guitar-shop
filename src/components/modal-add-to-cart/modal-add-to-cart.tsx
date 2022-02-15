@@ -35,7 +35,7 @@ function ModalAddToCart({ onClose, guitar, onSuccess }: AddToCartModalProps): JS
     <Modal onClose={onClose} >
       <div className="modal is-active">
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal onClick={onClose}></div>
+          <div className='modal__overlay' data-close-modal onClick={onClose}/>
           <div className="modal__content">
             <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
             <div className="modal__info">
@@ -78,8 +78,8 @@ function ModalAddToCart({ onClose, guitar, onSuccess }: AddToCartModalProps): JS
               onClick={onClose}
               data-testid="modal-add-to-cart-close"
             >
-              <span className="button-cross__icon"></span>
-              <span className="modal__close-btn-interactive-area"></span>
+              <span className='button-cross__icon'/>
+              <span className='modal__close-btn-interactive-area'/>
             </button>
           </div>
         </div>

@@ -29,10 +29,10 @@ function ModalSuccessAdd({ onClose }: ModalSuccessAddProps): JSX.Element {
     <Modal onClose={onClose}>
       <div className="modal is-active modal--success">
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal onClick={onClose}></div>
+          <div className='modal__overlay' data-close-modal onClick={onClose}/>
           <div className="modal__content">
             <svg className="modal__icon" width="26" height="20" aria-hidden="true">
-              <use xlinkHref="#icon-success"></use>
+              <use xlinkHref='#icon-success'/>
             </svg>
             <p className="modal__message">
               Товар успешно добавлен в корзину
@@ -59,8 +59,8 @@ function ModalSuccessAdd({ onClose }: ModalSuccessAddProps): JSX.Element {
               aria-label="Закрыть"
               onClick={onClose}
             >
-              <span className="button-cross__icon"></span>
-              <span className="modal__close-btn-interactive-area"></span>
+              <span className='button-cross__icon'/>
+              <span className='modal__close-btn-interactive-area'/>
             </button>
           </div>
         </div>
