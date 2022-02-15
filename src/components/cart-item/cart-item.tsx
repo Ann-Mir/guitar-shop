@@ -32,7 +32,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     let value = Number(evt.target.value);
-    if (value < (MIN_QUANTITY)) {
+    if (value < MIN_QUANTITY) {
       value = Math.abs(value);
     }
     if (value > MAX_QUANTITY) {
@@ -98,6 +98,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           aria-label="Уменьшить количество"
           data-testid="minus-button"
           onClick={handleMinusButtonClick}
+          disabled={Number(quantity) === MIN_QUANTITY}
         >
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-minus"></use>

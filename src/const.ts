@@ -97,6 +97,7 @@ export enum PromoCode {
   Light = 'light-333',
   Medium = 'medium-444',
   High = 'height-555',
+  Default = '',
 }
 
 export enum PromoCodeStatus {
@@ -107,3 +108,5 @@ export enum PromoCodeStatus {
 }
 
 export const DEFAULT_DISCOUNT = 0;
+
+export const DEFAULT_COUPON = '';

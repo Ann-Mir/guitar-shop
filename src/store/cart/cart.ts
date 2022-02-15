@@ -1,5 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { DEFAULT_DISCOUNT, NOT_FOUND_INDEX, PromoCodeStatus } from '../../const';
+import {
+  DEFAULT_DISCOUNT,
+  NOT_FOUND_INDEX,
+  PromoCode,
+  PromoCodeStatus
+} from '../../const';
 import { TCart } from '../../types/state';
 import {
   addToCart,
@@ -12,7 +17,7 @@ import {
 
 const initialState: TCart = {
   cartGuitars: [],
-  coupon: '',
+  coupon: PromoCode.Default,
   discount: DEFAULT_DISCOUNT,
   promoCodeStatus: PromoCodeStatus.Unknown,
 };

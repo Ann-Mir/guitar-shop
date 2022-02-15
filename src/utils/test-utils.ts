@@ -217,6 +217,55 @@ export const mockCartGuitars = [
     ],
   }];
 
+export const mockCartGuitarToAdd = {
+  id: 2,
+  name: 'CURT Z300',
+  vendorCode: 'TK129049',
+  type: 'electric',
+  description: 'Эргономичность гитары и качество сборки являются, пожалуй, её главными преимуществами. Идеальное расположение в руках музыканта дополняется прочностью конструкции из клёна.',
+  previewImg: 'img/guitar-data-8.jpg',
+  stringCount: 7,
+  rating: 3.5,
+  price: 29500,
+  comments: [
+    {
+      id: '9237bc4b',
+      userName: 'Паша',
+      advantage: 'Хорошый звук.',
+      disadvantage: 'Не рекомендую!',
+      comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
+      rating: 4,
+      createAt: '2022-01-07T13:00:41.846Z',
+      guitarId: 2,
+    },
+  ],
+};
+
+export const mockCartGuitar = {
+  id: 2,
+  name: 'CURT Z300',
+  vendorCode: 'TK129049',
+  type: 'electric',
+  description: 'Эргономичность гитары и качество сборки являются, пожалуй, её главными преимуществами. Идеальное расположение в руках музыканта дополняется прочностью конструкции из клёна.',
+  previewImg: 'img/guitar-data-8.jpg',
+  stringCount: 7,
+  rating: 3.5,
+  price: 29500,
+  quantity: 1,
+  comments: [
+    {
+      id: '9237bc4b',
+      userName: 'Паша',
+      advantage: 'Хорошый звук.',
+      disadvantage: 'Не рекомендую!',
+      comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
+      rating: 4,
+      createAt: '2022-01-07T13:00:41.846Z',
+      guitarId: 2,
+    },
+  ],
+};
+
 export const mockState = {
   DATA: {
     guitars: mockGuitars,

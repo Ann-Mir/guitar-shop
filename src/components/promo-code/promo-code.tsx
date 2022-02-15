@@ -5,13 +5,15 @@ import {
   PromoCode as PromoCodeEnum,
   PromoCodeStatus
 } from '../../const';
-import { setCoupon, setDiscount, setPromoCodeStatus } from '../../store/actions';
+import {
+  setCoupon,
+  setDiscount,
+  setPromoCodeStatus
+} from '../../store/actions';
 import { postPromoCodeAction } from '../../store/api-actions';
 import { getCoupon, getPromoCodeStatus } from '../../store/cart/selectors';
 
-
 function PromoCode(): JSX.Element {
-
   const promoCodes: Array<string> = Array.from(Object.values(PromoCodeEnum));
   const dispatch = useDispatch();
   const coupon = useSelector(getCoupon);
@@ -28,21 +30,19 @@ function PromoCode(): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
-    if (promoCodes.includes(promo)) {
-      dispatch(postPromoCodeAction({coupon: promo as PromoCodeEnum}));
+    if (promoCodes.includes(promo) && promo !== PromoCodeEnum.Default) {
+      dispatch(postPromoCodeAction({ coupon: promo as PromoCodeEnum }));
     } else {
       dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
       dispatch(setDiscount(DEFAULT_DISCOUNT));
-      dispatch(setCoupon(''));
+      dispatch(setCoupon(PromoCodeEnum.Default));
     }
   };
 
   return (
     <div className="cart__coupon coupon">
       <h2 className="title title--little coupon__title">Промокод на скидку</h2>
-      <p className="coupon__info">
-        Введите свой промокод, если он у вас есть.
-      </p>
+      <p className="coupon__info">Введите свой промокод, если он у вас есть.</p>
       <form
         className="coupon__form"
         id="coupon-form"
@@ -51,9 +51,7 @@ function PromoCode(): JSX.Element {
         onSubmit={handleFormSubmit}
       >
         <div className="form-input coupon__input">
-          <label className="visually-hidden">
-            Промокод
-          </label>
+          <label className="visually-hidden">Промокод</label>
           <input
             type="text"
             placeholder="Введите промокод"
@@ -63,18 +61,16 @@ function PromoCode(): JSX.Element {
             onChange={handleInputChange}
             data-testid="promo-input"
           />
-          {
-            promoCodeStatus === PromoCodeStatus.Success && (
-              <p className="form-input__message form-input__message--success">
-                Промокод принят
-              </p>
-            )
-          }
-          {
-            promoCodeStatus === PromoCodeStatus.Error && (
-              <p className="form-input__message form-input__message--error">неверный промокод</p>
-            )
-          }
+          {promoCodeStatus === PromoCodeStatus.Success && (
+            <p className="form-input__message form-input__message--success">
+              Промокод принят
+            </p>
+          )}
+          {promoCodeStatus === PromoCodeStatus.Error && (
+            <p className="form-input__message form-input__message--error">
+              неверный промокод
+            </p>
+          )}
         </div>
         <button
           className="button button--big coupon__button"
