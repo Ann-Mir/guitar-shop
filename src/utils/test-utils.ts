@@ -1,4 +1,4 @@
-import { CARDS_PER_PAGE, DEFAULT_PAGE, PostingStatus } from '../const';
+import { CARDS_PER_PAGE, DEFAULT_PAGE, PostingStatus, PromoCodeStatus } from '../const';
 import { Guitars } from '../types/guitar';
 
 export const mockGuitar =   {
@@ -285,7 +285,9 @@ export const mockState = {
   },
   CART: {
     cartGuitars: mockCartGuitars,
-    coupon: '',
+    coupon: 'medium-444',
+    discount: 25,
+    promoCodeStatus: PromoCodeStatus.Success,
   },
 };
 

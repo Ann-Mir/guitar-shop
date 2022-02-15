@@ -109,7 +109,7 @@ function Search(): JSX.Element {
           id="search"
           type="text"
           autoComplete="off"
-          placeholder="что вы ищите?"
+          placeholder="что вы ищете?"
           data-testid="search-input"
         />
         <label className="visually-hidden" htmlFor="search">

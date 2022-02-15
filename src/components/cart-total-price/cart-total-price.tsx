@@ -66,6 +66,7 @@ function CartTotalPrice(): JSX.Element {
       <button
         className="button button--red button--big cart__order-button"
         onClick={handlePostOrderClick}
+        data-testid="post-order-button"
       >
         Оформить заказ
       </button>

@@ -1,14 +1,18 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DEFAULT_DISCOUNT, PromoCode as PromoCodeEnum, PromoCodeStatus } from '../../const';
+import {
+  DEFAULT_DISCOUNT,
+  PromoCode as PromoCodeEnum,
+  PromoCodeStatus
+} from '../../const';
 import { setCoupon, setDiscount, setPromoCodeStatus } from '../../store/actions';
 import { postPromoCodeAction } from '../../store/api-actions';
 import { getCoupon, getPromoCodeStatus } from '../../store/cart/selectors';
 
-const PROMO_CODES: Array<string> = Array.from(Object.values(PromoCodeEnum));
 
 function PromoCode(): JSX.Element {
 
+  const promoCodes: Array<string> = Array.from(Object.values(PromoCodeEnum));
   const dispatch = useDispatch();
   const coupon = useSelector(getCoupon);
   const promoCodeStatus = useSelector(getPromoCodeStatus);
@@ -24,7 +28,7 @@ function PromoCode(): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
-    if (PROMO_CODES.includes(promo)) {
+    if (promoCodes.includes(promo)) {
       dispatch(postPromoCodeAction({coupon: promo as PromoCodeEnum}));
     } else {
       dispatch(setPromoCodeStatus(PromoCodeStatus.Error));
@@ -57,6 +61,7 @@ function PromoCode(): JSX.Element {
             name="coupon"
             value={promo}
             onChange={handleInputChange}
+            data-testid="promo-input"
           />
           {
             promoCodeStatus === PromoCodeStatus.Success && (
@@ -74,6 +79,7 @@ function PromoCode(): JSX.Element {
         <button
           className="button button--big coupon__button"
           disabled={promoCodeStatus === PromoCodeStatus.Posting}
+          data-testid="apply-promo-button"
         >
           Применить
         </button>

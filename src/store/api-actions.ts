@@ -36,7 +36,13 @@ export const enum ErrorMessage {
   OrderPost = 'Не удалось разместить заказ',
 }
 
+export const enum SuccessMessage {
+  OrderSuccess = 'Заказ размещен!',
+}
+
 const TOTAL_COUNT = 'x-total-count';
+
+const RESPONSE_SUCCESS = [200, 201];
 
 export const fetchGuitarsAction =
   (searchParams: string): ThunkActionResult =>
@@ -220,8 +226,8 @@ export const postOrder =
     ): Promise<void> => {
       try {
         const response = await api.post<TOrderPost>(`${APIRoute.Orders}`, order);
-        if (response.status === 201) {
-          toast.info('Заказ размещен!');
+        if (RESPONSE_SUCCESS.includes(response.status)) {
+          toast.info(SuccessMessage.OrderSuccess);
         }
       } catch {
         toast.error(ErrorMessage.OrderPost);
