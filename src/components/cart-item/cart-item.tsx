@@ -32,17 +32,13 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     let value = Number(evt.target.value);
-    if (value === MIN_QUANTITY) {
-      setIsRemoveModalOpen(true);
-    } else {
-      if (value < (MIN_QUANTITY)) {
-        value = Math.abs(value);
-      }
-      if (value > MAX_QUANTITY) {
-        value = MAX_QUANTITY;
-      }
-      dispatch(updateCartGuitarQuantity(guitar, value));
+    if (value < (MIN_QUANTITY)) {
+      value = Math.abs(value);
     }
+    if (value > MAX_QUANTITY) {
+      value = MAX_QUANTITY;
+    }
+    dispatch(updateCartGuitarQuantity(guitar, value));
   };
 
   const handleRemoveButtonClick = () => {
@@ -116,7 +112,11 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           min="0"
           max="99"
           onChange={handleInputChange}
-          value={Number(quantity).toString().replace(/^0+/, '')}
+          value={
+            Number(quantity) === MIN_QUANTITY
+              ? MIN_QUANTITY
+              : Number(quantity).toString().replace(/^0+/, '')
+          }
         />
         <button
           className="quantity__button"
