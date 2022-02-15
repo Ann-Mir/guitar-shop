@@ -5,7 +5,7 @@ import ModalAddToCart from '../modal-add-to-cart/modal-add-to-cart';
 
 
 type AddToCardButtonProps = {
-  className: string;
+  className?: string;
   children: ReactNode;
   guitar: Guitar;
   onSuccess: () => void;
@@ -16,7 +16,6 @@ function AddToCartButton({ className, children, guitar, onSuccess }: AddToCardBu
   const buttonClasses = cn('button button--red', className);
 
   const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState<boolean>(false);
-  // const [isAddedToCartModalOpen, setIsAddedToCartModalOpen] = useState<boolean>(false);
 
   const handleAddToCardClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -27,15 +26,8 @@ function AddToCartButton({ className, children, guitar, onSuccess }: AddToCardBu
     setIsAddToCartModalOpen(false);
   };
 
-  // const handleModalSuccessAddClose = () => {
-  //   setIsAddedToCartModalOpen(false);
-  // };
-
   return (
     <>
-      {/*{*/}
-      {/*  isAddedToCartModalOpen && <ModalSuccessAdd onClose={handleModalSuccessAddClose} />*/}
-      {/*}*/}
       {
         isAddToCartModalOpen && (
           <ModalAddToCart
@@ -48,6 +40,7 @@ function AddToCartButton({ className, children, guitar, onSuccess }: AddToCardBu
       <button
         className={buttonClasses}
         onClick={handleAddToCardClick}
+        data-testid="add-to-cart-button"
       >
         {children}
       </button>

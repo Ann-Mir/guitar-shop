@@ -3,7 +3,8 @@ import { DEFAULT_DISCOUNT } from '../../const';
 import { postOrder } from '../../store/api-actions';
 import {
   getCoupon,
-  getDiscountAmount, getGuitarsInCart,
+  getDiscountAmount,
+  getGuitarsInCart,
   getPriceWithDiscount,
   getTotalCartPrice
 } from '../../store/cart/selectors';

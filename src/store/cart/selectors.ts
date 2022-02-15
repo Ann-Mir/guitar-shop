@@ -25,7 +25,7 @@ export const getDiscountAmount = createSelector(
   getTotalCartPrice,
   getDiscount,
   (totalCartPrice, discount) =>
-    totalCartPrice * (discount / MAX_PERCENT));
+    Math.round(totalCartPrice * (discount / MAX_PERCENT)));
 
 export const getPriceWithDiscount = createSelector(
 

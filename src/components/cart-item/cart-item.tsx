@@ -75,8 +75,8 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
         type="button" aria-label="Удалить"
         onClick={handleRemoveButtonClick}
       >
-        <span className="button-cross__icon"></span>
-        <span className="cart-item__close-button-interactive-area"></span>
+        <span className="button-cross__icon" />
+        <span className="cart-item__close-button-interactive-area" />
       </button>
       <div className="cart-item__image">
         <img
@@ -101,7 +101,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           disabled={Number(quantity) === MIN_QUANTITY}
         >
           <svg width="8" height="8" aria-hidden="true">
-            <use xlinkHref="#icon-minus"></use>
+            <use xlinkHref='#icon-minus'/>
           </svg>
         </button>
         <input
@@ -127,7 +127,7 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           disabled={quantity === MAX_QUANTITY}
         >
           <svg width="8" height="8" aria-hidden="true">
-            <use xlinkHref="#icon-plus"></use>
+            <use xlinkHref='#icon-plus'/>
           </svg>
         </button>
       </div>

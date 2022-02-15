@@ -113,7 +113,7 @@ export const mockGuitars: Guitars = [
       {
         id: '9237bc4b',
         userName: 'Паша',
-        advantage: 'Хорошый звук.',
+        advantage: 'Хороший звук.',
         disadvantage: 'Не рекомендую!',
         comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
         rating: 4,
@@ -173,7 +173,7 @@ export const mockCartGuitars = [
       {
         id: '9237bc4b',
         userName: 'Паша',
-        advantage: 'Хорошый звук.',
+        advantage: 'Хороший звук.',
         disadvantage: 'Не рекомендую!',
         comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
         rating: 4,
@@ -231,7 +231,7 @@ export const mockCartGuitarToAdd = {
     {
       id: '9237bc4b',
       userName: 'Паша',
-      advantage: 'Хорошый звук.',
+      advantage: 'Хороший звук.',
       disadvantage: 'Не рекомендую!',
       comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
       rating: 4,
@@ -256,7 +256,7 @@ export const mockCartGuitar = {
     {
       id: '9237bc4b',
       userName: 'Паша',
-      advantage: 'Хорошый звук.',
+      advantage: 'Хороший звук.',
       disadvantage: 'Не рекомендую!',
       comment: 'В целом для домашнего использования и дворовых песен в самый раз!',
       rating: 4,
