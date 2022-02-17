@@ -62,7 +62,9 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
     if (quantity === (MIN_QUANTITY + QUANTITY_STEP)) {
       setIsRemoveModalOpen(true);
     } else {
-      dispatch(updateCartGuitarQuantity(guitar, (Number(quantity) - QUANTITY_STEP)));
+      const value = Number(quantity) - QUANTITY_STEP;
+      dispatch(updateCartGuitarQuantity(guitar, value));
+      setInputValue(value);
     }
   };
 
@@ -70,7 +72,9 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
     if (quantity === MAX_QUANTITY) {
       return;
     }
-    dispatch(updateCartGuitarQuantity(guitar, (Number(quantity) + QUANTITY_STEP)));
+    const value = Number(quantity) + QUANTITY_STEP;
+    dispatch(updateCartGuitarQuantity(guitar, value));
+    setInputValue(value);
   };
 
   const handleInputBlur = () => {
