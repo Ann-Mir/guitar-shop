@@ -31,18 +31,20 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (evt.target.value === '') {
+      return;
+    }
     let value = Number(evt.target.value);
     if (value === MIN_QUANTITY) {
-      setIsRemoveModalOpen(true);
-    } else {
-      if (value < MIN_QUANTITY) {
-        value = Math.abs(value);
-      }
-      if (value > MAX_QUANTITY) {
-        value = MAX_QUANTITY;
-      }
-      dispatch(updateCartGuitarQuantity(guitar, value));
+      value = MIN_QUANTITY + QUANTITY_STEP;
     }
+    if (value < MIN_QUANTITY) {
+      value = Math.abs(value);
+    }
+    if (value > MAX_QUANTITY) {
+      value = MAX_QUANTITY;
+    }
+    dispatch(updateCartGuitarQuantity(guitar, value));
   };
 
   const handleRemoveButtonClick = () => {
@@ -118,8 +120,8 @@ function CartItem({ guitar }: CartItemProps): JSX.Element {
           max="99"
           onChange={handleInputChange}
           value={
-            Number(quantity) === MIN_QUANTITY
-              ? MIN_QUANTITY
+            quantity === MIN_QUANTITY
+              ? MIN_QUANTITY + QUANTITY_STEP
               : Number(quantity).toString().replace(/^0+/, '')
           }
         />
